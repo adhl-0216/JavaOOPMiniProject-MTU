@@ -171,27 +171,14 @@ public class frmMainMenu extends JFrame {
         frame.setLocationRelativeTo(null);
 
         frmMainMenu gui = new frmMainMenu();
-        gui.getMainPanel().setBackground(Color.DARK_GRAY);
+        JLabel background = new JLabel(new ImageIcon("C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs/maxresdefault.jpg"));
+
+        frame.add(background);
 
         frame.add(gui.getMainPanel());
 
-        Image backgroundImage = Toolkit.getDefaultToolkit().getImage("mong.jpg");
 
         frame.setVisible(true);
-    }
-
-    Image backgroundImage = Toolkit.getDefaultToolkit().getImage("mong.jpg");
-
-    public frmMainMenu() {
-        this.setContentPane(new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(backgroundImage, 0, 0, null);
-            }
-        });
-
-        pack();
     }
 
     public JPanel getMainPanel() {

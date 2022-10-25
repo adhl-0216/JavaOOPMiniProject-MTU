@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUIs/designStyles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUIs/frmMainMenu.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUIs/frmMainMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUIs/maxresdefault.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUIs/BackgroundImageJFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GUIs/mainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/designStyles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/frmMainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/frmMainMenu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +51,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -62,13 +63,13 @@
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\GUIs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.frmMainMenu">
-    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainMenu" />
+  <component name="RunManager" selected="Application.mainMenu">
+    <configuration name="BackgroundImageJFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUIs.BackgroundImageJFrame" />
       <module name="JavaOOP Mini Project - MTU" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value=".*" />
+          <option name="PATTERN" value="GUIs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -76,12 +77,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestMobs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.TestMobs" />
+    <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MainMenu" />
       <module name="JavaOOP Mini Project - MTU" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value=".*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -115,12 +116,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="mainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUIs.mainMenu" />
+      <module name="JavaOOP Mini Project - MTU" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUIs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.mainMenu" />
         <item itemvalue="Application.frmMainMenu" />
+        <item itemvalue="Application.BackgroundImageJFrame" />
         <item itemvalue="Application.designStyles" />
         <item itemvalue="Application.MainMenu" />
-        <item itemvalue="Application.TestMobs" />
       </list>
     </recent_temporary>
   </component>
@@ -135,6 +150,7 @@
       <workItem from="1665499231059" duration="300000" />
       <workItem from="1666344798500" duration="1019000" />
       <workItem from="1666703599135" duration="5978000" />
+      <workItem from="1666710907060" duration="2940000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1665499373478</created>
