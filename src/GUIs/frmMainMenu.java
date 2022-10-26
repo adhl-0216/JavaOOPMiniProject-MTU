@@ -35,8 +35,8 @@ public class frmMainMenu extends JFrame {
         mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         topPanel = new JPanel();
         topPanel.setLayout(new GridBagLayout());
-        topPanel.setBackground(new Color(-6466770));
-        topPanel.setForeground(new Color(-6466770));
+        topPanel.setBackground(new Color(-1));
+        topPanel.setForeground(new Color(-1));
         mainPanel.add(topPanel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JPanel spacer1 = new JPanel();
         GridBagConstraints gbc;
@@ -160,6 +160,10 @@ public class frmMainMenu extends JFrame {
         return mainPanel;
     }
 
+    private frmMainMenu getFrmMainMenu() {
+        return this;
+    }
+
     private void createUIComponents() {
         // TODO: place custom component creation code here
     }
@@ -171,6 +175,8 @@ public class frmMainMenu extends JFrame {
         frame.setLocationRelativeTo(null);
 
         frmMainMenu gui = new frmMainMenu();
+        gui.getMainPanel().setBackground(Color.BLACK);
+        gui.getMainPanel().setOpaque(false);
         JLabel background = new JLabel(new ImageIcon("C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs/maxresdefault.jpg"));
 
         frame.add(background);
