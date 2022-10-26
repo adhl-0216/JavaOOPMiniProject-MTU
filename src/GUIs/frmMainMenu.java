@@ -32,19 +32,12 @@ public class frmMainMenu extends JFrame {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
         topPanel = new JPanel();
         topPanel.setLayout(new GridBagLayout());
         topPanel.setBackground(new Color(-1));
         topPanel.setForeground(new Color(-1));
         mainPanel.add(topPanel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        final JPanel spacer1 = new JPanel();
-        GridBagConstraints gbc;
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        topPanel.add(spacer1, gbc);
         final JLabel label1 = new JLabel();
         label1.setBackground(new Color(-1));
         label1.setFocusable(false);
@@ -52,8 +45,9 @@ public class frmMainMenu extends JFrame {
         if (label1Font != null) label1.setFont(label1Font);
         label1.setForeground(new Color(-11072761));
         label1.setText("In Le Head");
+        GridBagConstraints gbc;
         gbc = new GridBagConstraints();
-        gbc.gridx = 1;
+        gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         topPanel.add(label1, gbc);
@@ -62,11 +56,7 @@ public class frmMainMenu extends JFrame {
         btmPanel.setBackground(new Color(-6466770));
         btmPanel.setEnabled(false);
         btmPanel.setForeground(new Color(-6466770));
-        gbc = new GridBagConstraints();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        topPanel.add(btmPanel, gbc);
+        mainPanel.add(btmPanel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         btnOptions = new JButton();
         Font btnOptionsFont = this.$$$getFont$$$("Comic Sans MS", Font.BOLD, 14, btnOptions.getFont());
         if (btnOptionsFont != null) btnOptions.setFont(btnOptionsFont);
@@ -104,31 +94,31 @@ public class frmMainMenu extends JFrame {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         btmPanel.add(btnStart, gbc);
-        final JPanel spacer2 = new JPanel();
+        final JPanel spacer1 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        btmPanel.add(spacer1, gbc);
+        final JPanel spacer2 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 4;
         gbc.fill = GridBagConstraints.VERTICAL;
         btmPanel.add(spacer2, gbc);
         final JPanel spacer3 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 6;
         gbc.fill = GridBagConstraints.VERTICAL;
         btmPanel.add(spacer3, gbc);
         final JPanel spacer4 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        btmPanel.add(spacer4, gbc);
-        final JPanel spacer5 = new JPanel();
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.VERTICAL;
         gbc.ipady = 10;
-        btmPanel.add(spacer5, gbc);
+        btmPanel.add(spacer4, gbc);
     }
 
     /**

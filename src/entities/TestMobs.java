@@ -1,4 +1,4 @@
-package test;
+package entities;
 
 public class TestMobs {
     public static void main(String[] args) {

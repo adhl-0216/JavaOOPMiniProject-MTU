@@ -1,4 +1,4 @@
-package test;
+package entities;
 
 public abstract class Mobs {
     private String name;
