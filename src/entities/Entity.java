@@ -1,12 +1,12 @@
 package entities;
 
-public abstract class Mobs {
+public abstract class Entity {
     private String name;
     private double hp;
     private double atk;
     private double def;
 
-    public Mobs(String name, double hp, double atk, double def) {
+    public Entity(String name, double hp, double atk, double def) {
         setName(name);
         setHp(hp);
         setAtk(atk);
@@ -15,12 +15,10 @@ public abstract class Mobs {
 
     @Override
     public String toString() {
-        return "Mobs{" +
-                "name='" + name + '\'' +
+        return "name='" + name + "'" +
                 ", hp=" + hp +
                 ", atk=" + atk +
-                ", def=" + def +
-                '}';
+                ", def=" + def;
     }
 
     public void basicAtk(){}

@@ -5,16 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="added bg to gui">
+      <change afterPath="$PROJECT_DIR$/src/entities/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/Weapon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/Room.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/runStart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/BackgroundImageJFrame.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/frmMainMenu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/frmMainMenu.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/frmMainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/frmMainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/mainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/mainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TwoPanels.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/Mobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Mobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/Slime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Slime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/TestMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/TestMobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/testing/tester.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Mobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Slime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Slime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/TestMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/TestEntities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,39 +43,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "294",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propGUI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;294&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\GUIs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.mainMenu">
-    <configuration name="BackgroundImageJFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.BackgroundImageJFrame" />
+  <component name="RunManager" selected="Application.TestEntities">
+    <configuration name="TestEntities" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="entities.TestEntities" />
       <module name="JavaOOP Mini Project - MTU" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GUIs.*" />
+          <option name="PATTERN" value="entities.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -130,11 +131,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestEntities" />
         <item itemvalue="Application.mainMenu" />
         <item itemvalue="Application.frmMainMenu" />
         <item itemvalue="Application.tester" />
         <item itemvalue="Application.TwoPanels" />
-        <item itemvalue="Application.BackgroundImageJFrame" />
       </list>
     </recent_temporary>
   </component>
@@ -151,6 +152,7 @@
       <workItem from="1666703599135" duration="5978000" />
       <workItem from="1666710907060" duration="2940000" />
       <workItem from="1666772169119" duration="7146000" />
+      <workItem from="1667984791922" duration="5786000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1665499373478</created>

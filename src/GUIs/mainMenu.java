@@ -80,7 +80,7 @@ public class mainMenu {
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         btnStart.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
-        btnStart.setForeground(new Color(119, 29, 3));
+        btnStart.setForeground(new Color(255, 255, 255));
         btnStart.setBackground(new Color(82, 79, 78));
         btnStart.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnStart,gbc);
@@ -91,7 +91,7 @@ public class mainMenu {
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         btnLoad.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
-        btnLoad.setForeground(new Color(119, 29, 3));
+        btnLoad.setForeground(new Color(255, 255, 255));
         btnLoad.setBackground(new Color(82, 79, 78));
         btnLoad.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnLoad,gbc);
@@ -102,7 +102,7 @@ public class mainMenu {
         gbc.gridy = 5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         btnOptions.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
-        btnOptions.setForeground(new Color(119, 29, 3));
+        btnOptions.setForeground(new Color(255, 255, 255));
         btnOptions.setBackground(new Color(82, 79, 78));
         btnOptions.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnOptions,gbc);
@@ -113,7 +113,7 @@ public class mainMenu {
         gbc.gridy = 7;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         btnExit.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
-        btnExit.setForeground(new Color(119, 29, 3));
+        btnExit.setForeground(new Color(255, 255, 255));
         btnExit.setBackground(new Color(82, 79, 78));
         btnExit.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnExit,gbc);
