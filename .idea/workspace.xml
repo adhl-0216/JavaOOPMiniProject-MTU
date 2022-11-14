@@ -5,17 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="added bg to gui">
-      <change afterPath="$PROJECT_DIR$/src/entities/Inventory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entities/Weapon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/runStart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/Consumables.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entities/Equipments.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/mainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/mainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/Mobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entities/Slime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Slime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/TestMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/TestEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/TestEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/TestEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/Weapon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,13 +83,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TwoPanels" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TwoPanels" />
-      <module name="JavaOOP Mini Project - MTU" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="frmMainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUIs.frmMainMenu" />
       <module name="JavaOOP Mini Project - MTU" />
@@ -116,6 +109,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="runStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="runStart" />
+      <module name="JavaOOP Mini Project - MTU" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="tester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="testing.tester" />
       <module name="JavaOOP Mini Project - MTU" />
@@ -132,10 +132,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.TestEntities" />
+        <item itemvalue="Application.runStart" />
         <item itemvalue="Application.mainMenu" />
         <item itemvalue="Application.frmMainMenu" />
         <item itemvalue="Application.tester" />
-        <item itemvalue="Application.TwoPanels" />
       </list>
     </recent_temporary>
   </component>
@@ -153,6 +153,7 @@
       <workItem from="1666710907060" duration="2940000" />
       <workItem from="1666772169119" duration="7146000" />
       <workItem from="1667984791922" duration="5786000" />
+      <workItem from="1668440884807" duration="8463000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1665499373478</created>
@@ -189,5 +190,16 @@
     <MESSAGE value="test" />
     <MESSAGE value="added bg to gui" />
     <option name="LAST_COMMIT_MESSAGE" value="added bg to gui" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entities/TestEntities.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

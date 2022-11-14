@@ -1,11 +1,10 @@
 package entities;
 
 public class Weapon extends Item {
+    private int atk;
 
-    int atk;
-
-    public Weapon(String name, String desc, int atk, int durability) {
-        super(name, desc, durability);
+    public Weapon(String name, String desc, int atk, int durability, int weight) {
+        super(name, desc, durability, weight);
         setAtk(atk);
     }
 

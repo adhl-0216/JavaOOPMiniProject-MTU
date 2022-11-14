@@ -21,7 +21,10 @@ public abstract class Entity {
                 ", def=" + def;
     }
 
-    public void basicAtk(){}
+    public void basicAtk(Entity target) {
+        double dmg = getAtk() * (100/(100 + target.getDef()));
+        target.setHp((target.getHp()-dmg));
+    }
 
     public String getName() {
         return name;

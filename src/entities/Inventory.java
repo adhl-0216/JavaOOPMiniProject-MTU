@@ -1,11 +1,9 @@
 package entities;
 
-import java.util.Arrays;
-
 public class Inventory {
-    int grade;
-    int size;
-    Item[] items;
+    private int grade;
+    private int size;
+    private Item[] items;
 
     public Inventory(int grade) {
         setGrade(grade);
@@ -22,11 +20,42 @@ public class Inventory {
         StringBuilder output = new StringBuilder("{grade=" + grade +
                 ", size=" + size +
                 "\n\t\titems=\n");
-        for (Item item :
-                items) {
-            output.append("\t\t\t").append(item).append("\n");
+        for (Item item : items) {
+            if (item != null) output.append("\t\t\t").append(item).append("\n");
         }
         return output.toString();
+    }
+
+    public int vacantSpace(){
+        int count = size;
+        for (Item item:
+             items) {
+            if (item != null) {
+                count--;
+            }
+        }
+        return count;
+    }
+
+    public String addItem(Item target){
+        if (vacantSpace() > 0) {
+            for (int i = 0; i < size; i++) {
+                if (items[i] == null) {
+                    items[i] = target;
+                    break;
+                }
+            }
+        }else return "Inventory is full!";
+        return target.getName() + " added";
+    }
+    public void dropItem(Item target){
+        Item[] temp = new Item[size];
+        for (int i = 0; i < size; i++) {
+            if (items[i] != target) {
+                temp[i] = items[i];
+            }
+        }
+        setItems(temp);
     }
 
     public int getGrade() {

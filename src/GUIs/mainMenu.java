@@ -3,6 +3,10 @@ package GUIs;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class mainMenu {
     JFrame f;
@@ -43,9 +47,9 @@ public class mainMenu {
         panelMain.add(vSpacer1, gbc);
 
         panelTitle = new JPanel();
-            JLabel title = new JLabel("IN LE HEAD");
-            title.setFont(new Font(Font.MONOSPACED,Font.BOLD,20));
-            title.setForeground(new Color(255, 255, 255, 255));
+        JLabel title = new JLabel("IN LE HEAD");
+        title.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        title.setForeground(new Color(255, 255, 255, 255));
 //        panelTitle.setBackground(new Color(0,0,0,0));
         panelTitle.setOpaque(false);
         panelTitle.add(title);
@@ -79,69 +83,102 @@ public class mainMenu {
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        btnStart.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
+        btnStart.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
         btnStart.setForeground(new Color(255, 255, 255));
         btnStart.setBackground(new Color(82, 79, 78));
         btnStart.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
-        panelBtn.add(btnStart,gbc);
+        panelBtn.add(btnStart, gbc);
 
         btnLoad = new JButton("LOAD");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        btnLoad.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
+        btnLoad.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
         btnLoad.setForeground(new Color(255, 255, 255));
         btnLoad.setBackground(new Color(82, 79, 78));
         btnLoad.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
-        panelBtn.add(btnLoad,gbc);
+        panelBtn.add(btnLoad, gbc);
 
         btnOptions = new JButton("OPTIONS");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        btnOptions.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
+        btnOptions.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
         btnOptions.setForeground(new Color(255, 255, 255));
         btnOptions.setBackground(new Color(82, 79, 78));
         btnOptions.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
-        panelBtn.add(btnOptions,gbc);
+        panelBtn.add(btnOptions, gbc);
 
         btnExit = new JButton("EXIT");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        btnExit.setFont(new Font(Font.MONOSPACED,Font.BOLD,14));
+        btnExit.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
         btnExit.setForeground(new Color(255, 255, 255));
         btnExit.setBackground(new Color(82, 79, 78));
         btnExit.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
-        panelBtn.add(btnExit,gbc);
+        panelBtn.add(btnExit, gbc);
+
+        btnStart.addActionListener(new btnClick());
+        btnLoad.addActionListener(new btnClick());
+        btnOptions.addActionListener(new btnClick());
+        btnExit.addActionListener(new btnClick());
 
         f.add(panelMain);
 
         f.setVisible(true);
     }
 
-// https://coderanch.com/wiki/660351/Background-Image-JPanel
-    static class imgPanel extends JPanel
-    {
+    // https://coderanch.com/wiki/660351/Background-Image-JPanel
+    static class imgPanel extends JPanel {
         Image image;
-        public imgPanel()
-        {
-            try
-            {
+
+        public imgPanel() {
+            try {
                 image = Toolkit.getDefaultToolkit().createImage("C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs/maxresdefault.jpg");
-            }
-            catch (Exception e) { /*handled in paintComponent()*/ }
+            } catch (Exception e) { /*handled in paintComponent()*/ }
         }
 
         @Override
-        protected void paintComponent(Graphics g)
-        {
+        protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (image != null)
-                g.drawImage(image, 0,0,this.getWidth(),this.getHeight(),this);
+                g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
+        }
+    }
+
+
+    private class btnClick implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Timer t = new Timer();
+            class hideShowFrame extends TimerTask{
+                @Override
+                public void run() {
+                    f.setVisible(true);
+                }
+            }
+            if (e.getSource() == btnStart) {
+                System.out.println("Start");
+                f.setVisible(false);
+                t.schedule(new hideShowFrame(), 5000);
+            } else if (e.getSource() == btnLoad) {
+                System.out.println("Load");
+                f.setVisible(false);
+                t.schedule(new hideShowFrame(), 5000);
+            } else if (e.getSource() == btnOptions) {
+                System.out.println("Options");
+                f.setVisible(false);
+                t.schedule(new hideShowFrame(), 5000);
+            } else if (e.getSource() == btnExit) {
+                if (JOptionPane.showConfirmDialog(btnExit.getParent(), "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == 0) {
+                    JOptionPane.showMessageDialog(null, "COWARD","COWARD",JOptionPane.WARNING_MESSAGE);
+                    System.exit(0);
+                }
+            }
         }
     }
 }
