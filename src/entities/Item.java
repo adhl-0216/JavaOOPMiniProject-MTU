@@ -1,13 +1,13 @@
 package entities;
 
 public abstract class Item {
-    static int count = 0;
-    int id;
-    String name;
-    String desc;
-    int durability;
-    int maxDurability;
-    int weight;
+    private static int count = 0;
+    private int id;
+    private String name;
+    private String desc;
+    private int durability;
+    private int maxDurability;
+    private int weight;
 
     public Item(String name, String desc,int durability, int weight) {
         setId();
@@ -23,8 +23,16 @@ public abstract class Item {
         return name + String.format(" (%d/%d)",durability,maxDurability) + "," + desc;
     }
 
-    public void deleteId(){
-        this.id = -1;
+
+    public String durabilityLost(int dmg) {
+        String output;
+        String checkDur;
+        checkDur = setDurability(durability-dmg);
+        output = name + " has lost " + dmg + " Durability... " + String.format("(%d/%d)",durability,maxDurability);
+        if (checkDur != null) {
+            output += checkDur;
+        }
+        return output;
     }
 
     @Override
@@ -36,17 +44,6 @@ public abstract class Item {
                 ", durability=" + durability +
                 ", maxDurability=" + maxDurability +
                 '}';
-    }
-
-    public String durabilityLost(int dmg) {
-        String output;
-        setDurability(durability-dmg);
-        output = name + " has lost " + dmg + " Durability... " + String.format("(%d/%d)",durability,maxDurability);
-        if (durability == 0) {
-            output += "\n" + name + " has reached 0 Durability, all is lost...";
-            deleteId();
-        }
-        return output;
     }
 
     public int getWeight() {
@@ -85,7 +82,20 @@ public abstract class Item {
         return durability;
     }
 
-    public void setDurability(int durability) {
+    public String setDurability(int durability) {
         this.durability = durability;
+        if (this.durability == 0) {
+            return "\n" + name + " has reached 0 Durability, all is lost...";
+        }
+        return null;
+    }
+
+
+    public int getMaxDurability() {
+        return maxDurability;
+    }
+
+    public void setMaxDurability(int maxDurability) {
+        this.maxDurability = maxDurability;
     }
 }

@@ -77,7 +77,6 @@ public class Inventory {
     public Item[] getItems() {
         return items;
     }
-
     public void setItems(Item[] items) {
         this.items = items;
     }

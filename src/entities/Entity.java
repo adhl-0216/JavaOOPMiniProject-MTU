@@ -15,15 +15,15 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return "name='" + name + "'" +
-                ", hp=" + hp +
-                ", atk=" + atk +
-                ", def=" + def;
+        return String.format("name='%s', hp=%.2f, atk=%.2f, def=%.2f", getName(), getHp(), getAtk(), getDef());
     }
 
     public void basicAtk(Entity target) {
-        double dmg = getAtk() * (100/(100 + target.getDef()));
+        double dmg = atk * (100/(100 + target.getDef()));
         target.setHp((target.getHp()-dmg));
+        if (target.getClass() == Player.class) {
+            ((Player) target).setSanity(((Player) target).getSanity()-(atk*.1));
+        }
     }
 
     public String getName() {

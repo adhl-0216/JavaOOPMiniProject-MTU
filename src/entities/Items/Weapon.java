@@ -1,4 +1,6 @@
-package entities;
+package entities.Items;
+
+import entities.Item;
 
 public class Weapon extends Item {
     private int atk;
@@ -8,15 +10,16 @@ public class Weapon extends Item {
         setAtk(atk);
     }
 
+
     @Override
     public String toString() {
         return "Weapon{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
-                ", atk=" + atk +
-                ", durability=" + durability +
-                ", maxDurability=" + maxDurability +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", desc='" + getDesc() + '\'' +
+                ", atk=" + getAtk() +
+                ", durability=" + getDurability() +
+                ", maxDurability=" + getMaxDurability() +
                 '}';
     }
 
