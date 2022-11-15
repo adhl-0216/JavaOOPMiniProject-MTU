@@ -9,21 +9,17 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class mainMenu {
-    JFrame f;
-    JPanel panelMain;
-    JPanel panelTitle;
-    JPanel panelBtn;
-    JButton btnStart;
-    JButton btnLoad;
-    JButton btnOptions;
-    JButton btnExit;
+    private final JFrame f;
+    private final JButton btnStart;
+    private final JButton btnLoad;
+    private final JButton btnOptions;
+    private final JButton btnExit;
 
     public static void main(String[] args) {
         new mainMenu();
     }
 
     public mainMenu() {
-        GridBagConstraints gbc;
         f = new JFrame("IN LE HEAD");
         f.setSize(360, 360);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,10 +29,11 @@ public class mainMenu {
         f.setContentPane(bg);
         f.setResizable(false);
 
-        panelMain = new JPanel();
+        JPanel panelMain = new JPanel();
         panelMain.setLayout(new GridBagLayout());
         panelMain.setOpaque(false);
 
+        GridBagConstraints gbc;
         final JPanel vSpacer1 = new JPanel();
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -46,7 +43,7 @@ public class mainMenu {
         vSpacer1.setOpaque(false);
         panelMain.add(vSpacer1, gbc);
 
-        panelTitle = new JPanel();
+        JPanel panelTitle = new JPanel();
         JLabel title = new JLabel("IN LE HEAD");
         title.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         title.setForeground(new Color(255, 255, 255, 255));
@@ -68,7 +65,7 @@ public class mainMenu {
         vSpacer2.setOpaque(false);
         panelMain.add(vSpacer2, gbc);
 
-        panelBtn = new JPanel();
+        JPanel panelBtn = new JPanel();
         panelBtn.setLayout(new GridBagLayout());
 //        panelBtn.setBackground(new Color(0,0,0,0));
         panelBtn.setOpaque(false);
@@ -138,7 +135,7 @@ public class mainMenu {
 
         public imgPanel() {
             try {
-                image = Toolkit.getDefaultToolkit().createImage("C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs/maxresdefault.jpg");
+                image = Toolkit.getDefaultToolkit().createImage("C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs/mainMenuBG.jpg");
             } catch (Exception e) { /*handled in paintComponent()*/ }
         }
 

@@ -1,8 +1,8 @@
-package entities;
+package GameObjects;
 
-import entities.Items.Consumables;
-import entities.Items.Equipments;
-import entities.Items.Weapon;
+import GameObjects.Loots.Consumables;
+import GameObjects.Loots.Equipments;
+import GameObjects.Loots.Weapon;
 
 public class Player extends Entity {
     private Inventory inventory;

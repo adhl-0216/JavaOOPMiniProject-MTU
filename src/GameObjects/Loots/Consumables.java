@@ -1,7 +1,7 @@
-package entities.Items;
+package GameObjects.Loots;
 
-import entities.Item;
-import entities.Player;
+import GameObjects.Item;
+import GameObjects.Player;
 
 public class Consumables extends Item {
     private String type; //"hp" || "sans" || "hybrid"

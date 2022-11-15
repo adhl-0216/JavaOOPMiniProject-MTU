@@ -1,6 +1,6 @@
-package entities.Items;
+package GameObjects.Loots;
 
-import entities.Item;
+import GameObjects.Item;
 
 public class Equipments extends Item {
     private String slot; // "head" || "body" || "misc"

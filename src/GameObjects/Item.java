@@ -1,4 +1,4 @@
-package entities;
+package GameObjects;
 
 public abstract class Item {
     private static int count = 0;

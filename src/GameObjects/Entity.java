@@ -1,4 +1,4 @@
-package entities;
+package GameObjects;
 
 public abstract class Entity {
     private String name;

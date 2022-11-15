@@ -1,4 +1,4 @@
-package entities;
+package GameObjects;
 
 public class Inventory {
     private int grade;
