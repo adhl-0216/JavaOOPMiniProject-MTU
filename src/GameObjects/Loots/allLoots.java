@@ -1,6 +1,6 @@
 package GameObjects.Loots;
 
-public abstract class allLoots {
+public class allLoots {
 
     public static Weapon newAxe() {return new Weapon("Axe", "An ordinary tree axe.", 15, 20);}
     public static Weapon newMachete() {return new Weapon("Machete", "An old and rusty machete.", 25, 20);}

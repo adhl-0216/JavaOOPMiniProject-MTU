@@ -8,4 +8,9 @@ public class Tier1 extends Entity {
         double atk = (int) Math.floor((Math.random() * (maxAtk - baseAtk))) + baseAtk;
         setAtk(atk);
     }
+
+    @Override
+    public String toString() {
+        return "Tier1{" + super.toString() + "}";
+    }
 }

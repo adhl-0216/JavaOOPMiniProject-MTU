@@ -18,12 +18,19 @@ public abstract class Entity {
         return String.format("name='%s', hp=%.2f, atk=%.2f, def=%.2f", getName(), getHp(), getAtk(), getDef());
     }
 
-    public void basicAtk(Entity target) {
+    public String basicAtk(Entity target) {
+        String output = this.getName() + " attacked " + target.getName() + ".";
         double dmg = atk * (100/(100 + target.getDef()));
         target.setHp((target.getHp()-dmg));
         if (target.getClass() == Player.class) {
             ((Player) target).setSanity(((Player) target).getSanity()-(atk*.1));
         }
+        if (this.getClass() == Player.class){
+            if (((Player) this).getMainWeapon() != null){
+                output += "\n" + ((Player) this).getMainWeapon().durabilityLost(1);
+            }
+        }
+        return output;
     }
 
     public String getName() {

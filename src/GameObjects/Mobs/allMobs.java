@@ -2,9 +2,10 @@ package GameObjects.Mobs;
 
 import GameObjects.Entity;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
-public abstract class allMobs {
+public class allMobs {
     //tier 1
     public static Tier1 newWolf() {
         String[] var = {"Grey Wolf","Black Wolf", "White Wolf", "Brown Wolf"};
@@ -18,11 +19,26 @@ public abstract class allMobs {
         };
     }
 
+    //tier 2
+    public static Tier2 newGhoul(){
+        Tier2 ghoul = new Tier2("Ghoul", 150, 10,20);
+        ghoul.addSpecialAtk("Jump-scare",10,"SANITY");
+        ghoul.addSpecialAtk("Loud Cry",33.33,"HP");
+        return ghoul;
+    }
+
     public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
-            System.out.println(newWolf());
-            System.out.println(newFox());
-            System.out.println("\n");
-        }
+//        for (int i = 0; i < 3; i++) {
+//            System.out.println(newWolf());
+//            System.out.println(newFox());
+//            System.out.println("\n");
+//        }
+        Tier1 wolf1 = newWolf();
+        Tier2 ghoul1 = newGhoul();
+        JOptionPane.showMessageDialog(null,wolf1+"\n"+ghoul1 ,"Test", 1);
+//        System.out.println(ghoul1.basicAtk(wolf1));
+        JOptionPane.showMessageDialog(null,ghoul1.specialAtk(wolf1,2),"Test", 1);
+        JOptionPane.showMessageDialog(null,wolf1,"Test", 1);
+        System.exit(0);
     }
 }
