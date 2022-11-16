@@ -1,33 +1,23 @@
 package GUIs;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class mainMenu {
-    private final JFrame f;
-    private final JButton btnStart;
-    private final JButton btnLoad;
-    private final JButton btnOptions;
-    private final JButton btnExit;
+public class mainMenu extends JFrame{
 
-    public static void main(String[] args) {
-        new mainMenu();
-    }
+    private gameplayWindow mainGame;
 
-    public mainMenu() {
-        f = new JFrame("IN LE HEAD");
-        f.setSize(360, 360);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setLayout(new BorderLayout());
-        f.setLocationRelativeTo(null);
+    public mainMenu(String title) {
+        this.setTitle(title);
+        this.setSize(360, 360);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+        this.setLocationRelativeTo(null);
         JPanel bg = new imgPanel();
-        f.setContentPane(bg);
-        f.setResizable(false);
+        this.setContentPane(bg);
+        this.setResizable(false);
 
         JPanel panelMain = new JPanel();
         panelMain.setLayout(new GridBagLayout());
@@ -44,12 +34,11 @@ public class mainMenu {
         panelMain.add(vSpacer1, gbc);
 
         JPanel panelTitle = new JPanel();
-        JLabel title = new JLabel("IN LE HEAD");
-        title.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
-        title.setForeground(new Color(255, 255, 255, 255));
-//        panelTitle.setBackground(new Color(0,0,0,0));
+        JLabel lblTitle = new JLabel("IN LE HEAD");
+        lblTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+        lblTitle.setForeground(new Color(255, 255, 255, 255));
         panelTitle.setOpaque(false);
-        panelTitle.add(title);
+        panelTitle.add(lblTitle);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 2;
@@ -67,7 +56,6 @@ public class mainMenu {
 
         JPanel panelBtn = new JPanel();
         panelBtn.setLayout(new GridBagLayout());
-//        panelBtn.setBackground(new Color(0,0,0,0));
         panelBtn.setOpaque(false);
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
@@ -75,7 +63,7 @@ public class mainMenu {
         gbc.fill = GridBagConstraints.BOTH;
         panelMain.add(panelBtn, gbc);
 
-        btnStart = new JButton("START");
+        JButton btnStart = new JButton("START");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -86,7 +74,7 @@ public class mainMenu {
         btnStart.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnStart, gbc);
 
-        btnLoad = new JButton("LOAD");
+        JButton btnLoad = new JButton("LOAD");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -97,7 +85,7 @@ public class mainMenu {
         btnLoad.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnLoad, gbc);
 
-        btnOptions = new JButton("OPTIONS");
+        JButton btnOptions = new JButton("OPTIONS");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 5;
@@ -108,7 +96,7 @@ public class mainMenu {
         btnOptions.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnOptions, gbc);
 
-        btnExit = new JButton("EXIT");
+        JButton btnExit = new JButton("EXIT");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 7;
@@ -119,15 +107,48 @@ public class mainMenu {
         btnExit.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnExit, gbc);
 
-        btnStart.addActionListener(new btnClick());
-        btnLoad.addActionListener(new btnClick());
-        btnOptions.addActionListener(new btnClick());
-        btnExit.addActionListener(new btnClick());
+        btnStart.addActionListener(e -> btnStartClicked());
+        btnLoad.addActionListener(e -> btnLoadClicked());
+        btnOptions.addActionListener(e -> btnOptionsClicked());
+        btnExit.addActionListener(e -> btnExitClicked());
 
-        f.add(panelMain);
-
-        f.setVisible(true);
+        this.add(panelMain);
     }
+
+    Timer t = new Timer();
+    class hideShowFrame extends TimerTask{
+        @Override
+        public void run() {
+            mainMenu.this.setVisible(true);
+        }
+    }
+    private void btnStartClicked() {
+        System.out.println("Start");
+        mainMenu.this.setVisible(false);
+
+        mainGame = new gameplayWindow("IN LE HEAD");
+        mainGame.setVisible(true);
+    }
+    private void btnLoadClicked() {
+        System.out.println("Load");
+
+        mainMenu.this.setVisible(false);
+        t.schedule(new hideShowFrame(), 3000);
+    }
+    private void btnOptionsClicked() {
+        System.out.println("Options");
+
+        mainMenu.this.setVisible(false);
+        t.schedule(new hideShowFrame(), 3000);
+    }
+    private void btnExitClicked() {
+        int exit = JOptionPane.showConfirmDialog(null, "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (exit == 0) {
+            JOptionPane.showMessageDialog(null, "COWARD","COWARD",JOptionPane.WARNING_MESSAGE);
+            System.exit(0);
+        }
+    }
+
 
     // https://coderanch.com/wiki/660351/Background-Image-JPanel
     private static class imgPanel extends JPanel {
@@ -144,38 +165,6 @@ public class mainMenu {
             super.paintComponent(g);
             if (image != null)
                 g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-        }
-    }
-
-
-    private class btnClick implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Timer t = new Timer();
-            class hideShowFrame extends TimerTask{
-                @Override
-                public void run() {
-                    f.setVisible(true);
-                }
-            }
-            if (e.getSource() == btnStart) {
-                System.out.println("Start");
-                f.setVisible(false);
-                t.schedule(new hideShowFrame(), 5000);
-            } else if (e.getSource() == btnLoad) {
-                System.out.println("Load");
-                f.setVisible(false);
-                t.schedule(new hideShowFrame(), 5000);
-            } else if (e.getSource() == btnOptions) {
-                System.out.println("Options");
-                f.setVisible(false);
-                t.schedule(new hideShowFrame(), 5000);
-            } else if (e.getSource() == btnExit) {
-                if (JOptionPane.showConfirmDialog(btnExit.getParent(), "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE) == 0) {
-                    JOptionPane.showMessageDialog(null, "COWARD","COWARD",JOptionPane.WARNING_MESSAGE);
-                    System.exit(0);
-                }
-            }
         }
     }
 }
