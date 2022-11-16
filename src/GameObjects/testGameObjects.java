@@ -2,10 +2,11 @@ package GameObjects;
 
 import GameObjects.Mobs.Tier1;
 import GameObjects.Loots.*;
+import GameObjects.Mobs.allMobs;
 
 public class testGameObjects {
     public static void main(String[] args) {
-        Tier1 blu = new Tier1("Blue Slime", 100, 5,5);
+        Tier1 wolf1 = allMobs.newWolf();
 
         Player you = new Player();
         you.setInventory(new Inventory(3));
@@ -23,10 +24,10 @@ public class testGameObjects {
                 you.equip(jacket) + "\n" +
                 you.equip(axe) + "\n" +
                 you + "\n" +
-                blu + "\n" +
-                you.basicAtk(blu) + "\n" +
-                blu + "\n" +
-                blu.basicAtk(you) + "\n" +
+                wolf1 + "\n" +
+                you.basicAtk(wolf1) + "\n" +
+                wolf1 + "\n" +
+                wolf1.basicAtk(you) + "\n" +
                 you.combatStats() + "\n" +
                 you.consume(water) + "\n" +
                 you + "\n";

@@ -130,12 +130,12 @@ public class mainMenu {
     }
 
     // https://coderanch.com/wiki/660351/Background-Image-JPanel
-    static class imgPanel extends JPanel {
+    private static class imgPanel extends JPanel {
         Image image;
 
         public imgPanel() {
             try {
-                image = Toolkit.getDefaultToolkit().createImage("C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs/mainMenuBG.jpg");
+                image = Toolkit.getDefaultToolkit().createImage("src/GUIs/mainMenuBG.jpg");
             } catch (Exception e) { /*handled in paintComponent()*/ }
         }
 
