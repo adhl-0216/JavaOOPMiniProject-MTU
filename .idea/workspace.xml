@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="added gui actionlisteners and basic combat">
-      <change afterPath="$PROJECT_DIR$/src/GUIs/gameplayWindow.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GUIs/gameplayWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/allRooms.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/testRooms.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/mainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/mainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/runStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/Consumables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/Consumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/Equipments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/Equipment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/allLoots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/allLoots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/testGameObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/testGameObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,27 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;294&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "false",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "294",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propGUI"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\GUIs" />
@@ -68,7 +74,7 @@
       <recent name="GameObjects.Mobs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.runStart">
+  <component name="RunManager" selected="Application.testRooms">
     <configuration name="GUIs.mainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUIs.mainMenu" />
       <module name="JavaOOP Mini Project - MTU" />
@@ -82,25 +88,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="allMobs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameObjects.Mobs.allMobs" />
+    <configuration name="allRooms" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.allRooms" />
       <module name="JavaOOP Mini Project - MTU" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GameObjects.Mobs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="frmFPview" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.frmFPview" />
-      <module name="JavaOOP Mini Project - MTU" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GUIs.*" />
+          <option name="PATTERN" value="map.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,13 +121,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="testRooms" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="map.testRooms" />
+      <module name="JavaOOP Mini Project - MTU" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="map.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.testRooms" />
+        <item itemvalue="Application.testGameObjects" />
+        <item itemvalue="Application.allRooms" />
         <item itemvalue="Application.runStart" />
         <item itemvalue="Application.GUIs.mainMenu" />
-        <item itemvalue="Application.testGameObjects" />
-        <item itemvalue="Application.allMobs" />
-        <item itemvalue="Application.frmFPview" />
       </list>
     </recent_temporary>
   </component>
@@ -201,5 +207,15 @@
     <MESSAGE value="added bg to gui" />
     <MESSAGE value="added gui actionlisteners and basic combat" />
     <option name="LAST_COMMIT_MESSAGE" value="added gui actionlisteners and basic combat" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

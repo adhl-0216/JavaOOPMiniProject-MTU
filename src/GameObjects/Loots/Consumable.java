@@ -3,10 +3,10 @@ package GameObjects.Loots;
 import GameObjects.Item;
 import GameObjects.Player;
 
-public class Consumables extends Item {
+public class Consumable extends Item {
     private String type; //"hp" || "sans" || "hybrid"
     private double value;
-    public Consumables(String name, String desc, int weight, String type, double value) {
+    public Consumable(String name, String desc, int weight, String type, double value) {
         super(name, desc, 1, weight);
         setType(type);
         setValue(value);
@@ -33,7 +33,7 @@ public class Consumables extends Item {
 
     @Override
     public String toString() {
-        return "Consumables{" +
+        return "Consumable{" +
                 "id=" + getId() +
                 ", name='" + getName() + '\'' +
                 ", desc='" + getDesc() + '\'' +

@@ -9,9 +9,9 @@ public class allLoots {
     public static Weapon newTorch() {return new Weapon("Torch", "A military grade long torch.", 10, 20);}
     public static Weapon newCross() {return new Weapon("Cross", "A silver cross with intricate design.", 4, 20);}
 
-    public static Equipments newJacket() {return new Equipments("Jacket", "An old rugged jacket", 20, 50,"body" );}
-    public static Equipments newGloves() {return new Equipments("Gloves", "A pair of hunting leather gloves", 20, 20,"misc");}
+    public static Equipment newJacket() {return new Equipment("Jacket", "An old rugged jacket", 20, 50,"body" );}
+    public static Equipment newGloves() {return new Equipment("Gloves", "A pair of hunting leather gloves", 20, 20,"misc");}
 
-    public static Consumables newApple() {return new Consumables("Apple", "A small apple", 1, "HP", 10);}
-    public static Consumables newWater() {return new Consumables("Water", "A bottle of half-full mineral water", 1, "HP & SANITY", 10);}
+    public static Consumable newApple() {return new Consumable("Apple", "A small apple", 1, "HP", 10);}
+    public static Consumable newWater() {return new Consumable("Water", "A bottle of half-full mineral water", 1, "HP & SANITY", 10);}
 }

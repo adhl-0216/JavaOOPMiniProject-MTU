@@ -2,10 +2,10 @@ package GameObjects.Loots;
 
 import GameObjects.Item;
 
-public class Equipments extends Item {
+public class Equipment extends Item {
     private String slot; // "head" || "body" || "misc"
     private int def;
-    public Equipments(String name, String desc, int durability, int def, String slot) {
+    public Equipment(String name, String desc, int durability, int def, String slot) {
         super(name, desc, durability, 0);
         setDef(def);
         setSlot(slot);
@@ -13,7 +13,7 @@ public class Equipments extends Item {
 
     @Override
     public String toString() {
-        return "Equipments{" +
+        return "Equipment{" +
                 "id=" + getId() +
                 ", name='" + getName() + '\'' +
                 ", desc='" + getDesc() + '\'' +

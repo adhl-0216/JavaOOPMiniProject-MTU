@@ -17,13 +17,15 @@ public class Inventory {
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder("{grade=" + grade +
+        StringBuilder output = new StringBuilder("inventory={" +
+                "\n\t\tgrade=" + grade +
+                ", vacantSpace=" + this.vacantSpace() +
                 ", size=" + size +
                 "\n\t\titems=\n");
         for (Item item : items) {
             if (item != null) output.append("\t\t\t").append(item).append("\n");
         }
-        return output.toString();
+        return output.append("\t}").toString();
     }
 
     public int vacantSpace(){

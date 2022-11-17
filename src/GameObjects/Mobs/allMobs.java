@@ -28,15 +28,10 @@ public class allMobs {
     }
 
     public static void main(String[] args) {
-//        for (int i = 0; i < 3; i++) {
-//            System.out.println(newWolf());
-//            System.out.println(newFox());
-//            System.out.println("\n");
-//        }
+
         Tier1 wolf1 = newWolf();
         Tier2 ghoul1 = newGhoul();
         JOptionPane.showMessageDialog(null,wolf1+"\n"+ghoul1 ,"Test", 1);
-//        System.out.println(ghoul1.basicAtk(wolf1));
         JOptionPane.showMessageDialog(null,ghoul1.specialAtk(wolf1,2),"Test", 1);
         JOptionPane.showMessageDialog(null,wolf1,"Test", 1);
         System.exit(0);

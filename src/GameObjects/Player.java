@@ -1,61 +1,105 @@
 package GameObjects;
 
-import GameObjects.Loots.Consumables;
-import GameObjects.Loots.Equipments;
+import GameObjects.Loots.Consumable;
+import GameObjects.Loots.Equipment;
 import GameObjects.Loots.Weapon;
+import map.Room;
+
+import java.util.ArrayList;
 
 public class Player extends Entity {
     private Inventory inventory;
     private double sanity;
     private Weapon mainWeapon;
-    private Equipments head;
-    private Equipments body;
-    private Equipments misc;
+    private Equipment head;
+    private Equipment body;
+    private Equipment misc;
 
     public Player() {
         super("You", 100, 4, 4);
         setSanity(100);
     }
 
-    public String pickUp(Item item){
-        inventory.addItem(item);
-        return "Picked up " + item.getName();
-    }
+    public Room pickUp(String itemName, Room room){
 
-    public String consume(Consumables consumable){
-        String output;
-        for (Item item : inventory.getItems()) {
-            if (item == consumable) {
-                output = consumable.use(this);
-                inventory.dropItem(consumable);
-                return output;
+        for (Item target : room.getLoots()) {
+            if (target.getName().equalsIgnoreCase(itemName)) {
+                inventory.addItem(target);
+                room.getLoots().remove(target);
+                break;
             }
         }
-        //else
-        output = "Consumable is not in inventory.";
-        return output;
+        System.out.println("Picked up " + itemName);
+        return room;
     }
 
-    public String equip(Item item) {
-        for (Item i: inventory.getItems()) {
-            if (i == item) {
+//    public String consume(String consumable){
+//        String output;
+//        Item[] inv = inventory.getItems();
+//        for (Item item : inv) {
+//            if (item.getName().equalsIgnoreCase(consumable)) {
+//                output = ((Consumable) item).use(this);
+//                inventory.dropItem(item);
+//                return output;
+//            }
+//        }
+//        //else
+//        output = "Consumable is not in inventory.";
+//        return output;
+//    }
+
+    public String consume(String consumable) {
+        for (Item item: inventory.getItems()) {
+            System.out.println(item);
+            if (item != null) {
+                if (item.getName().equalsIgnoreCase(consumable)) {
+                    if (item.getClass() == Consumable.class) {
+                        String type = ((Consumable) item).getType();
+                        double value = ((Consumable) item).getValue();
+                        switch (type) {
+                            case "HP" -> {
+                                setHp(Math.min((getHp() + value), 100));
+                            }
+                            case "SANITY" -> {
+                                setSanity(Math.min((getSanity() + value), 100));
+
+                            }
+                            case "HP & SANITY" -> {
+                                setHp(Math.min((getHp() + value / 2), 100));
+                                setSanity(Math.min((getSanity() + value / 2), 100));
+                                return String.format("Consumed 1 %s. (+%.2f HP +%.2f SANITY)", item.getName(), value / 2, value / 2);
+                            }
+                        }
+                        inventory.dropItem(item);
+                    }
+                }
+            }else break;
+        }
+        return "Item is not in inventory.";
+    }
+
+    public String equip(String equipment) {
+        for (Item item: inventory.getItems()) {
+            if (item.getName().equalsIgnoreCase(equipment)) {
                 String output = "Equipped " + item.getName() + ".";
                 if (item.getClass() == Weapon.class) {
                     double wpAtk = ((Weapon) item).getAtk();
                     setAtk(getAtk()+ wpAtk);
                     setMainWeapon(((Weapon) item));
+                    inventory.dropItem(item);
                     output += String.format(" (+%.2f ATK)",wpAtk);
-                } else if (item.getClass() == Equipments.class) {
-                    double eqDef = ((Equipments) item).getDef();
+                } else if (item.getClass() == Equipment.class) {
+                    double eqDef = ((Equipment) item).getDef();
                     setDef(getDef()+ eqDef);
-                    switch (((Equipments) item).getSlot()) {
+                    switch (((Equipment) item).getSlot()) {
                         case "head" :
-                            setHead(((Equipments) item));
+                            setHead(((Equipment) item));
                         case "body" :
-                            setBody(((Equipments) item));
+                            setBody(((Equipment) item));
                         case "misc" :
-                            setMisc(((Equipments) item));
+                            setMisc(((Equipment) item));
                     }
+                    inventory.dropItem(item);
                     output += String.format(" (+%.2f DEF)", eqDef);
                 }
                 return output;
@@ -66,25 +110,34 @@ public class Player extends Entity {
 
     @Override
     public String toString() {
-        return "Player{" +
+        return "Player{\n\t" +
                 super.toString() +
-                String.format(", sanity=%.2f }",getSanity()) +
-                "\n\tinventory=" + getInventory() +
-                '}';
+                String.format(", sanity=%.2f",getSanity()) +
+                ",\n\tmainWeapon=" + mainWeapon +
+                ",\n\thead=" + head +
+                ",\n\tbody=" + body +
+                ",\n\tmisc=" + misc +
+                "\n\t" + getInventory() +
+                "\n}";
     }
 
     public String combatStats() {
-        return "Player{" +
+        return "Player{\n\t" +
                 super.toString() +
-                String.format(", sanity=%.2f }",getSanity());
+                String.format(", sanity=%.2f",getSanity()) +
+                ",\n\tmainWeapon=" + mainWeapon +
+                ",\n\thead=" + head +
+                ",\n\tbody=" + body +
+                ",\n\tmisc=" + misc +"\n}";
     }
 
     public Inventory getInventory() {
         return inventory;
     }
 
-    public void setInventory(Inventory inventory) {
+    public String setInventory(Inventory inventory) {
         this.inventory = inventory;
+        return "You can still pick up " + inventory.vacantSpace() + " item(s).";
     }
 
     public double getSanity() {
@@ -103,27 +156,27 @@ public class Player extends Entity {
         this.mainWeapon = mainWeapon;
     }
 
-    public Equipments getHead() {
+    public Equipment getHead() {
         return head;
     }
 
-    public void setHead(Equipments head) {
+    public void setHead(Equipment head) {
         this.head = head;
     }
 
-    public Equipments getBody() {
+    public Equipment getBody() {
         return body;
     }
 
-    public void setBody(Equipments body) {
+    public void setBody(Equipment body) {
         this.body = body;
     }
 
-    public Equipments getMisc() {
+    public Equipment getMisc() {
         return misc;
     }
 
-    public void setMisc(Equipments misc) {
+    public void setMisc(Equipment misc) {
         this.misc = misc;
     }
 }
