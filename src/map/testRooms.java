@@ -1,5 +1,6 @@
 package map;
 
+import GameObjects.Entity;
 import GameObjects.Inventory;
 import GameObjects.Item;
 import GameObjects.Player;
@@ -12,22 +13,21 @@ import static map.allRooms.tutRoom;
 public class testRooms {
     public static void main(String[] args) {
         Room tutorial = tutRoom();
-        ArrayList<Item> loots = tutorial.getLoots();
+        ArrayList<Entity> mobs = tutorial.getMobs();
+
 
         Player you = tutorial.addPlayer(new Player());
-//        System.out.println(tutorial);
-        you.setInventory(new Inventory(3));
-        you.pickUp("axe", tutorial);
-        you.pickUp("apple", tutorial);
-        you.pickUp("water", tutorial);
-        System.out.println(you.getInventory());
-//        System.out.println(you.equip("axe"));
-//        System.out.println(you.getInventory());
-        you.setHp(10);
-        you.setSanity(10);
-        System.out.println(you);
-        System.out.println(you.consume("apple"));
-        System.out.println(you.consume("water"));
-        System.out.println(you);
+        System.out.println(tutorial);
+        System.out.println(you.setInventory(new Inventory(3)));
+        System.out.println(you.pickUp("axe", tutorial));
+        System.out.println(you.pickUp("apple", tutorial));
+        System.out.println(you.pickUp("apple", tutorial));
+        System.out.println(you.pickUp("water", tutorial));
+        System.out.println(tutorial);
+        System.out.println(you.equip("axe"));
+        System.out.println(you.basicAtk("Wolf", tutorial));
+        System.out.println(you.basicAtk("Wolf", tutorial));
+        System.out.println(you.basicAtk("Wolf", tutorial));
+        System.out.println(mobs.get(0));
     }
 }

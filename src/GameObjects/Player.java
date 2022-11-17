@@ -20,33 +20,17 @@ public class Player extends Entity {
         setSanity(100);
     }
 
-    public Room pickUp(String itemName, Room room){
+    public String pickUp(String itemName, Room room){
 
         for (Item target : room.getLoots()) {
             if (target.getName().equalsIgnoreCase(itemName)) {
                 inventory.addItem(target);
                 room.getLoots().remove(target);
-                break;
+                return "Picked up " + itemName +".";
             }
         }
-        System.out.println("Picked up " + itemName);
-        return room;
+        return "No such thing exists.";
     }
-
-//    public String consume(String consumable){
-//        String output;
-//        Item[] inv = inventory.getItems();
-//        for (Item item : inv) {
-//            if (item.getName().equalsIgnoreCase(consumable)) {
-//                output = ((Consumable) item).use(this);
-//                inventory.dropItem(item);
-//                return output;
-//            }
-//        }
-//        //else
-//        output = "Consumable is not in inventory.";
-//        return output;
-//    }
 
     public String consume(String consumable) {
         for (Item item: inventory.getItems()) {
@@ -141,7 +125,7 @@ public class Player extends Entity {
 
     public String setInventory(Inventory inventory) {
         this.inventory = inventory;
-        return "You can still pick up " + inventory.vacantSpace() + " item(s).";
+        return "You can pick up " + inventory.vacantSpace() + " item(s).";
     }
 
     public double getSanity() {
