@@ -50,59 +50,63 @@ public class Player extends Entity {
 
     public String consume(String consumable) {
         for (Item item: inventory.getItems()) {
-            System.out.println(item);
             if (item != null) {
                 if (item.getName().equalsIgnoreCase(consumable)) {
                     if (item.getClass() == Consumable.class) {
-                        String type = ((Consumable) item).getType();
-                        double value = ((Consumable) item).getValue();
+                        Consumable c = (Consumable)item;
+                        String type = c.getType();
+                        double value = c.getValue();
                         switch (type) {
                             case "HP" -> {
-                                setHp(Math.min((getHp() + value), 100));
+                                setHp(Math.min((getHp() + value),100));
                             }
                             case "SANITY" -> {
-                                setSanity(Math.min((getSanity() + value), 100));
+                                setSanity(Math.min((getSanity() + value),100));
 
                             }
                             case "HP & SANITY" -> {
-                                setHp(Math.min((getHp() + value / 2), 100));
-                                setSanity(Math.min((getSanity() + value / 2), 100));
-                                return String.format("Consumed 1 %s. (+%.2f HP +%.2f SANITY)", item.getName(), value / 2, value / 2);
+                                setHp(Math.min((getHp() + value / 2),100));
+                                setSanity(Math.min((getSanity() + value / 2),100));
+                                inventory.dropItem(item);
+                                return String.format("Consumed 1 %s. (+%.2f HP +%.2f SANITY)", c.getName(),value/2,value/2);
                             }
                         }
                         inventory.dropItem(item);
+                        return String.format("Consumed 1 %s. (+%.2f %s)", c.getName(),value,type);
                     }
                 }
-            }else break;
+            }
         }
         return "Item is not in inventory.";
     }
 
     public String equip(String equipment) {
         for (Item item: inventory.getItems()) {
-            if (item.getName().equalsIgnoreCase(equipment)) {
-                String output = "Equipped " + item.getName() + ".";
-                if (item.getClass() == Weapon.class) {
-                    double wpAtk = ((Weapon) item).getAtk();
-                    setAtk(getAtk()+ wpAtk);
-                    setMainWeapon(((Weapon) item));
-                    inventory.dropItem(item);
-                    output += String.format(" (+%.2f ATK)",wpAtk);
-                } else if (item.getClass() == Equipment.class) {
-                    double eqDef = ((Equipment) item).getDef();
-                    setDef(getDef()+ eqDef);
-                    switch (((Equipment) item).getSlot()) {
-                        case "head" :
-                            setHead(((Equipment) item));
-                        case "body" :
-                            setBody(((Equipment) item));
-                        case "misc" :
-                            setMisc(((Equipment) item));
+            if (item != null) {
+                if (item.getName().equalsIgnoreCase(equipment)) {
+                    String output = "Equipped " + item.getName() + ".";
+                    if (item.getClass() == Weapon.class) {
+                        double wpAtk = ((Weapon) item).getAtk();
+                        setAtk(getAtk() + wpAtk);
+                        setMainWeapon(((Weapon) item));
+                        inventory.dropItem(item);
+                        output += String.format(" (+%.2f ATK)", wpAtk);
+                    } else if (item.getClass() == Equipment.class) {
+                        double eqDef = ((Equipment) item).getDef();
+                        setDef(getDef() + eqDef);
+                        switch (((Equipment) item).getSlot()) {
+                            case "head":
+                                setHead(((Equipment) item));
+                            case "body":
+                                setBody(((Equipment) item));
+                            case "misc":
+                                setMisc(((Equipment) item));
+                        }
+                        inventory.dropItem(item);
+                        output += String.format(" (+%.2f DEF)", eqDef);
                     }
-                    inventory.dropItem(item);
-                    output += String.format(" (+%.2f DEF)", eqDef);
+                    return output;
                 }
-                return output;
             }
         }
         return "Item is not in inventory.";

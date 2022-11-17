@@ -19,10 +19,15 @@ public class testRooms {
         you.setInventory(new Inventory(3));
         you.pickUp("axe", tutorial);
         you.pickUp("apple", tutorial);
+        you.pickUp("water", tutorial);
         System.out.println(you.getInventory());
 //        System.out.println(you.equip("axe"));
 //        System.out.println(you.getInventory());
+        you.setHp(10);
+        you.setSanity(10);
+        System.out.println(you);
         System.out.println(you.consume("apple"));
-        System.out.println(you.getInventory());
+        System.out.println(you.consume("water"));
+        System.out.println(you);
     }
 }
