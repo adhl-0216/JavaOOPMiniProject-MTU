@@ -13,8 +13,6 @@ import static map.allRooms.tutRoom;
 public class testRooms {
     public static void main(String[] args) {
         Room tutorial = tutRoom();
-        ArrayList<Entity> mobs = tutorial.getMobs();
-
 
         Player you = tutorial.addPlayer(new Player());
         System.out.println(tutorial);
@@ -28,6 +26,6 @@ public class testRooms {
         System.out.println(you.basicAtk("Wolf", tutorial));
         System.out.println(you.basicAtk("Wolf", tutorial));
         System.out.println(you.basicAtk("Wolf", tutorial));
-        System.out.println(mobs.get(0));
+        System.out.println(tutorial.getMobs().get(0));
     }
 }
