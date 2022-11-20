@@ -25,14 +25,130 @@ public class gameplayWindow extends JFrame {
     private JPanel pnlConsumables;
     private JLabel lblMob2;
     private JLabel pnlMob3;
+    private JPanel pnlHpBar;
+    private JLabel lblHpValue;
+    private JLabel lblHpIcon;
 
     public gameplayWindow(String title) {
         super(title);
         $$$setupUI$$$();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setLayout(null);
         this.setSize(1024, 1024);
         this.setLocationRelativeTo(null);
         this.setContentPane(mainPanel);
+    }
+
+    public JLabel getLblMob1() {
+        return lblMob1;
+    }
+
+    public void setLblMob1(JLabel lblMob1) {
+        this.lblMob1 = lblMob1;
+    }
+
+    public JButton getBtnMisc() {
+        return btnMisc;
+    }
+
+    public void setBtnMisc(JButton btnMisc) {
+        this.btnMisc = btnMisc;
+    }
+
+    public JLabel getLblLocation() {
+        return lblLocation;
+    }
+
+    public void setLblLocation(JLabel lblLocation) {
+        this.lblLocation = lblLocation;
+    }
+
+    public JButton getBtnHead() {
+        return btnHead;
+    }
+
+    public void setBtnHead(JButton btnHead) {
+        this.btnHead = btnHead;
+    }
+
+    public JButton getBtnMainWeapon() {
+        return btnMainWeapon;
+    }
+
+    public void setBtnMainWeapon(JButton btnMainWeapon) {
+        this.btnMainWeapon = btnMainWeapon;
+    }
+
+    public JButton getBtnBody() {
+        return btnBody;
+    }
+
+    public void setBtnBody(JButton btnBody) {
+        this.btnBody = btnBody;
+    }
+
+    public JTextPane getTxtGameLog() {
+        return txtGameLog;
+    }
+
+    public void setTxtGameLog(JTextPane txtGameLog) {
+        this.txtGameLog = txtGameLog;
+    }
+
+    public JButton getBtnConsum1() {
+        return btnConsum1;
+    }
+
+    public void setBtnConsum1(JButton btnConsum1) {
+        this.btnConsum1 = btnConsum1;
+    }
+
+    public JButton getBtnConsum2() {
+        return btnConsum2;
+    }
+
+    public void setBtnConsum2(JButton btnConsum2) {
+        this.btnConsum2 = btnConsum2;
+    }
+
+    public JButton getBtnConsum3() {
+        return btnConsum3;
+    }
+
+    public void setBtnConsum3(JButton btnConsum3) {
+        this.btnConsum3 = btnConsum3;
+    }
+
+    public JButton getBtnConsum4() {
+        return btnConsum4;
+    }
+
+    public void setBtnConsum4(JButton btnConsum4) {
+        this.btnConsum4 = btnConsum4;
+    }
+
+    public JLabel getLblMob2() {
+        return lblMob2;
+    }
+
+    public void setLblMob2(JLabel lblMob2) {
+        this.lblMob2 = lblMob2;
+    }
+
+    public JLabel getLblHpValue() {
+        return lblHpValue;
+    }
+
+    public void setLblHpValue(JLabel lblHpValue) {
+        this.lblHpValue = lblHpValue;
+    }
+
+    public JLabel getLblHpIcon() {
+        return lblHpIcon;
+    }
+
+    public void setLblHpIcon(JLabel lblHpIcon) {
+        this.lblHpIcon = lblHpIcon;
     }
 
     /**
@@ -44,7 +160,7 @@ public class gameplayWindow extends JFrame {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 3, new Insets(0, 0, 0, 0), -1, -1));
         mainPanel.setMinimumSize(new Dimension(1080, 720));
         mainPanel.setPreferredSize(new Dimension(1080, 720));
         pnlLocation = new JPanel();
@@ -58,17 +174,17 @@ public class gameplayWindow extends JFrame {
         mainPanel.add(pnlMobs, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         pnlMobs.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         lblMob1 = new JLabel();
-        lblMob1.setText("(mob1)");
+        lblMob1.setText("");
         pnlMobs.add(lblMob1, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lblMob2 = new JLabel();
-        lblMob2.setText("(mob3)");
-        pnlMobs.add(lblMob2, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblMob2.setText("");
+        pnlMobs.add(lblMob2, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pnlMob3 = new JLabel();
-        pnlMob3.setText("(mob2)");
-        pnlMobs.add(pnlMob3, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pnlMob3.setText("");
+        pnlMobs.add(pnlMob3, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pnlConsumables = new JPanel();
         pnlConsumables.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
-        mainPanel.add(pnlConsumables, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(600, 200), null, 0, false));
+        mainPanel.add(pnlConsumables, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension(420, 200), new Dimension(420, 200), null, 0, false));
         pnlConsumables.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         btnConsum1 = new JButton();
         btnConsum1.setText("(empty)");
@@ -86,7 +202,7 @@ public class gameplayWindow extends JFrame {
         pnlEquipments.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         pnlEquipments.setOpaque(true);
         pnlEquipments.setPreferredSize(new Dimension(320, 320));
-        mainPanel.add(pnlEquipments, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(124, 124), null, 0, false));
+        mainPanel.add(pnlEquipments, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(124, 124), null, 0, false));
         btnMainWeapon = new JButton();
         btnMainWeapon.setText("(empty)");
         pnlEquipments.add(btnMainWeapon, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -101,9 +217,18 @@ public class gameplayWindow extends JFrame {
         pnlEquipments.add(btnBody, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pnlGameLog = new JPanel();
         pnlGameLog.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-        mainPanel.add(pnlGameLog, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 2, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(100, 400), null, 0, true));
+        mainPanel.add(pnlGameLog, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(100, 400), null, 0, true));
         txtGameLog = new JTextPane();
         pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        pnlHpBar = new JPanel();
+        pnlHpBar.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
+        mainPanel.add(pnlHpBar, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        lblHpIcon = new JLabel();
+        lblHpIcon.setText("Label");
+        pnlHpBar.add(lblHpIcon, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblHpValue = new JLabel();
+        lblHpValue.setText("Label");
+        pnlHpBar.add(lblHpValue, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -113,7 +238,4 @@ public class gameplayWindow extends JFrame {
         return mainPanel;
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
