@@ -12,24 +12,24 @@ public class Consumable extends Item {
         setValue(value);
     }
 
-    public String use(Player p) {
-        switch (type) {
-            case "HP" -> {
-                p.setHp(Math.min((p.getHp() + value),100));
-            }
-            case "SANITY" -> {
-                p.setSanity(Math.min((p.getSanity() + value),100));
-
-            }
-            case "HP & SANITY" -> {
-                p.setHp(Math.min((p.getHp() + value / 2),100));
-                p.setSanity(Math.min((p.getSanity() + value / 2),100));
-                return String.format("%s used 1 %s. (+%.2f HP +%.2f SANITY)",p.getName(), this.getName(),value/2,value/2);
-            }
-        }
-        this.setDurability(0);
-        return String.format("%s used 1 %s. (+%.2f %s)",p.getName(), this.getName(),value,type);
-    }
+//    public String use(Player p) {
+//        switch (type) {
+//            case "HP" -> {
+//                p.setHp(Math.min((p.getHp() + value),100));
+//            }
+//            case "SANITY" -> {
+//                p.setSanity(Math.min((p.getSanity() + value),100));
+//
+//            }
+//            case "HP & SANITY" -> {
+//                p.setHp(Math.min((p.getHp() + value / 2),100));
+//                p.setSanity(Math.min((p.getSanity() + value / 2),100));
+//                return String.format("%s used 1 %s. (+%.2f HP +%.2f SANITY)",p.getName(), this.getName(),value/2,value/2);
+//            }
+//        }
+//        this.setDurability(0);
+//        return String.format("%s used 1 %s. (+%.2f %s)",p.getName(), this.getName(),value,type);
+//    }
 
     @Override
     public String toString() {

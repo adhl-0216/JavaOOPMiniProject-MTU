@@ -1,39 +1,49 @@
 package GameObjects.Mobs;
 
-import GameObjects.Entity;
-
-import javax.swing.*;
-import java.util.ArrayList;
-
 public class allMobs {
     //tier 1
     public static Tier1 newWolf() {
         String[] var = {"Grey Wolf","Black Wolf", "White Wolf", "Brown Wolf"};
-        return new Tier1(var[(int) Math.floor(Math.random() * var.length)], 100, 5,10) {
-        };
+        Tier1 wolf = new Tier1("wolf", 100, 5,10);
+        wolf.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        return wolf;
+    }
+    public static Tier1 newAlphaWolf() {
+        Tier1 alphaWolf;
+        alphaWolf = new Tier1("Alpha Wolf", 120, 6,12);
+        return alphaWolf;
     }
 
     public static Tier1 newFox() {
         String[] var = {"Orange Fox", "White Fox", "Red Fox", "Black Fox"};
-        return new Tier1(var[(int) Math.floor(Math.random() * var.length)], 80, 8, 12) {
-        };
+        Tier1 fox = new Tier1("fox", 80, 8, 12);
+        fox.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        return fox;
     }
 
     //tier 2
-    public static Tier2 newGhoul(){
-        Tier2 ghoul = new Tier2("Ghoul", 150, 10,20);
-        ghoul.addSpecialAtk("Jump-scare",10,"SANITY");
-        ghoul.addSpecialAtk("Loud Cry",33.33,"HP");
-        return ghoul;
+    public static Tier2 newBoar(){
+        Tier2 boar = new Tier2("Wild Boar", 150, 10,20);
+        boar.addSpecialAtk("Battle Cry",10,"SANITY");
+        boar.addSpecialAtk("Charge",20,"HP");
+        return boar;
+    }
+
+    //tier 3
+
+    public static Tier3 newBear(){
+        Tier3 bear;
+        String[] var = {"Black Bear", "Brown Bear"};
+        bear = new Tier3("bear", 200, 20, 30);
+        bear.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        bear.addSpecialAtk("Battle Cry",10,"SANITY");
+        bear.addSpecialAtk("Claw Attack",25,"HP");
+        bear.addSSA("Bear Hug",50,"HP");
+        return bear;
     }
 
     public static void main(String[] args) {
-
-        Tier1 wolf1 = newWolf();
-        Tier2 ghoul1 = newGhoul();
-        JOptionPane.showMessageDialog(null,wolf1+"\n"+ghoul1 ,"Test", 1);
-        JOptionPane.showMessageDialog(null,ghoul1.specialAtk(wolf1,2),"Test", 1);
-        JOptionPane.showMessageDialog(null,wolf1,"Test", 1);
-        System.exit(0);
+        Tier1 t1 = newFox();
+        System.out.println(t1.getClass());
     }
 }

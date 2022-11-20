@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="fixed Player.consume and Player.equip">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/Consumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/Consumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/allLoots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/allLoots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/allRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/allRooms.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/testRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/testRooms.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,27 +46,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;false&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;294&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propGUI&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "false",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "294",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "Errors"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\GUIs" />
@@ -67,12 +76,12 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.testRooms">
-    <configuration name="GUIs.mainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.mainMenu" />
+    <configuration name="allMobs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GameObjects.Mobs.allMobs" />
       <module name="JavaOOP Mini Project - MTU" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="GUIs.*" />
+          <option name="PATTERN" value="GameObjects.Mobs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -129,10 +138,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.testRooms" />
+        <item itemvalue="Application.allMobs" />
+        <item itemvalue="Application.runStart" />
         <item itemvalue="Application.testGameObjects" />
         <item itemvalue="Application.allRooms" />
-        <item itemvalue="Application.runStart" />
-        <item itemvalue="Application.GUIs.mainMenu" />
       </list>
     </recent_temporary>
   </component>

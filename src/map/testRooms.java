@@ -3,29 +3,42 @@ package map;
 import GameObjects.Entity;
 import GameObjects.Inventory;
 import GameObjects.Item;
+import GameObjects.Loots.allLoots;
+import GameObjects.Mobs.allMobs;
 import GameObjects.Player;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
-import static map.allRooms.tutRoom;
 
 public class testRooms {
     public static void main(String[] args) {
-        Room tutorial = tutRoom();
+        Player you = new Player();
+        you.setInventory(new Inventory(3));
+        Room cabin = allRooms.newCabin();
+        Room cave = allRooms.newCave();
+        cabin.addPlayer(you);
+        System.out.println(cabin);
+        cabin.newTurn(you, "pickup", "machete");
+        cabin.newTurn(you, "pickup", "jacket");
+        cabin.newTurn(you, "pickup", "gloves");
+        cabin.newTurn(you, "pickup", "sandwich");
+        cabin.newTurn(you, "pickup", "jerky");
+        cabin.newTurn(you, "equip", "machete");
+        cabin.newTurn(you, "equip", "jacket");
+        cabin.newTurn(you, "equip", "gloves");
+        cabin.removePlayer(you);
+        System.out.println(cabin);
+        System.out.println(cabin.getGameLog());
 
-        Player you = tutorial.addPlayer(new Player());
-        System.out.println(tutorial);
-        System.out.println(you.setInventory(new Inventory(3)));
-        System.out.println(you.pickUp("axe", tutorial));
-        System.out.println(you.pickUp("apple", tutorial));
-        System.out.println(you.pickUp("apple", tutorial));
-        System.out.println(you.pickUp("water", tutorial));
-        System.out.println(tutorial);
-        System.out.println(you.equip("axe"));
-        System.out.println(you.basicAtk("Wolf", tutorial));
-        System.out.println(you.basicAtk("Wolf", tutorial));
-        System.out.println(you.basicAtk("Wolf", tutorial));
-        System.out.println(tutorial.getMobs().get(0));
+        cave.addPlayer(you);
+        System.out.println(cave);
+        for (int i = 0; i < 3; i++) {
+            cave.newTurn(you, "attack", "bear");
+
+        }
+        cave.newTurn(you, "consume", "sandwich");
+        cave.newTurn(you, "consume", "jerky");
+        for (int i = 0; i < 5; i++) {
+            if(cave.newTurn(you, "attack", "bear") == null) break;
+        }
+        System.out.println(cave.getGameLog());
+        System.out.println(cave);
     }
 }

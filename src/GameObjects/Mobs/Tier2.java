@@ -1,6 +1,7 @@
 package GameObjects.Mobs;
 
 import GameObjects.Entity;
+import GameObjects.Player;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,14 @@ public class Tier2 extends Entity {
         double atk = (int) Math.floor((Math.random() * (maxAtk - baseAtk))) + baseAtk;
         setAtk(atk);
     }
+
+    public String basicAtk(Player player) {
+        double dmg = this.getAtk() * (100 / (100 + player.getDef()));
+        player.setHp(player.getHp() - dmg);
+        player.setSanity(player.getSanity() - (dmg*.05));
+        return this.getName() + " attacked " + player.getName() + ".";
+    }
+
     public void addSpecialAtk(String name, double val, String type){
         if (specialAtks != null) {
             specialAtks.add(new specialAtk(name, val, type));
@@ -21,12 +30,18 @@ public class Tier2 extends Entity {
         }
     }
 
-    public String specialAtk(Entity target, int sid){
-        specialAtk sAtk = specialAtks.get(sid-1);
+    public String specialAtk(Player player, int sid){
+        specialAtk sAtk = specialAtks.get(sid);
         if (sAtk.getType().equals("HP")){
-            target.setHp(target.getHp()-sAtk.getVal());
+            player.setHp(player.getHp()-sAtk.getVal());
+        } else if (sAtk.getType().equals("SANITY")) {
+            player.setSanity(player.getSanity()-sAtk.getVal());
         }
-        return this.getName()  + " used " + sAtk.getName() + " against " + target.getName() + "!";
+        return this.getName()  + " used " + sAtk.getName() + " against " + player.getName() + "!";
+    }
+
+    public ArrayList<specialAtk> getSpecialAtks() {
+        return specialAtks;
     }
 
     @Override

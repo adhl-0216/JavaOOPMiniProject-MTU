@@ -26,7 +26,7 @@ public class Player extends Entity {
             if (target.getName().equalsIgnoreCase(itemName)) {
                 inventory.addItem(target);
                 room.getLoots().remove(target);
-                return "Picked up " + itemName +".";
+                return "Picked up " + target.getName() +".";
             }
         }
         return "No such thing exists.";
@@ -45,7 +45,11 @@ public class Player extends Entity {
                                 setHp(Math.min((getHp() + value),100));
                             }
                             case "SANITY" -> {
-                                setSanity(Math.min((getSanity() + value),100));
+                                if (consumable.equalsIgnoreCase("whiskey")) {
+                                    setSanity(getSanity() + value);
+                                } else {
+                                    setSanity(Math.min((getSanity() + value),100));
+                                }
 
                             }
                             case "HP & SANITY" -> {
@@ -94,6 +98,25 @@ public class Player extends Entity {
             }
         }
         return "Item is not in inventory.";
+    }
+
+    public String basicAtk(String Target, Room room) {
+        for (Entity target : room.getMobs()) {
+            if (target.getHp() > 0) {
+                if ((target.getName()).toLowerCase().contains(Target) || target.getName().equalsIgnoreCase(Target)){
+                    String output = this.getName() + " attacked " + target.getName() + ".";
+                    double dmg = this.getAtk() * (100 / (100 + target.getDef()));
+                    target.setHp((target.getHp() - dmg));
+                    if (this.getMainWeapon() != null) {
+                        output += "\n" + this.getMainWeapon().durabilityLost(1);
+                    }
+                    return output;
+                }
+            } else {
+                room.removeMob(target.getName());
+            }
+        }
+        return "Target Not Found.";
     }
 
     @Override
