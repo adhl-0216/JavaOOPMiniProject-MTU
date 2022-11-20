@@ -85,11 +85,10 @@ public class Room {
                 }
             }
             gameLog += gameLogBuilder + "\n";
-            gameLog += this.getMobs().toString() + "\n" + this.getPlayer() + "\n";
+//            gameLog += this.getMobs().toString() + "\n" + this.getPlayer() + "\n";
             setTurnCount(++turnCount);
             return "Successfully attacked.";
         }
-
         return null;
     }
 

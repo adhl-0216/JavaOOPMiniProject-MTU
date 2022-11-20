@@ -34,7 +34,7 @@ public class mainMenu extends JFrame{
         panelMain.add(vSpacer1, gbc);
 
         JPanel panelTitle = new JPanel();
-        JLabel lblTitle = new JLabel("IN LE HEAD");
+        JLabel lblTitle = new JLabel("A SECOND CHANCE");
         lblTitle.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         lblTitle.setForeground(new Color(255, 255, 255, 255));
         panelTitle.setOpaque(false);
