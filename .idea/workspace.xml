@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="designed main game window GUI">
-      <change afterPath="$PROJECT_DIR$/assets/wolf.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/gameplayWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/gameplayWindow.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/gameplayWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/gameplayWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/gameplayWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/gameplayWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/mainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/runStart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +48,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "false",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "294",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/GUIs",

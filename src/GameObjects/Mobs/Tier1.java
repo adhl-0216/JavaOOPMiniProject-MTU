@@ -4,6 +4,8 @@ import GameObjects.Entity;
 import GameObjects.Player;
 import map.Room;
 
+import javax.swing.*;
+
 public class Tier1 extends Entity {
     public Tier1(String name, double hp, double baseAtk, double maxAtk) {
         super(name, hp, 0, 10);

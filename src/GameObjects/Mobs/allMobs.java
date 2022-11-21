@@ -1,11 +1,14 @@
 package GameObjects.Mobs;
 
+import javax.swing.*;
+
 public class allMobs {
     //tier 1
     public static Tier1 newWolf() {
         String[] var = {"Grey Wolf","Black Wolf", "White Wolf", "Brown Wolf"};
         Tier1 wolf = new Tier1("wolf", 100, 5,10);
         wolf.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        wolf.setImageIcon(new ImageIcon("assets/wolf.png"));
         return wolf;
     }
     public static Tier1 newAlphaWolf() {

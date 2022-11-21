@@ -2,14 +2,16 @@ package GUIs;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class mainMenu extends JFrame{
+public class MainMenu extends JFrame{
 
-    private gameplayWindow mainGame;
+    private GameWindow gameWindow;
 
-    public mainMenu(String title) {
+    public MainMenu(String title) {
         this.setTitle(title);
         this.setSize(360, 360);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -111,6 +113,12 @@ public class mainMenu extends JFrame{
         btnLoad.addActionListener(e -> btnLoadClicked());
         btnOptions.addActionListener(e -> btnOptionsClicked());
         btnExit.addActionListener(e -> btnExitClicked());
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                btnExitClicked();
+            }
+        });
 
         this.add(panelMain);
     }
@@ -119,30 +127,46 @@ public class mainMenu extends JFrame{
     class hideShowFrame extends TimerTask{
         @Override
         public void run() {
-            mainMenu.this.setVisible(true);
+            MainMenu.this.setVisible(true);
         }
     }
-    private void btnStartClicked() {
-        System.out.println("Start");
-        mainMenu.this.setVisible(false);
 
-        mainGame = new gameplayWindow("IN LE HEAD");
-        mainGame.setVisible(true);
+    public void setGameWindow(GameWindow mainGame) {
+        this.gameWindow = mainGame;
+    }
+
+    public GameWindow getGameWindow() {
+        try {
+            return gameWindow;
+        } catch (Exception e) {
+            System.out.println("mainGame is null.");
+            return null;
+        }
+    }
+
+    private void btnStartClicked() {
+        try {
+            gameWindow.setVisible(true);
+            MainMenu.this.setVisible(false);
+        } catch (Exception e) {
+            System.out.println("mainGame is null.");
+            System.exit(0);
+        }
     }
     private void btnLoadClicked() {
         System.out.println("Load");
 
-        mainMenu.this.setVisible(false);
+        MainMenu.this.setVisible(false);
         t.schedule(new hideShowFrame(), 3000);
     }
     private void btnOptionsClicked() {
         System.out.println("Options");
 
-        mainMenu.this.setVisible(false);
+        MainMenu.this.setVisible(false);
         t.schedule(new hideShowFrame(), 3000);
     }
     private void btnExitClicked() {
-        int exit = JOptionPane.showConfirmDialog(null, "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int exit = JOptionPane.showConfirmDialog(null, "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (exit == 0) {
             JOptionPane.showMessageDialog(null, "COWARD","COWARD",JOptionPane.WARNING_MESSAGE);
             System.exit(0);

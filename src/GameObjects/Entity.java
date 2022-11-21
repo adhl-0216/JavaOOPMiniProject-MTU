@@ -1,10 +1,13 @@
 package GameObjects;
 
+import javax.swing.*;
+
 public abstract class Entity {
     private String name;
     private double hp;
     private double atk;
     private double def;
+    private ImageIcon imageIcon;
 
     public Entity(String name, double hp, double atk, double def) {
         setName(name);
@@ -16,6 +19,14 @@ public abstract class Entity {
     @Override
     public String toString() {
         return String.format("name='%s', hp=%.2f, atk=%.2f, def=%.2f", getName(), getHp(), getAtk(), getDef());
+    }
+
+    public ImageIcon getImageIcon() {
+        return imageIcon;
+    }
+
+    public void setImageIcon(ImageIcon imageIcon) {
+        this.imageIcon = imageIcon;
     }
 
     public String getName() {
