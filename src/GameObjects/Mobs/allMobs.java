@@ -8,12 +8,13 @@ public class allMobs {
         String[] var = {"Grey Wolf","Black Wolf", "White Wolf", "Brown Wolf"};
         Tier1 wolf = new Tier1("wolf", 100, 5,10);
         wolf.setName(var[(int) Math.floor(Math.random() * var.length)]);
-        wolf.setImageIcon(new ImageIcon("assets/wolf.png"));
+        wolf.setSrc("assets/wolf.png");
         return wolf;
     }
     public static Tier1 newAlphaWolf() {
         Tier1 alphaWolf;
         alphaWolf = new Tier1("Alpha Wolf", 120, 6,12);
+        alphaWolf.setSrc("assets/wolf.png");
         return alphaWolf;
     }
 
@@ -42,6 +43,7 @@ public class allMobs {
         bear.addSpecialAtk("Battle Cry",10,"SANITY");
         bear.addSpecialAtk("Claw Attack",25,"HP");
         bear.addSSA("Bear Hug",50,"HP");
+        bear.setSrc("assets/bear.png");
         return bear;
     }
 

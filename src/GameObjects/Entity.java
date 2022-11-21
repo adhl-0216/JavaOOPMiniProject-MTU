@@ -7,7 +7,7 @@ public abstract class Entity {
     private double hp;
     private double atk;
     private double def;
-    private ImageIcon imageIcon;
+    private String src;
 
     public Entity(String name, double hp, double atk, double def) {
         setName(name);
@@ -21,12 +21,12 @@ public abstract class Entity {
         return String.format("name='%s', hp=%.2f, atk=%.2f, def=%.2f", getName(), getHp(), getAtk(), getDef());
     }
 
-    public ImageIcon getImageIcon() {
-        return imageIcon;
+    public String getSrc() {
+        return src;
     }
 
-    public void setImageIcon(ImageIcon imageIcon) {
-        this.imageIcon = imageIcon;
+    public void setSrc(String src) {
+        this.src = src;
     }
 
     public String getName() {
