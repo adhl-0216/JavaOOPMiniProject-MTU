@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="added Inventory management">
+    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="working on gameplay Inventory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/GameWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/allRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/allRooms.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669132519457</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="working on gameplay Inventory">
+      <created>1669136536935</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669136536935</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +252,8 @@
     <MESSAGE value="designed main game window GUI" />
     <MESSAGE value="added basic window navigation" />
     <MESSAGE value="added Inventory management" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Inventory management" />
+    <MESSAGE value="working on gameplay Inventory" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on gameplay Inventory" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

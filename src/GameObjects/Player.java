@@ -16,8 +16,8 @@ public class Player extends Entity {
     private Equipment body;
     private Equipment misc;
     public Player() {
-        super("You", 100, 5, 5);
-        setSanity(100);
+        super("You", 50, 5, 5);
+        setSanity(50);
     }
 
     public String pickUp(String itemName, Room room){
