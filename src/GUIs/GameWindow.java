@@ -90,6 +90,9 @@ public class GameWindow extends JFrame {
         if (btnInv.getName().equalsIgnoreCase("weapon")) {
             room.newTurn(player, "equip", btnInv.getText());
             setEquipments();
+        } else if (btnInv.getName().equalsIgnoreCase("equipment")) {
+            room.newTurn(player, "equip", btnInv.getText());
+            setEquipments();
         } else if (btnInv.getName().equalsIgnoreCase("consumable")) {
             room.newTurn(player, "consume", btnInv.getText());
         }
@@ -100,30 +103,26 @@ public class GameWindow extends JFrame {
 
     private void setEquipments() {
 
-        try {
+
+        if (player.getMainWeapon() != null) {
+            lblAtk.setText("ATK: " + player.getAtk());
             btnMainWeapon.setText(player.getMainWeapon().getName());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
-        try {
+
+        if (player.getHead() != null) {
+            lblDef.setText("DEF: " + player.getDef());
             btnHead.setText(player.getHead().getName());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
-
-        try {
+        if (player.getBody() != null) {
+            lblDef.setText("DEF: " + player.getDef());
             btnBody.setText(player.getBody().getName());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
-
-        try {
+        if (player.getMisc() != null) {
+            lblDef.setText("DEF: " + player.getDef());
             btnMisc.setText(player.getMisc().getName());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
 
     }
@@ -167,11 +166,7 @@ public class GameWindow extends JFrame {
         for (int i = 0; i < inv.length; i++) {
             btnInvs[i].setText(inv[i].getName());
             String type = inv[i].getClass().getSimpleName();
-            if (!type.equalsIgnoreCase("Equipment")) {
-                btnInvs[i].setName(type);
-            } else {
-                btnInvs[i].setName(((Equipment) inv[i]).getSlot());
-            }
+            btnInvs[i].setName(type);
         }
     }
 
@@ -184,7 +179,6 @@ public class GameWindow extends JFrame {
             setRoom(map[nextLoc]);
             this.currLoc++;
         }
-
     }
 
     private void setRoom(Room room) {
@@ -217,7 +211,6 @@ public class GameWindow extends JFrame {
 
     public void setMap(Room[] map) {
         this.map = map;
-//        System.out.println(Arrays.toString(map));
     }
 
     public Room[] getMap() {
@@ -450,9 +443,11 @@ public class GameWindow extends JFrame {
         Font txtGameLogFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, txtGameLog.getFont());
         if (txtGameLogFont != null) txtGameLog.setFont(txtGameLogFont);
         txtGameLog.setForeground(new Color(-1));
+        txtGameLog.setLineWrap(true);
         txtGameLog.setOpaque(true);
         txtGameLog.setText("");
-        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 0, false));
+        txtGameLog.setWrapStyleWord(true);
+        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, 50), null, 0, false));
         pnlMobs = new JPanel();
         pnlMobs.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         pnlMobs.setBackground(new Color(-11382962));
@@ -738,5 +733,6 @@ public class GameWindow extends JFrame {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
+
     }
 }

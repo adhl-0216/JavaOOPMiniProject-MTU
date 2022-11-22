@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class allRooms {
     public static Room tutRoom() {
-        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater()};
+        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater(), allLoots.newJacket()};
         final Entity[] mobs = {allMobs.newAlphaWolf()};
         return new Room("Tutorial", loots, mobs);
     }
@@ -21,7 +21,7 @@ public class allRooms {
         return new Room("forest", loots, mobs);
     }
     public static Room newForest2() {
-        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater()};
+        final Item[] loots = {allLoots.newApple(), allLoots.newWater()};
         final Entity[] mobs = {allMobs.newBoar()};
         return new Room("forest", loots, mobs);
     }
@@ -44,7 +44,7 @@ public class allRooms {
         return new Room("cave", loots, mobs);
     }
     public static Room newForest3() {
-        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater()};
+        final Item[] loots = {allLoots.newApple(), allLoots.newWater()};
         final Entity[] mobs = {allMobs.newAlphaWolf(), allMobs.newWolf(), allMobs.newWolf()};
         return new Room("forest", loots, mobs);
     }

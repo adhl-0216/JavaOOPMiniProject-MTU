@@ -15,7 +15,6 @@ public class Player extends Entity {
     private Equipment head;
     private Equipment body;
     private Equipment misc;
-
     public Player() {
         super("You", 100, 5, 5);
         setSanity(100);
@@ -77,28 +76,50 @@ public class Player extends Entity {
                     String output = "Equipped " + item.getName() + ".";
                     if (item.getClass() == Weapon.class) {
                         double wpAtk = ((Weapon) item).getAtk();
-                        setAtk(getAtk() + wpAtk);
+                        if (getMainWeapon() != null) {
+                            setAtk(getAtk() + wpAtk - getMainWeapon().getAtk());
+                        }else {
+                            setAtk(5 + wpAtk);
+                        }
                         setMainWeapon(((Weapon) item));
                         inventory.dropItem(item);
                         output += String.format(" (+%.2f ATK)", wpAtk);
-                    } else if (item.getClass() == Equipment.class) {
+                    }
+                    else if (item.getClass() == Equipment.class) {
                         double eqDef = ((Equipment) item).getDef();
-                        setDef(getDef() + eqDef);
-                        switch (((Equipment) item).getSlot()) {
-                            case "head":
-                                setHead(((Equipment) item));
-                            case "body":
-                                setBody(((Equipment) item));
-                            case "misc":
-                                setMisc(((Equipment) item));
+                        Equipment eq = (Equipment) item;
+
+                        if (eq.getSlot().equalsIgnoreCase("head")) {
+                            if (getHead() != null) {
+                                setDef(getDef() + eqDef - getHead().getDef());
+                            } else {
+                                setDef(5 + eqDef);
+                            }
+                            setHead(((Equipment) item));
+                        }
+                        else if (eq.getSlot().equalsIgnoreCase("body")) {
+                            if (getBody() != null) {
+                                setDef(getDef() + eqDef - getBody().getDef());
+                            } else {
+                                setDef(5 + eqDef);
+                            }
+                            setBody(((Equipment) item));
+                        }
+                        else if (eq.getSlot().equalsIgnoreCase("misc")) {
+                            if (getMisc() != null) {
+                                setDef(getDef() + eqDef - getMisc().getDef());
+                            } else {
+                                setDef(5 + eqDef);
+                            }
+                            setMisc(((Equipment) item));
                         }
                         inventory.dropItem(item);
                         output += String.format(" (+%.2f DEF)", eqDef);
                     }
-                    return output;
+                        return output;
+                    }
                 }
             }
-        }
         return "Item is not in inventory.";
     }
 
