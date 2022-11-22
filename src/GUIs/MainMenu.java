@@ -146,6 +146,7 @@ public class MainMenu extends JFrame{
 
     private void btnStartClicked() {
         try {
+            this.setGameWindow(gameWindow);
             gameWindow.setVisible(true);
             MainMenu.this.setVisible(false);
         } catch (Exception e) {
@@ -180,7 +181,7 @@ public class MainMenu extends JFrame{
 
         public imgPanel() {
             try {
-                image = Toolkit.getDefaultToolkit().createImage("src/GUIs/mainMenuBG.jpg");
+                image = Toolkit.getDefaultToolkit().createImage("assets/mainMenuBG.jpg");
             } catch (Exception e) { /*handled in paintComponent()*/ }
         }
 

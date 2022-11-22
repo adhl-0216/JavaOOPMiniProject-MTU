@@ -22,6 +22,7 @@ public class allMobs {
         String[] var = {"Orange Fox", "White Fox", "Red Fox", "Black Fox"};
         Tier1 fox = new Tier1("fox", 80, 8, 12);
         fox.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        fox.setSrc("assets/fox.png");
         return fox;
     }
 
@@ -30,6 +31,7 @@ public class allMobs {
         Tier2 boar = new Tier2("Wild Boar", 150, 10,20);
         boar.addSpecialAtk("Battle Cry",10,"SANITY");
         boar.addSpecialAtk("Charge",20,"HP");
+        boar.setSrc("assets/boar.png");
         return boar;
     }
 
@@ -48,7 +50,7 @@ public class allMobs {
     }
 
     public static void main(String[] args) {
-        Tier1 t1 = newFox();
-        System.out.println(t1.getClass());
+        JOptionPane.showMessageDialog( null, new ImageIcon(newBear().getSrc()));
+        System.exit(0);
     }
 }

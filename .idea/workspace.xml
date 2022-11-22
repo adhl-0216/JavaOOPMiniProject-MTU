@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="added basic window navigation">
-      <change afterPath="$PROJECT_DIR$/assets/bear.png" afterDir="false" />
+    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/boar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fox.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/wolf.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/wolf.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/GameWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUIs/mainMenuBG.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/mainMenuBG.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/runStart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,27 +43,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "false",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "294",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/assets",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW&quot;: &quot;false&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;294&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/assets&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\assets" />
@@ -137,8 +139,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.runStart" />
-        <item itemvalue="Application.testRooms" />
         <item itemvalue="Application.allMobs" />
+        <item itemvalue="Application.testRooms" />
         <item itemvalue="Application.testGameObjects" />
         <item itemvalue="Application.allRooms" />
       </list>
@@ -249,6 +251,20 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.ConcurrentModificationException" package="java.util" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUIs/GameWindow.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUIs/GameWindow.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

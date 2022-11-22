@@ -38,10 +38,10 @@ public class GameWindow extends JFrame {
     private JPanel pnlGame;
     private MainMenu parent;
     private Room[] map;
-    private static int currLoc = 0;
+    private int currLoc = 1;
     private Room room;
 
-    public GameWindow(String title, MainMenu parent) {
+    public GameWindow(String title, MainMenu parent, Room[] map) {
         super(title);
         this.setParent(parent);
         $$$setupUI$$$();
@@ -53,14 +53,24 @@ public class GameWindow extends JFrame {
         this.setContentPane(mainPanel);
         this.pack();
 
+        this.setMap(map);
+        this.setRoom(map[0]);
+
         txtGameLog.setEditable(false);
         txtGameLog.setText("lorem ipsum");
 
-        btnLocation.addActionListener(e -> nextLocation(++currLoc));
+        btnLocation.addActionListener(e -> nextLocation(currLoc));
     }
 
-    private void nextLocation(int nextLoc) {
-        setRoom(map[nextLoc]);
+    private void nextLocation(int currLoc) {
+        if (currLoc == map.length) {
+            JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
+            super.dispose();
+            parent.setVisible(true);
+        } else {
+            setRoom(map[currLoc]);
+            this.currLoc++;
+        }
     }
 
     private void setRoom(Room room) {
@@ -70,16 +80,24 @@ public class GameWindow extends JFrame {
                 if (room.getMobs().get(i).getSrc() != null) {
                     btnMobs[i].setIcon(new ImageIcon(room.getMobs().get(i).getSrc()));
                     btnMobs[i].setText(room.getMobs().get(i).getName());
+                    btnMobs[i].setVisible(true);
+                    System.out.println("set " + room.getMobs().get(i).getName());
                 }
             } catch (Exception e) {
                 btnMobs[i].setVisible(false);
             }
         }
+
+        btnLocation.setText(room.getName());
     }
 
     public void setMap(Room[] map) {
         this.map = map;
-        System.out.println(Arrays.toString(map));
+//        System.out.println(Arrays.toString(map));
+    }
+
+    public Room[] getMap() {
+        return map;
     }
 
     WindowListener exitListener = new WindowAdapter() {

@@ -20,13 +20,13 @@ public class Room {
     private int turnCount;
     private String gameLog = "";
     public Room(String name) {
-        this.name = name;
+        setName(name);
         this.loots = new ArrayList<Item>();
         this.mobs = new ArrayList<Entity>();
         setTurnCount(1);
     }
     public Room(String name, Item[] loots, Entity[] mobs) {
-        this.name = name;
+        setName(name);
         this.loots = new ArrayList<Item>();
         this.mobs = new ArrayList<Entity>();
         Collections.addAll(this.loots,loots);
@@ -55,8 +55,14 @@ public class Room {
         }
         else if (event.equalsIgnoreCase("attack")) {
             StringBuilder gameLogBuilder = new StringBuilder(player.basicAtk(target, this) + "\n");
-            for (Entity mob : mobs) {
-                if (mob.getHp() > 0) {
+            for (int i = 0; i < mobs.size(); i++) {
+                Entity mob = mobs.get(i);
+                if (mob.getHp() == 0) {
+                    gameLogBuilder.append(mob.getName()).append(" is dead.").append("\n");
+                    removeMob(mob.getName());
+                    i++;
+                }
+                else {
                     if (mob.getClass().toString().equalsIgnoreCase("class GameObjects.Mobs.Tier1")) {
                         gameLogBuilder.append(((Tier1) mob).basicAtk(player)).append("\n");
                     }
@@ -78,10 +84,6 @@ public class Room {
                             }
                         }
                     }
-                }
-                else {
-                    this.removeMob(mob.getName());
-                    gameLogBuilder.append(mob.getName()).append(" is dead.").append("\n");
                 }
             }
             gameLog += gameLogBuilder + "\n";
@@ -107,6 +109,14 @@ public class Room {
                 "\n\tloots={" + lootsStr + "\n\t\t}" +
                 "\n\tmobs={" + mobsStr + "\n\t\t}" +
                 "\n}";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void addPlayer(Player player){
@@ -136,7 +146,7 @@ public class Room {
     }
 
     public void removeMob(String target) {
-        loots.removeIf(loot -> loot.getName().equalsIgnoreCase(target));
+        mobs.removeIf(mob -> mob.getName().equalsIgnoreCase(target));
     }
 
     public ArrayList<Item> getLoots() {
