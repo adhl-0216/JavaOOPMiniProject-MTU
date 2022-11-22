@@ -8,9 +8,9 @@ public class Inventory {
     public Inventory(int grade) {
         setGrade(grade);
         switch (grade){
-            case 1: setSize(4);
-            case 2: setSize(8);
-            case 3: setSize(16);
+            case 1: setSize(1);
+            case 2: setSize(2);
+            case 3: setSize(4);
         }
         this.items = new Item[size];
     }

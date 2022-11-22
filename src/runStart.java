@@ -1,5 +1,7 @@
 import GUIs.GameWindow;
 import GUIs.MainMenu;
+import GameObjects.Inventory;
+import GameObjects.Player;
 import map.Room;
 import map.allRooms;
 
@@ -7,8 +9,7 @@ import java.util.Arrays;
 
 public class runStart {
     public static void main(String[] args) {
-        MainMenu menu = new MainMenu("A SECOND CHANCE");
-        menu.setVisible(true);
+
 
         Room tutorial = allRooms.tutRoom();
         Room forest1 = allRooms.newForest1();
@@ -18,10 +19,13 @@ public class runStart {
         Room forest3 = allRooms.newForest3();
 
         Room[] map = {tutorial, forest1, forest2, cabin, cave, forest3};
+        Player you = new Player();
+        you.setInventory(new Inventory(3));
 
-        GameWindow gameWindow = new GameWindow("A SECOND CHANCE", menu, map);
+        MainMenu menu = new MainMenu("A SECOND CHANCE");
+        GameWindow gameWindow = new GameWindow("A SECOND CHANCE", menu, map, you);
 
         menu.setGameWindow(gameWindow);
-        System.out.println(Arrays.toString(gameWindow.getMap()));
+        menu.setVisible(true);
     }
 }

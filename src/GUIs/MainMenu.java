@@ -121,6 +121,7 @@ public class MainMenu extends JFrame{
         });
 
         this.add(panelMain);
+
     }
 
     Timer t = new Timer();
@@ -146,9 +147,9 @@ public class MainMenu extends JFrame{
 
     private void btnStartClicked() {
         try {
-            this.setGameWindow(gameWindow);
+//            this.setGameWindow(new GameWindow(getGameWindow().getTitle(), this, getGameWindow().getMap(), getGameWindow().getPlayer()));
             gameWindow.setVisible(true);
-            MainMenu.this.setVisible(false);
+            this.setVisible(false);
         } catch (Exception e) {
             System.out.println("mainGame is null.");
             System.exit(0);

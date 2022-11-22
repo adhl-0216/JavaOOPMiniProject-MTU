@@ -14,7 +14,7 @@ public class allMobs {
     public static Tier1 newAlphaWolf() {
         Tier1 alphaWolf;
         alphaWolf = new Tier1("Alpha Wolf", 120, 6,12);
-        alphaWolf.setSrc("assets/wolf.png");
+        alphaWolf.setSrc("assets/alphaWolf.png");
         return alphaWolf;
     }
 

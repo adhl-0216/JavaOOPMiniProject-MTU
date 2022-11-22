@@ -45,7 +45,7 @@ public class allRooms {
     }
     public static Room newForest3() {
         final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater()};
-        final Entity[] mobs = {allMobs.newWolf(), allMobs.newAlphaWolf(), allMobs.newWolf()};
+        final Entity[] mobs = {allMobs.newAlphaWolf(), allMobs.newWolf(), allMobs.newWolf()};
         return new Room("forest", loots, mobs);
     }
 }
