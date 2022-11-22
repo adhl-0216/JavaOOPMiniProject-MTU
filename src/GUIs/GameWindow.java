@@ -99,10 +99,33 @@ public class GameWindow extends JFrame {
     }
 
     private void setEquipments() {
-        btnMainWeapon.setText(player.getMainWeapon().getName());
-        btnHead.setText(player.getHead().getName());
-        btnBody.setText(player.getBody().getName());
-        btnMisc.setText(player.getMisc().getName());
+
+        try {
+            btnMainWeapon.setText(player.getMainWeapon().getName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            btnHead.setText(player.getHead().getName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        try {
+            btnBody.setText(player.getBody().getName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
+        try {
+            btnMisc.setText(player.getMisc().getName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     private void setLoots() {
