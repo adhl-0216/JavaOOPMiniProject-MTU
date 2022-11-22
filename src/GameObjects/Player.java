@@ -6,6 +6,7 @@ import GameObjects.Loots.Weapon;
 import map.Room;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Player extends Entity {
     private Inventory inventory;
@@ -16,7 +17,7 @@ public class Player extends Entity {
     private Equipment misc;
 
     public Player() {
-        super("You", 100, 4, 4);
+        super("You", 100, 5, 5);
         setSanity(100);
     }
 
@@ -24,9 +25,10 @@ public class Player extends Entity {
 
         for (Item target : room.getLoots()) {
             if (target.getName().equalsIgnoreCase(itemName)) {
-                inventory.addItem(target);
-                room.getLoots().remove(target);
-                return "Picked up " + target.getName() +".";
+                if (!Objects.equals(inventory.addItem(target), "Inventory is full!")) {
+                    room.getLoots().remove(target);
+                    return "Picked up " + target.getName() +".";
+                }else return "Inventory is full!";
             }
         }
         return "No such thing exists.";

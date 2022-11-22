@@ -121,7 +121,6 @@ public class MainMenu extends JFrame{
         });
 
         this.add(panelMain);
-
     }
 
     Timer t = new Timer();
@@ -177,7 +176,7 @@ public class MainMenu extends JFrame{
 
 
     // https://coderanch.com/wiki/660351/Background-Image-JPanel
-    private static class imgPanel extends JPanel {
+    static class imgPanel extends JPanel {
         Image image;
 
         public imgPanel() {

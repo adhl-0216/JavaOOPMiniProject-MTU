@@ -7,10 +7,7 @@ import GameObjects.Mobs.Tier2;
 import GameObjects.Mobs.Tier3;
 import GameObjects.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 public class Room {
     private String name;
@@ -41,17 +38,20 @@ public class Room {
     public String newTurn(Player player, String event, String target){
         gameLog += "Turn " + turnCount + "\n";
         if (event.equalsIgnoreCase("pickUp")){
-            gameLog += player.pickUp(target, this) + "\n";
-            setTurnCount(++turnCount);
-            return "Successfully picked up.";
+            String pickUp = player.pickUp(target, this);
+            if (!Objects.equals(pickUp, "Inventory is full!")) {
+                gameLog += pickUp + "\n";
+                setTurnCount(++turnCount);
+            } else {
+                gameLog += "Inventory is full!\n";
+                return "full";
+            }
         }
         else if (event.equalsIgnoreCase("equip")) {
             gameLog += player.equip(target) + "\n";
-            return "Successfully equipped.";
         }
         else if (event.equalsIgnoreCase("consume")) {
             gameLog += player.consume(target) + "\n";
-            return "Successfully consumed.";
         }
         else if (event.equalsIgnoreCase("attack")) {
             StringBuilder gameLogBuilder = new StringBuilder(player.basicAtk(target, this) + "\n");
@@ -89,7 +89,6 @@ public class Room {
             gameLog += gameLogBuilder + "\n";
 //            gameLog += this.getMobs().toString() + "\n" + this.getPlayer() + "\n";
             setTurnCount(++turnCount);
-            return "Successfully attacked.";
         }
         return null;
     }
