@@ -65,6 +65,7 @@ public class GameWindow extends JFrame {
         this.setLocationRelativeTo(null);
         JPanel bg = new MainMenu.imgPanel();
         this.setContentPane(bg);
+        mainPanel.setSize(1080, 960);
         this.add(mainPanel);
         this.pack();
 
@@ -82,6 +83,17 @@ public class GameWindow extends JFrame {
         btnInv2.addActionListener(this::equipOrConsume);
         btnInv3.addActionListener(this::equipOrConsume);
         btnInv4.addActionListener(this::equipOrConsume);
+    }
+
+    private void nextLocation(int nextLoc) {
+        if (nextLoc == map.length) {
+            JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
+            super.dispose();
+            parent.setVisible(true);
+        } else {
+            setRoom(map[nextLoc]);
+            this.currLoc++;
+        }
     }
 
     private void equipOrConsume(ActionEvent e) {
@@ -103,13 +115,10 @@ public class GameWindow extends JFrame {
     }
 
     private void setEquipments() {
-
-
         if (player.getMainWeapon() != null) {
             lblAtk.setText("ATK: " + player.getAtk());
             btnMainWeapon.setText(player.getMainWeapon().getName());
         }
-
 
         if (player.getHead() != null) {
             lblDef.setText("DEF: " + player.getDef());
@@ -125,7 +134,6 @@ public class GameWindow extends JFrame {
             lblDef.setText("DEF: " + player.getDef());
             btnMisc.setText(player.getMisc().getName());
         }
-
     }
 
     private void setLoots() {
@@ -171,17 +179,6 @@ public class GameWindow extends JFrame {
         }
     }
 
-    private void nextLocation(int nextLoc) {
-        if (nextLoc == map.length) {
-            JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
-            super.dispose();
-            parent.setVisible(true);
-        } else {
-            setRoom(map[nextLoc]);
-            this.currLoc++;
-        }
-    }
-
     private void setRoom(Room room) {
         this.room = room;
         room.addPlayer(player);
@@ -206,8 +203,12 @@ public class GameWindow extends JFrame {
             }
         }
 
-        btnLocation.setText(room.getName());
         setLoots();
+        btnLocation.setText(room.getName());
+        lblAtk.setText("ATK: " + player.getAtk());
+        lblDef.setText("DEF: " + player.getDef());
+        lblHpValue.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
+        lblSans.setText(String.format("SANITY: (%.2f/100.00)", +player.getSanity()));
     }
 
     public void setMap(Room[] map) {
@@ -403,9 +404,11 @@ public class GameWindow extends JFrame {
         Font mainPanelFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, mainPanel.getFont());
         if (mainPanelFont != null) mainPanel.setFont(mainPanelFont);
         mainPanel.setForeground(new Color(-1));
-        mainPanel.setMinimumSize(new Dimension(1080, 560));
+        mainPanel.setMaximumSize(new Dimension(1080, 720));
+        mainPanel.setMinimumSize(new Dimension(1080, 720));
         mainPanel.setOpaque(false);
-        mainPanel.setPreferredSize(new Dimension(1080, 560));
+        mainPanel.setPreferredSize(new Dimension(1080, 720));
+        mainPanel.setRequestFocusEnabled(false);
         pnlLocation = new JPanel();
         pnlLocation.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         pnlLocation.setBackground(new Color(-11382962));
@@ -414,7 +417,7 @@ public class GameWindow extends JFrame {
         if (pnlLocationFont != null) pnlLocation.setFont(pnlLocationFont);
         pnlLocation.setForeground(new Color(-1));
         pnlLocation.setOpaque(false);
-        mainPanel.add(pnlLocation, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        mainPanel.add(pnlLocation, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, true));
         btnLocation = new JButton();
         btnLocation.setBackground(new Color(-11382962));
         btnLocation.setBorderPainted(false);
@@ -426,7 +429,7 @@ public class GameWindow extends JFrame {
         btnLocation.setHorizontalAlignment(4);
         btnLocation.setOpaque(false);
         btnLocation.setText("(location)");
-        pnlLocation.add(btnLocation, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pnlLocation.add(btnLocation, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pnlGameLog = new JPanel();
         pnlGameLog.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         pnlGameLog.setBackground(new Color(-11382962));
@@ -435,7 +438,7 @@ public class GameWindow extends JFrame {
         if (pnlGameLogFont != null) pnlGameLog.setFont(pnlGameLogFont);
         pnlGameLog.setForeground(new Color(-1));
         pnlGameLog.setOpaque(false);
-        mainPanel.add(pnlGameLog, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(200, 400), new Dimension(400, 505), 0, false));
+        mainPanel.add(pnlGameLog, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(400, 804), new Dimension(400, 804), 0, false));
         txtGameLog = new JTextArea();
         txtGameLog.setBackground(new Color(-11382962));
         txtGameLog.setDoubleBuffered(false);
@@ -448,7 +451,7 @@ public class GameWindow extends JFrame {
         txtGameLog.setOpaque(true);
         txtGameLog.setText("");
         txtGameLog.setWrapStyleWord(true);
-        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTHWEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(400, 500), new Dimension(400, 500), 0, false));
+        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(400, 800), new Dimension(400, 800), 0, false));
         pnlMobs = new JPanel();
         pnlMobs.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         pnlMobs.setBackground(new Color(-11382962));
@@ -459,7 +462,7 @@ public class GameWindow extends JFrame {
         if (pnlMobsFont != null) pnlMobs.setFont(pnlMobsFont);
         pnlMobs.setForeground(new Color(-1));
         pnlMobs.setOpaque(false);
-        mainPanel.add(pnlMobs, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.add(pnlMobs, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 200), new Dimension(-1, 200), 0, true));
         pnlMobs.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         btnMob1 = new JButton();
         btnMob1.setBackground(new Color(-11382962));
@@ -527,7 +530,7 @@ public class GameWindow extends JFrame {
         if (pnlGameFont != null) pnlGame.setFont(pnlGameFont);
         pnlGame.setForeground(new Color(-1));
         pnlGame.setOpaque(false);
-        mainPanel.add(pnlGame, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, true));
+        mainPanel.add(pnlGame, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pnlHpBar = new JPanel();
         pnlHpBar.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
         pnlHpBar.setBackground(new Color(-11382962));
@@ -610,7 +613,7 @@ public class GameWindow extends JFrame {
         btnInv1.setOpaque(true);
         btnInv1.setText("(empty)");
         btnInv1.setToolTipText("Inventory slot 1");
-        pnlInventory.add(btnInv1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlInventory.add(btnInv1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         btnInv2 = new JButton();
         btnInv2.setBackground(new Color(-11382962));
         btnInv2.setDoubleBuffered(false);
@@ -620,7 +623,7 @@ public class GameWindow extends JFrame {
         btnInv2.setOpaque(true);
         btnInv2.setText("(empty)");
         btnInv2.setToolTipText("Inventory slot 2");
-        pnlInventory.add(btnInv2, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlInventory.add(btnInv2, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         btnInv3 = new JButton();
         btnInv3.setBackground(new Color(-11382962));
         btnInv3.setDoubleBuffered(false);
@@ -630,7 +633,7 @@ public class GameWindow extends JFrame {
         btnInv3.setOpaque(true);
         btnInv3.setText("(empty)");
         btnInv3.setToolTipText("Inventory slot 3");
-        pnlInventory.add(btnInv3, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlInventory.add(btnInv3, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         btnInv4 = new JButton();
         btnInv4.setBackground(new Color(-11382962));
         btnInv4.setDoubleBuffered(false);
@@ -640,7 +643,7 @@ public class GameWindow extends JFrame {
         btnInv4.setOpaque(true);
         btnInv4.setText("(empty)");
         btnInv4.setToolTipText("Inventory slot 4");
-        pnlInventory.add(btnInv4, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlInventory.add(btnInv4, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         pnlEquipments = new JPanel();
         pnlEquipments.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         pnlEquipments.setBackground(new Color(-11382962));
@@ -660,7 +663,7 @@ public class GameWindow extends JFrame {
         btnMainWeapon.setOpaque(true);
         btnMainWeapon.setText("(empty)");
         btnMainWeapon.setToolTipText("Main Weapon slot");
-        pnlEquipments.add(btnMainWeapon, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlEquipments.add(btnMainWeapon, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         btnHead = new JButton();
         btnHead.setBackground(new Color(-11382962));
         btnHead.setDoubleBuffered(false);
@@ -670,7 +673,7 @@ public class GameWindow extends JFrame {
         btnHead.setOpaque(true);
         btnHead.setText("(empty)");
         btnHead.setToolTipText("Head slot");
-        pnlEquipments.add(btnHead, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlEquipments.add(btnHead, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         btnBody = new JButton();
         btnBody.setBackground(new Color(-11382962));
         btnBody.setDoubleBuffered(false);
@@ -680,7 +683,7 @@ public class GameWindow extends JFrame {
         btnBody.setOpaque(true);
         btnBody.setText("(empty)");
         btnBody.setToolTipText("Body slot");
-        pnlEquipments.add(btnBody, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlEquipments.add(btnBody, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         btnMisc = new JButton();
         btnMisc.setBackground(new Color(-11382962));
         btnMisc.setDoubleBuffered(false);
@@ -690,9 +693,9 @@ public class GameWindow extends JFrame {
         btnMisc.setOpaque(true);
         btnMisc.setText("(empty)");
         btnMisc.setToolTipText("Misc. slot");
-        pnlEquipments.add(btnMisc, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlEquipments.add(btnMisc, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
         pnlLoots = new JPanel();
-        pnlLoots.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        pnlLoots.setLayout(new FlowLayout(FlowLayout.CENTER, 4, 4));
         pnlLoots.setBackground(new Color(-11382962));
         pnlLoots.setDoubleBuffered(false);
         pnlLoots.setEnabled(false);
@@ -700,7 +703,7 @@ public class GameWindow extends JFrame {
         if (pnlLootsFont != null) pnlLoots.setFont(pnlLootsFont);
         pnlLoots.setForeground(new Color(-1));
         pnlLoots.setOpaque(false);
-        mainPanel.add(pnlLoots, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mainPanel.add(pnlLoots, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 40), new Dimension(-1, 40), 0, false));
     }
 
     /**

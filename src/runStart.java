@@ -5,12 +5,8 @@ import GameObjects.Player;
 import map.Room;
 import map.allRooms;
 
-import java.util.Arrays;
-
 public class runStart {
     public static void main(String[] args) {
-
-
         Room tutorial = allRooms.tutRoom();
         Room forest1 = allRooms.newForest1();
         Room forest2 = allRooms.newForest2();
