@@ -30,9 +30,10 @@ public class allRooms {
                 allLoots.newMachete(),
                 allLoots.newSandwich(),
                 allLoots.newJerky(),
-                allLoots.newWhiskey(),
                 allLoots.newJacket(),
-                allLoots.newGloves()
+                allLoots.newGloves(),
+                allLoots.newHelmet(),
+                allLoots.newWhiskey()
         };
         final Entity[] mobs = {};
         return new Room("cabin", loots, mobs);

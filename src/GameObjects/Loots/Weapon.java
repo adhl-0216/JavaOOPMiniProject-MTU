@@ -10,7 +10,6 @@ public class Weapon extends Item {
         setAtk(atk);
     }
 
-
     @Override
     public String toString() {
         return "Weapon{" +

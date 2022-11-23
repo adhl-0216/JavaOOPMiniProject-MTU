@@ -2,10 +2,10 @@ package GUIs;
 
 import GameObjects.Entity;
 import GameObjects.Item;
+import GameObjects.Loots.Consumable;
 import GameObjects.Loots.Equipment;
 import GameObjects.Loots.Weapon;
 import GameObjects.Player;
-import com.sun.source.doctree.EntityTree;
 import map.Room;
 import map.allRooms;
 
@@ -15,12 +15,14 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 
-public class GameWindow extends JFrame {
+public class GameWindow extends JFrame implements Serializable {
     private static final Font customFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
     private JPanel mainPanel;
 
@@ -31,8 +33,6 @@ public class GameWindow extends JFrame {
     private JTextArea txtGameLog;
 
     private JPanel pnlMobs;
-    private final ArrayList<JButton> btnMobs = new ArrayList<>();
-    private final ArrayList<JLabel> lblMobs = new ArrayList<>();
     private JPanel pnlLoots;
 
     private JPanel pnlGame;
@@ -55,11 +55,11 @@ public class GameWindow extends JFrame {
     private MainMenu parent;
     private Player player;
     private Room[] map;
-    private int currLoc = 1;
+    private int currLoc = 0;
     private Room room;
 
 
-    public GameWindow(String title, MainMenu parent, Player player) {
+    public GameWindow(String title, MainMenu parent, Player player, Room[] map, int loadedLoc) {
         super(title);
         this.setParent(parent);
         $$$setupUI$$$();
@@ -75,8 +75,9 @@ public class GameWindow extends JFrame {
         this.pack();
 
         setPlayer(player);
-        setMap();
-        setRoom(getMap()[0]);
+        setMap(map);
+        setCurrLoc(loadedLoc);
+        setRoom(this.map[currLoc]);
 
         txtGameLog.setText("You woke up in the forest...\n");
 
@@ -90,7 +91,7 @@ public class GameWindow extends JFrame {
     }
 
 
-    private void nextLocation(int nextLoc) {
+    private void nextLocation(int currLoc) {
         boolean allCleared = true;
         ArrayList<Entity> mobs = room.getMobs();
         if (mobs != null) {
@@ -103,13 +104,12 @@ public class GameWindow extends JFrame {
 
         if (allCleared || room.getName().equalsIgnoreCase("cabin")) {
             btnLocation.setText("Proceed to the next location>>");
-            if (nextLoc == getMap().length) {
+            if (currLoc == getMap().length) {
                 JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
                 super.dispose();
                 parent.setVisible(true);
             } else {
-                setRoom(getMap()[nextLoc]);
-                this.currLoc++;
+                setRoom(getMap()[++this.currLoc]);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Something is blocking your way...", "Can't Proceed", JOptionPane.WARNING_MESSAGE);
@@ -156,18 +156,18 @@ public class GameWindow extends JFrame {
     }
 
     private void playerAttack(JButton btn, JLabel lbl) {
-        Entity mob = null;
-        for (Entity i : room.getMobs()) {
-            if (i.getId() == Integer.parseInt(btn.getName())) {
-                mob = i;
+        for (Entity mob : room.getMobs()) {
+            if (mob.getId() == Integer.parseInt(btn.getName())) {
+                room.newTurn(player, "attack", String.valueOf(mob.getId()));
+                System.out.println(mob);
+                txtGameLog.setText(room.getGameLog());
+                lbl.setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
+                lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
+                lblSans.setText(String.format("SANITY: (%.2f/100.00)", player.getSanity()));
+                break;
             }
         }
-        assert mob != null;
-        room.newTurn(player, "attack", mob.getName());
-        txtGameLog.setText(room.getGameLog());
-        lbl.setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
-        lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
-        lblSans.setText(String.format("SANITY: (%.2f/100.00)", player.getSanity()));
+
         if (player.getHp() <= 0 || player.getSanity() <= 0) {
             JOptionPane.showMessageDialog(null, "All is lost...", "GAME OVER", JOptionPane.ERROR_MESSAGE);
             this.dispose();
@@ -190,13 +190,11 @@ public class GameWindow extends JFrame {
             gbc.gridx = 0;
             gbc.gridy = 1;
             gbc.fill = GridBagConstraints.BOTH;
-            JLabel lblMob = new JLabel(String.format("%s - HP: %.2f", mob.getName(), +room.getMobs().get(i).getHp()));
-            lblMobs.add(lblMob);
+            JLabel lblMob = new JLabel(String.format("%s - HP: %.2f", mob.getName(), +mob.getHp()));
             lblMob.setFont(customFont);
             lblMob.setForeground(Color.white);
             lblMob.setBackground(new Color(82, 79, 78));
             lblMob.setVisible(true);
-            lblMobs.add(lblMob);
 
             //set image, addEventListener etc.
             gbc = new GridBagConstraints();
@@ -212,8 +210,7 @@ public class GameWindow extends JFrame {
             btnMob.setBorderPainted(false);
             btnMob.addActionListener(e -> playerAttack(btnMob, lblMob));
             btnMob.setVisible(true);
-            btnMob.setToolTipText("Click to attack " + mob.getName());
-            btnMobs.add(btnMob);
+            btnMob.setToolTipText("Click to attack " + mob.getName() + " id=" + mob.getId());
 
             pnlMob.add(lblMob, gbc);
             pnlMob.add(btnMob, gbc);
@@ -248,7 +245,7 @@ public class GameWindow extends JFrame {
             try {
                 setPnlInventory();
             } catch (Exception ex) {
-                System.out.println("");
+                System.out.println();
             }
         } else {
             JOptionPane.showMessageDialog(null, "There's no more space in your inventory!", "Inventory is Full", JOptionPane.WARNING_MESSAGE);
@@ -261,6 +258,16 @@ public class GameWindow extends JFrame {
         for (int i = 0; i < inv.length; i++) {
             btnInvs[i].setText(inv[i].getName());
             String type = inv[i].getClass().getSimpleName();
+            if (type.equalsIgnoreCase("consumable")) {
+                Consumable con = (Consumable) inv[i];
+                btnInvs[i].setToolTipText(inv[i].getDesc() + String.format(" (+ %.2f%s)", con.getValue(), con.getType()));
+            } else if (type.equalsIgnoreCase("equipment")) {
+                Equipment eq = (Equipment) inv[i];
+                btnInvs[i].setToolTipText(inv[i].getDesc() + String.format(" (+ %d.00DEF)", eq.getDef()));
+            } else if (type.equalsIgnoreCase("weapon")) {
+                Weapon wp = (Weapon) inv[i];
+                btnInvs[i].setToolTipText(inv[i].getDesc() + String.format(" (+ %d.00ATK)", wp.getAtk()));
+            }
             btnInvs[i].setName(type);
         }
     }
@@ -279,17 +286,7 @@ public class GameWindow extends JFrame {
     }
 
 
-    public void setMap() {
-        Room tutorial = allRooms.tutRoom();
-        Room forest1 = allRooms.newForest1();
-        Room forest2 = allRooms.newForest2();
-        Room cabin = allRooms.newCabin();
-        Room cave = allRooms.newCave();
-        Room forest3 = allRooms.newForest3();
-        Room tutorial2 = allRooms.tutRoom();
-
-
-        final Room[] map = {tutorial, forest1, forest2, cabin, cave, forest3, tutorial2};
+    public void setMap(Room[] map) {
         this.map = Arrays.copyOf(map, map.length);
     }
 
@@ -326,24 +323,17 @@ public class GameWindow extends JFrame {
         return txtGameLog;
     }
 
-    // https://coderanch.com/wiki/660351/Background-Image-JPanel
-    private static class imgPanel extends JPanel {
-        Image image;
-
-        public imgPanel() {
-            try {
-                image = Toolkit.getDefaultToolkit().createImage("assets/mainMenuBG.jpg");
-            } catch (Exception e) { /*handled in paintComponent()*/ }
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            if (image != null)
-                g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), this);
-        }
+    public int getCurrLoc() {
+        return currLoc;
     }
 
+    public void setCurrLoc(int currLoc) {
+        this.currLoc = currLoc;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
 
     /**
      * Method generated by IntelliJ IDEA GUI Designer
@@ -400,7 +390,7 @@ public class GameWindow extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         pnlLocation.add(btnLocation, gbc);
         pnlGameLog = new JPanel();
-        pnlGameLog.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        pnlGameLog.setLayout(new GridBagLayout());
         pnlGameLog.setBackground(new Color(-11382962));
         pnlGameLog.setDoubleBuffered(false);
         Font pnlGameLogFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlGameLog.getFont());
@@ -409,6 +399,7 @@ public class GameWindow extends JFrame {
         pnlGameLog.setMaximumSize(new Dimension(364, 804));
         pnlGameLog.setMinimumSize(new Dimension(364, 804));
         pnlGameLog.setOpaque(false);
+        pnlGameLog.setPreferredSize(new Dimension(364, 804));
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -425,12 +416,21 @@ public class GameWindow extends JFrame {
         if (txtGameLogFont != null) txtGameLog.setFont(txtGameLogFont);
         txtGameLog.setForeground(new Color(-1));
         txtGameLog.setLineWrap(true);
+        txtGameLog.setMaximumSize(new Dimension(364, 804));
+        txtGameLog.setMinimumSize(new Dimension(360, 17));
         txtGameLog.setOpaque(true);
+        txtGameLog.setPreferredSize(new Dimension(364, 804));
         txtGameLog.setText("");
         txtGameLog.setWrapStyleWord(true);
-        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(360, 800), new Dimension(360, 800), new Dimension(360, 800), 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        pnlGameLog.add(txtGameLog, gbc);
         pnlGame = new JPanel();
-        pnlGame.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        pnlGame.setLayout(new GridBagLayout());
         pnlGame.setBackground(new Color(-11382962));
         pnlGame.setDoubleBuffered(false);
         pnlGame.setFocusable(false);
@@ -457,7 +457,12 @@ public class GameWindow extends JFrame {
         if (pnlInventoryFont != null) pnlInventory.setFont(pnlInventoryFont);
         pnlInventory.setForeground(new Color(-1));
         pnlInventory.setOpaque(false);
-        pnlGame.add(pnlInventory, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(420, 100), new Dimension(420, 100), new Dimension(420, 100), 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        pnlGame.add(pnlInventory, gbc);
         pnlInventory.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         btnInv1 = new JButton();
         btnInv1.setBackground(new Color(-11382962));
@@ -509,7 +514,14 @@ public class GameWindow extends JFrame {
         pnlHpBar.setForeground(new Color(-1));
         pnlHpBar.setOpaque(false);
         pnlHpBar.setVisible(true);
-        pnlGame.add(pnlHpBar, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 50), new Dimension(-1, 50), new Dimension(-1, 50), 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        pnlGame.add(pnlHpBar, gbc);
         lblAtk = new JLabel();
         lblAtk.setBackground(new Color(-11382962));
         lblAtk.setDoubleBuffered(false);
@@ -573,7 +585,13 @@ public class GameWindow extends JFrame {
         pnlEquipments.setMinimumSize(new Dimension(250, 250));
         pnlEquipments.setOpaque(false);
         pnlEquipments.setPreferredSize(new Dimension(320, 320));
-        pnlGame.add(pnlEquipments, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(260, 260), new Dimension(260, 260), 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        pnlGame.add(pnlEquipments, gbc);
         btnMainWeapon = new JButton();
         btnMainWeapon.setBackground(new Color(-11382962));
         btnMainWeapon.setDoubleBuffered(false);

@@ -124,20 +124,16 @@ public class Player extends Entity {
         return "Item is not in inventory.";
     }
 
-    public String basicAtk(String Target, Room room) {
+    public String basicAtk(String id, Room room) {
         for (Entity target : room.getMobs()) {
-            if (target.getHp() > 0) {
-                if ((target.getName()).toLowerCase().contains(Target) || target.getName().equalsIgnoreCase(Target)){
-                    String output = this.getName() + " attacked " + target.getName() + ".";
-                    double dmg = this.getAtk() * (100 / (100 + target.getDef()));
-                    target.setHp((target.getHp() - dmg));
-                    if (this.getMainWeapon() != null) {
-                        output += "\n" + this.getMainWeapon().durabilityLost(1);
-                    }
-                    return output;
+            if (target.getId() == Integer.parseInt(id)){
+                String output = this.getName() + " attacked " + target.getName() + ".";
+                double dmg = this.getAtk() * (100 / (100 + target.getDef()));
+                target.setHp((target.getHp() - dmg));
+                if (this.getMainWeapon() != null) {
+                    output += "\n" + this.getMainWeapon().durabilityLost(1);
                 }
-            } else {
-                room.removeMob(target.getName());
+                return output;
             }
         }
         return "Target Not Found.";

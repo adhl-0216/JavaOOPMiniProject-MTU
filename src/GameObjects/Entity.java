@@ -1,8 +1,9 @@
 package GameObjects;
 
 import javax.swing.*;
+import java.io.Serializable;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
     private String name;
     private double hp;
     private double atk;

@@ -32,9 +32,20 @@ public class OptionsMenu extends JFrame {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(exitListener);
 
+        radEasy.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+        radEasy.setForeground(new Color(255, 255, 255));
         radEasy.addActionListener(this::selectDifficulty);
+
+        radNormal.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+        radNormal.setForeground(new Color(255, 255, 255));
         radNormal.addActionListener(this::selectDifficulty);
+
+        radHard.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+        radHard.setForeground(new Color(255, 255, 255));
         radHard.addActionListener(this::selectDifficulty);
+
+        lblDifficulty.setFont(new Font(Font.MONOSPACED, Font.BOLD, 24));
+        lblDifficulty.setForeground(new Color(255, 255, 255));
     }
 
     private void selectDifficulty(ActionEvent e) {
@@ -58,11 +69,11 @@ public class OptionsMenu extends JFrame {
     WindowListener exitListener = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
-        int confirm = JOptionPane.showConfirmDialog(null, "Return To Main Menu?", "Quit Options", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (confirm == 0) {
-            getParent().setVisible(true);
-            OptionsMenu.super.dispose();
-        }
+            int confirm = JOptionPane.showConfirmDialog(null, "Return To Main Menu?", "Quit Options", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirm == 0) {
+                getParent().setVisible(true);
+                OptionsMenu.super.dispose();
+            }
         }
     };
 
@@ -94,13 +105,13 @@ public class OptionsMenu extends JFrame {
         gbc.fill = GridBagConstraints.BOTH;
         mainPanel.add(pnlDiff, gbc);
         lblDifficulty = new JLabel();
-        Font lblDifficultyFont = this.$$$getFont$$$("Monospaced", Font.BOLD, 16, lblDifficulty.getFont());
+        Font lblDifficultyFont = this.$$$getFont$$$(null, -1, -1, lblDifficulty.getFont());
         if (lblDifficultyFont != null) lblDifficulty.setFont(lblDifficultyFont);
         lblDifficulty.setForeground(new Color(-1));
         lblDifficulty.setText("Difficulty");
         pnlDiff.add(lblDifficulty, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         radEasy = new JRadioButton();
-        Font radEasyFont = this.$$$getFont$$$("Monospaced", Font.BOLD, 12, radEasy.getFont());
+        Font radEasyFont = this.$$$getFont$$$(null, -1, -1, radEasy.getFont());
         if (radEasyFont != null) radEasy.setFont(radEasyFont);
         radEasy.setForeground(new Color(-1));
         radEasy.setName("");
@@ -108,14 +119,14 @@ public class OptionsMenu extends JFrame {
         radEasy.setText("Easy");
         pnlDiff.add(radEasy, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radNormal = new JRadioButton();
-        Font radNormalFont = this.$$$getFont$$$("Monospaced", Font.BOLD, 12, radNormal.getFont());
+        Font radNormalFont = this.$$$getFont$$$(null, -1, -1, radNormal.getFont());
         if (radNormalFont != null) radNormal.setFont(radNormalFont);
         radNormal.setForeground(new Color(-1));
         radNormal.setOpaque(false);
         radNormal.setText("Normal");
         pnlDiff.add(radNormal, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         radHard = new JRadioButton();
-        Font radHardFont = this.$$$getFont$$$("Monospaced", Font.BOLD, 12, radHard.getFont());
+        Font radHardFont = this.$$$getFont$$$(null, -1, -1, radHard.getFont());
         if (radHardFont != null) radHard.setFont(radHardFont);
         radHard.setForeground(new Color(-1));
         radHard.setOpaque(false);

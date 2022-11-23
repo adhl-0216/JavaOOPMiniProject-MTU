@@ -7,9 +7,10 @@ import GameObjects.Mobs.Tier2;
 import GameObjects.Mobs.Tier3;
 import GameObjects.Player;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Room {
+public class Room implements Serializable {
     private String name;
     private final ArrayList<Item> loots;
     private final ArrayList<Entity> mobs;
@@ -24,8 +25,8 @@ public class Room {
     }
     public Room(String name, Item[] loots, Entity[] mobs) {
         setName(name);
-        this.loots = new ArrayList<Item>();
-        this.mobs = new ArrayList<Entity>();
+        this.loots = new ArrayList<>();
+        this.mobs = new ArrayList<>();
         Collections.addAll(this.loots,loots);
         Collections.addAll(this.mobs,mobs);
         setTurnCount(1);
@@ -54,30 +55,26 @@ public class Room {
         }
         else if (event.equalsIgnoreCase("attack")) {
             StringBuilder gameLogBuilder = new StringBuilder(player.basicAtk(target, this) + "\n");
-            for (int i = 0; i < mobs.size(); i++) {
-                Entity mob = mobs.get(i);
+            for (Entity mob : mobs) {
                 if (mob.getHp() == 0) {
                     gameLogBuilder.append(mob.getName()).append(" is dead.").append("\n");
-                }
-                else {
-                    if (mob.getClass().toString().equalsIgnoreCase("class GameObjects.Mobs.Tier1")) {
+                } else {
+                    if (mob.getClass().getSimpleName().equalsIgnoreCase("Tier1")) {
                         gameLogBuilder.append(((Tier1) mob).basicAtk(player)).append("\n");
-                    }
-                    else if (mob.getClass().toString().equalsIgnoreCase("class GameObjects.Mobs.Tier2")) {
-                        if (rng(4)==0){
-                            gameLogBuilder.append(((Tier2)mob).specialAtk(player, rng(((Tier2) mob).getSpecialAtks().size()))).append("\n");
-                        }else {
-                            gameLogBuilder.append(((Tier2)mob).basicAtk(player)).append("\n");
-                        }
-                    }
-                    else if (mob.getClass().toString().equalsIgnoreCase("class GameObjects.Mobs.Tier3")) {
-                        if (turnCount%5 == 0 && turnCount > 0) {
-                            gameLogBuilder.append(((Tier3)mob).SSA(player)).append("\n");
+                    } else if (mob.getClass().getSimpleName().equalsIgnoreCase("Tier2")) {
+                        if (rng(4) == 0) {
+                            gameLogBuilder.append(((Tier2) mob).specialAtk(player, rng(((Tier2) mob).getSpecialAtks().size()))).append("\n");
                         } else {
-                            if (rng(4)==0){
-                                gameLogBuilder.append(((Tier3)mob).specialAtk(player, rng(((Tier3) mob).getSpecialAtks().size()))).append("\n");
-                            }else {
-                                gameLogBuilder.append(((Tier3)mob).basicAtk(player)).append("\n");
+                            gameLogBuilder.append(((Tier2) mob).basicAtk(player)).append("\n");
+                        }
+                    } else if (mob.getClass().getSimpleName().equalsIgnoreCase("Tier3")) {
+                        if (turnCount % 5 == 0 && turnCount > 0) {
+                            gameLogBuilder.append(((Tier3) mob).SSA(player)).append("\n");
+                        } else {
+                            if (rng(4) == 0) {
+                                gameLogBuilder.append(((Tier3) mob).specialAtk(player, rng(((Tier3) mob).getSpecialAtks().size()))).append("\n");
+                            } else {
+                                gameLogBuilder.append(((Tier3) mob).basicAtk(player)).append("\n");
                             }
                         }
                     }
@@ -102,6 +99,7 @@ public class Room {
         }
         return "Room{" +
                 "\n\tname=" + this.name +
+                "\n\tplayer=" + this.player +
                 "\n\tloots={" + lootsStr + "\n\t\t}" +
                 "\n\tmobs={" + mobsStr + "\n\t\t}" +
                 "\n}";

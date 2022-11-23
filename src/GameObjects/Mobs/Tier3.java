@@ -3,6 +3,7 @@ package GameObjects.Mobs;
 import GameObjects.Entity;
 import GameObjects.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Tier3 extends Entity {
@@ -61,7 +62,7 @@ public class Tier3 extends Entity {
                 '}';
     }
 
-    private static class specialAtk {
+    private static class specialAtk implements Serializable {
         private String name;
         private double val;
         private String type;

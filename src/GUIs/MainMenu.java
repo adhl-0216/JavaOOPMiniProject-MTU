@@ -2,6 +2,7 @@ package GUIs;
 
 import GameObjects.Inventory;
 import GameObjects.Player;
+import map.Map;
 import map.Room;
 import map.allRooms;
 
@@ -10,8 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -95,7 +98,7 @@ public class MainMenu extends JFrame{
         btnLoad.setForeground(new Color(255, 255, 255));
         btnLoad.setBackground(new Color(82, 79, 78));
         btnLoad.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
-        btnLoad.setEnabled(false);
+//        btnLoad.setEnabled(false);
         panelBtn.add(btnLoad, gbc);
 
         JButton btnOptions = new JButton("OPTIONS");
@@ -149,7 +152,7 @@ public class MainMenu extends JFrame{
 
 
     private void btnStartClicked(ActionEvent e) {
-        int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "START GAME", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "Start Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(newGame == 0) {
             try {
                 Player player = new Player(100, 15, 15,3);
@@ -161,7 +164,7 @@ public class MainMenu extends JFrame{
                         case "Hard" -> player = new Player(100, 5, 5,3);
                     }
                 }
-                setGameWindow(new GameWindow(this.getTitle(), this, player));
+                setGameWindow(new GameWindow(this.getTitle(), this, player, Map.map,0));
                 this.setVisible(false);
                 btnLoad.setEnabled(true);
             } catch (Exception ex) {
@@ -170,8 +173,24 @@ public class MainMenu extends JFrame{
         }
     }
     private void btnLoadClicked() {
-        gameWindow.setVisible(true);
-        this.setVisible(false);
+        if (gameWindow == null) {
+            try {
+                File inFile = new File("saved_games.data");
+                FileInputStream inStream = new FileInputStream(inFile);
+                ObjectInputStream objectInputStream = new ObjectInputStream(inStream);
+                Room[] loadedMap = (Room[]) objectInputStream.readObject();
+                int prevLoc = (int) objectInputStream.readObject();
+                setGameWindow(new GameWindow(this.getTitle(), this, loadedMap[prevLoc].getPlayer(), loadedMap, prevLoc));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No Saved Games.", "No Saved Games", JOptionPane.INFORMATION_MESSAGE);
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            gameWindow.setVisible(true);
+            this.setVisible(false);
+        }
+
     }
     private void btnOptionsClicked() {
         optionsMenu.setVisible(true);
@@ -180,6 +199,20 @@ public class MainMenu extends JFrame{
     private void btnExitClicked() {
         int exit = JOptionPane.showConfirmDialog(null, "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (exit == 0) {
+            if (this.gameWindow != null) {
+                try {
+                    File outFile = new File("saved_games.data");
+                    FileOutputStream outStream = new FileOutputStream(outFile);
+                    ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
+                    objectOutStream.writeObject(gameWindow.getMap());
+                    objectOutStream.writeObject(gameWindow.getCurrLoc());
+                    JOptionPane.showMessageDialog(null, "There is no escape...", "Game Saved", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println(Arrays.toString(gameWindow.getMap()));
+                    System.out.println(gameWindow.getCurrLoc());
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
             JOptionPane.showMessageDialog(null, "COWARD","COWARD",JOptionPane.WARNING_MESSAGE);
             System.exit(0);
         }

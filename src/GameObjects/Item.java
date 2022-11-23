@@ -1,6 +1,8 @@
 package GameObjects;
 
-public abstract class Item {
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
     private static int count = 0;
     private int id;
     private String name;

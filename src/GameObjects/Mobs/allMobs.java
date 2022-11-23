@@ -5,9 +5,7 @@ import javax.swing.*;
 public class allMobs {
     //tier 1
     public static Tier1 newWolf() {
-        String[] var = {"Grey Wolf","Black Wolf", "White Wolf", "Brown Wolf"};
-        Tier1 wolf = new Tier1("wolf", 100, 5,10);
-        wolf.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        Tier1 wolf = new Tier1("Wolf", 100, 5,10);
         wolf.setSrc("assets/wolf.png");
         return wolf;
     }
@@ -19,9 +17,7 @@ public class allMobs {
     }
 
     public static Tier1 newFox() {
-        String[] var = {"Orange Fox", "White Fox", "Red Fox", "Black Fox"};
-        Tier1 fox = new Tier1("fox", 80, 8, 12);
-        fox.setName(var[(int) Math.floor(Math.random() * var.length)]);
+        Tier1 fox = new Tier1("Fox", 80, 8, 12);
         fox.setSrc("assets/fox.png");
         return fox;
     }
