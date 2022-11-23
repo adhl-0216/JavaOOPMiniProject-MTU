@@ -15,9 +15,10 @@ public class Player extends Entity {
     private Equipment head;
     private Equipment body;
     private Equipment misc;
-    public Player() {
-        super("You", 50, 5, 5);
-        setSanity(50);
+    public Player(double HP, double ATK, double DEF, int invGrade) {
+        super("You", HP, ATK, DEF);
+        setInventory(new Inventory(invGrade));
+        setSanity(100);
     }
 
     public String pickUp(String itemName, Room room){
@@ -93,7 +94,7 @@ public class Player extends Entity {
                             if (getHead() != null) {
                                 setDef(getDef() + eqDef - getHead().getDef());
                             } else {
-                                setDef(5 + eqDef);
+                                setDef(getDef() + eqDef);
                             }
                             setHead(((Equipment) item));
                         }
@@ -101,7 +102,7 @@ public class Player extends Entity {
                             if (getBody() != null) {
                                 setDef(getDef() + eqDef - getBody().getDef());
                             } else {
-                                setDef(5 + eqDef);
+                                setDef(getDef()  + eqDef);
                             }
                             setBody(((Equipment) item));
                         }
@@ -109,7 +110,7 @@ public class Player extends Entity {
                             if (getMisc() != null) {
                                 setDef(getDef() + eqDef - getMisc().getDef());
                             } else {
-                                setDef(5 + eqDef);
+                                setDef(getDef()  + eqDef);
                             }
                             setMisc(((Equipment) item));
                         }

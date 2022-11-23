@@ -11,23 +11,22 @@ import java.util.Arrays;
 
 public class allRooms {
     public static Room tutRoom() {
-        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater(), allLoots.newJacket()};
+        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater(), allLoots.newCap()};
         final Entity[] mobs = {allMobs.newAlphaWolf()};
         return new Room("Tutorial", loots, mobs);
     }
     public static Room newForest1() {
-        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newWater()};
+        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newBerries(), allLoots.newBerries()};
         final Entity[] mobs = {allMobs.newFox(), allMobs.newFox()};
         return new Room("forest", loots, mobs);
     }
     public static Room newForest2() {
-        final Item[] loots = {allLoots.newApple(), allLoots.newWater()};
+        final Item[] loots = {allLoots.newBar(), allLoots.newBar()};
         final Entity[] mobs = {allMobs.newBoar()};
         return new Room("forest", loots, mobs);
     }
     public static Room newCabin() {
         final Item[] loots = {
-                allLoots.newPan(),
                 allLoots.newMachete(),
                 allLoots.newSandwich(),
                 allLoots.newJerky(),

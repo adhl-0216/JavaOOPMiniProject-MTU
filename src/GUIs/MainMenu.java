@@ -1,15 +1,25 @@
 package GUIs;
 
+import GameObjects.Inventory;
+import GameObjects.Player;
+import map.Room;
+import map.allRooms;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainMenu extends JFrame{
 
     private GameWindow gameWindow;
+    private final OptionsMenu optionsMenu = new OptionsMenu(this);
+    private final JButton btnLoad;
 
     public MainMenu(String title) {
         this.setTitle(title);
@@ -76,7 +86,7 @@ public class MainMenu extends JFrame{
         btnStart.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnStart, gbc);
 
-        JButton btnLoad = new JButton("LOAD");
+        btnLoad = new JButton("LOAD");
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -85,6 +95,7 @@ public class MainMenu extends JFrame{
         btnLoad.setForeground(new Color(255, 255, 255));
         btnLoad.setBackground(new Color(82, 79, 78));
         btnLoad.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
+        btnLoad.setEnabled(false);
         panelBtn.add(btnLoad, gbc);
 
         JButton btnOptions = new JButton("OPTIONS");
@@ -109,7 +120,7 @@ public class MainMenu extends JFrame{
         btnExit.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnExit, gbc);
 
-        btnStart.addActionListener(e -> btnStartClicked());
+        btnStart.addActionListener(this :: btnStartClicked);
         btnLoad.addActionListener(e -> btnLoadClicked());
         btnOptions.addActionListener(e -> btnOptionsClicked());
         btnExit.addActionListener(e -> btnExitClicked());
@@ -121,6 +132,7 @@ public class MainMenu extends JFrame{
         });
 
         this.add(panelMain);
+        this.setVisible(true);
     }
 
     Timer t = new Timer();
@@ -131,40 +143,31 @@ public class MainMenu extends JFrame{
         }
     }
 
-    public void setGameWindow(GameWindow mainGame) {
-        this.gameWindow = mainGame;
+    public void setGameWindow(GameWindow gameWindow) {
+        this.gameWindow = gameWindow;
     }
 
-    public GameWindow getGameWindow() {
-        try {
-            return gameWindow;
-        } catch (Exception e) {
-            System.out.println("mainGame is null.");
-            return null;
-        }
-    }
 
-    private void btnStartClicked() {
-        try {
-//            this.setGameWindow(new GameWindow(getGameWindow().getTitle(), this, getGameWindow().getMap(), getGameWindow().getPlayer()));
-            gameWindow.setVisible(true);
-            this.setVisible(false);
-        } catch (Exception e) {
-            System.out.println("mainGame is null.");
-            System.exit(0);
+    private void btnStartClicked(ActionEvent e) {
+//        JButton btn = (JButton)e.getSource();
+        int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "START GAME", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(newGame == 0) {
+            try {
+                setGameWindow(new GameWindow(this.getTitle(), this, new Player(100, 10, 10,3)));
+                this.setVisible(false);
+                btnLoad.setEnabled(true);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
     private void btnLoadClicked() {
-        System.out.println("Load");
-
-        MainMenu.this.setVisible(false);
-        t.schedule(new hideShowFrame(), 3000);
+        gameWindow.setVisible(true);
+        this.setVisible(false);
     }
     private void btnOptionsClicked() {
-        System.out.println("Options");
-
+        optionsMenu.setVisible(true);
         MainMenu.this.setVisible(false);
-        t.schedule(new hideShowFrame(), 3000);
     }
     private void btnExitClicked() {
         int exit = JOptionPane.showConfirmDialog(null, "Giving up?", "Escape", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -173,7 +176,6 @@ public class MainMenu extends JFrame{
             System.exit(0);
         }
     }
-
 
     // https://coderanch.com/wiki/660351/Background-Image-JPanel
     static class imgPanel extends JPanel {

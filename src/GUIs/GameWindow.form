@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUIs.GameWindow">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="4" vgap="4">
-    <margin top="4" left="4" bottom="4" right="4"/>
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="589" width="1080" height="720"/>
+      <xy x="25" y="36" width="1080" height="720"/>
     </constraints>
     <properties>
       <background color="-11382962"/>
@@ -18,10 +17,13 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="e95a1" binding="pnlLocation" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="e95a1" binding="pnlLocation" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="true"/>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="true">
+            <preferred-size width="-1" height="24"/>
+            <maximum-size width="-1" height="24"/>
+          </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-11382962"/>
@@ -34,7 +36,11 @@
         <children>
           <component id="b15eb" class="javax.swing.JButton" binding="btnLocation">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="26"/>
+                <maximum-size width="-1" height="26"/>
+              </grid>
+              <gridbag weightx="1.0" weighty="1.0"/>
             </constraints>
             <properties>
               <background color="-11382962"/>
@@ -44,6 +50,7 @@
               <font name="Courier New" size="14" style="1"/>
               <foreground color="-1"/>
               <horizontalAlignment value="4"/>
+              <horizontalTextPosition value="0"/>
               <opaque value="false"/>
               <text value="(location)"/>
             </properties>
@@ -53,16 +60,19 @@
       <grid id="81aca" binding="pnlGameLog" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="0" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="true">
             <preferred-size width="400" height="804"/>
             <maximum-size width="400" height="804"/>
           </grid>
+          <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-11382962"/>
           <doubleBuffered value="false"/>
           <font name="Courier New" size="14" style="1"/>
           <foreground color="-1"/>
+          <maximumSize width="364" height="804"/>
+          <minimumSize width="364" height="804"/>
           <opaque value="false"/>
         </properties>
         <border type="none"/>
@@ -70,8 +80,9 @@
           <component id="fe6c1" class="javax.swing.JTextArea" binding="txtGameLog">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="400" height="800"/>
-                <maximum-size width="400" height="800"/>
+                <minimum-size width="360" height="800"/>
+                <preferred-size width="360" height="800"/>
+                <maximum-size width="360" height="800"/>
               </grid>
             </constraints>
             <properties>
@@ -90,112 +101,14 @@
           </component>
         </children>
       </grid>
-      <grid id="1414f" binding="pnlMobs" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="200"/>
-            <maximum-size width="-1" height="200"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-11382962"/>
-          <doubleBuffered value="false"/>
-          <enabled value="false"/>
-          <focusable value="false"/>
-          <font name="Courier New" size="14" style="1"/>
-          <foreground color="-1"/>
-          <opaque value="false"/>
-        </properties>
-        <border type="none" title=""/>
-        <children>
-          <component id="84075" class="javax.swing.JButton" binding="btnMob1">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="14" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-              <text value="(empty)"/>
-            </properties>
-          </component>
-          <component id="9b04b" class="javax.swing.JButton" binding="btnMob2">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="14" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-              <text value="(empty)"/>
-            </properties>
-          </component>
-          <component id="f1017" class="javax.swing.JButton" binding="btnMob3">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <borderPainted value="false"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="14" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-              <text value="(empty)"/>
-            </properties>
-          </component>
-          <component id="528df" class="javax.swing.JLabel" binding="lblMob2Hp">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="14" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-              <text value="(0/0)"/>
-            </properties>
-          </component>
-          <component id="ccab7" class="javax.swing.JLabel" binding="lblMob1Hp">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="14" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-              <text value="(0/0)"/>
-            </properties>
-          </component>
-          <component id="23cae" class="javax.swing.JLabel" binding="lblMob3Hp">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="14" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-              <text value="(0/0)"/>
-            </properties>
-          </component>
-        </children>
-      </grid>
       <grid id="dd5d3" binding="pnlGame" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="true">
+            <preferred-size width="-1" height="360"/>
+            <maximum-size width="-1" height="360"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
           <background color="-11382962"/>
@@ -203,104 +116,19 @@
           <focusable value="false"/>
           <font name="Courier New" size="14" style="1"/>
           <foreground color="-1"/>
+          <maximumSize width="680" height="600"/>
+          <minimumSize width="680" height="600"/>
           <opaque value="false"/>
         </properties>
         <border type="none"/>
         <children>
-          <grid id="87b9e" binding="pnlHpBar" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="26"/>
-                <preferred-size width="-1" height="26"/>
-                <maximum-size width="-1" height="26"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-11382962"/>
-              <doubleBuffered value="false"/>
-              <font name="Courier New" size="12" style="1"/>
-              <foreground color="-1"/>
-              <opaque value="false"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="99ae5" class="javax.swing.JLabel" binding="lblHpValue">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-11382962"/>
-                  <doubleBuffered value="false"/>
-                  <enabled value="true"/>
-                  <focusable value="false"/>
-                  <font name="Courier New" size="18" style="1"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <opaque value="false"/>
-                  <text value="HP: (100/100)"/>
-                </properties>
-              </component>
-              <component id="44f92" class="javax.swing.JLabel" binding="lblDef">
-                <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-11382962"/>
-                  <doubleBuffered value="false"/>
-                  <enabled value="true"/>
-                  <focusable value="false"/>
-                  <font name="Courier New" size="18" style="1"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <opaque value="false"/>
-                  <text value="DEF: 5"/>
-                </properties>
-              </component>
-              <component id="f5d2e" class="javax.swing.JLabel" binding="lblAtk">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-11382962"/>
-                  <doubleBuffered value="false"/>
-                  <enabled value="true"/>
-                  <focusable value="false"/>
-                  <font name="Courier New" size="18" style="1"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <opaque value="false"/>
-                  <text value="ATK: 5"/>
-                </properties>
-              </component>
-              <component id="8d5b6" class="javax.swing.JLabel" binding="lblSans">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <background color="-11382962"/>
-                  <doubleBuffered value="false"/>
-                  <enabled value="true"/>
-                  <focusable value="false"/>
-                  <font name="Courier New" size="18" style="1"/>
-                  <foreground color="-1"/>
-                  <horizontalAlignment value="0"/>
-                  <horizontalTextPosition value="0"/>
-                  <opaque value="false"/>
-                  <text value="SANITY: (100/100)"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
           <grid id="36bad" binding="pnlInventory" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="420" height="200"/>
-                <preferred-size width="420" height="200"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <minimum-size width="420" height="100"/>
+                <preferred-size width="420" height="100"/>
+                <maximum-size width="420" height="100"/>
               </grid>
             </constraints>
             <properties>
@@ -312,7 +140,7 @@
               <foreground color="-1"/>
               <opaque value="false"/>
             </properties>
-            <border type="none" title=""/>
+            <border type="empty" title=""/>
             <children>
               <component id="bd30a" class="javax.swing.JButton" binding="btnInv1">
                 <constraints>
@@ -388,11 +216,102 @@
               </component>
             </children>
           </grid>
-          <grid id="55fad" binding="pnlEquipments" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="87b9e" binding="pnlHpBar" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="1" vgap="1">
+            <margin top="0" left="4" bottom="0" right="4"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="-1" height="50"/>
+                <preferred-size width="-1" height="50"/>
+                <maximum-size width="-1" height="50"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-11382962"/>
+              <doubleBuffered value="false"/>
+              <enabled value="true"/>
+              <font name="Courier New" size="12" style="1"/>
+              <foreground color="-1"/>
+              <opaque value="false"/>
+              <visible value="true"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="f5d2e" class="javax.swing.JLabel" binding="lblAtk">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-11382962"/>
+                  <doubleBuffered value="false"/>
+                  <enabled value="true"/>
+                  <focusable value="false"/>
+                  <font name="Courier New" size="18" style="1"/>
+                  <foreground color="-1"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="ATK: 5"/>
+                </properties>
+              </component>
+              <component id="ffd40" class="javax.swing.JLabel" binding="lblDef">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-11382962"/>
+                  <doubleBuffered value="false"/>
+                  <enabled value="true"/>
+                  <focusable value="false"/>
+                  <font name="Courier New" size="18" style="1"/>
+                  <foreground color="-1"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="DEF: 5"/>
+                </properties>
+              </component>
+              <component id="bfa19" class="javax.swing.JLabel" binding="lblSans">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-11382962"/>
+                  <doubleBuffered value="false"/>
+                  <enabled value="true"/>
+                  <focusable value="false"/>
+                  <font name="Courier New" size="18" style="1"/>
+                  <foreground color="-1"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="SANITY: (100/100)"/>
+                </properties>
+              </component>
+              <component id="99ae5" class="javax.swing.JLabel" binding="lblHp">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-11382962"/>
+                  <doubleBuffered value="false"/>
+                  <enabled value="true"/>
+                  <focusable value="false"/>
+                  <font name="Courier New" size="18" style="1"/>
+                  <foreground color="-1"/>
+                  <horizontalAlignment value="0"/>
+                  <horizontalTextPosition value="0"/>
+                  <opaque value="false"/>
+                  <text value="HP: (100/100)"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="55fad" binding="pnlEquipments" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="true" same-size-vertically="true" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="124" height="124"/>
+                <preferred-size width="260" height="260"/>
+                <maximum-size width="260" height="260"/>
               </grid>
             </constraints>
             <properties>
@@ -400,6 +319,8 @@
               <doubleBuffered value="false"/>
               <font name="Courier New" size="14" style="1"/>
               <foreground color="-1"/>
+              <maximumSize width="250" height="250"/>
+              <minimumSize width="250" height="250"/>
               <opaque value="false"/>
               <preferredSize width="320" height="320"/>
             </properties>
@@ -483,10 +404,12 @@
       </grid>
       <grid id="62695" binding="pnlLoots" layout-manager="FlowLayout" hgap="4" vgap="4" flow-align="1">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="40"/>
             <preferred-size width="-1" height="40"/>
             <maximum-size width="-1" height="40"/>
           </grid>
+          <gridbag weightx="1.0" weighty="0.0"/>
         </constraints>
         <properties>
           <background color="-11382962"/>
@@ -497,6 +420,26 @@
           <opaque value="false"/>
         </properties>
         <border type="none"/>
+        <children/>
+      </grid>
+      <grid id="b9694" binding="pnlMobs" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="200"/>
+            <maximum-size width="-1" height="200"/>
+          </grid>
+          <gridbag weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <background color="-11382962"/>
+          <doubleBuffered value="false"/>
+          <enabled value="false"/>
+          <focusable value="false"/>
+          <font name="Courier New" size="14" style="1"/>
+          <foreground color="-1"/>
+          <opaque value="false"/>
+        </properties>
+        <border type="empty" title=""/>
         <children/>
       </grid>
     </children>

@@ -44,7 +44,7 @@ public class allMobs {
         bear.setName(var[(int) Math.floor(Math.random() * var.length)]);
         bear.addSpecialAtk("Battle Cry",10,"SANITY");
         bear.addSpecialAtk("Claw Attack",25,"HP");
-        bear.addSSA("Bear Hug",50,"HP");
+        bear.addSSA("Bear Hug",35,"HP");
         bear.setSrc("assets/bear.png");
         return bear;
     }

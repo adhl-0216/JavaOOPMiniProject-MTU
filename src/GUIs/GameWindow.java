@@ -1,10 +1,12 @@
 package GUIs;
 
+import GameObjects.Entity;
 import GameObjects.Item;
 import GameObjects.Loots.Equipment;
 import GameObjects.Loots.Weapon;
 import GameObjects.Player;
 import map.Room;
+import map.allRooms;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -13,48 +15,50 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 
 public class GameWindow extends JFrame {
     private static final Font customFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
     private JPanel mainPanel;
-    private JPanel pnlEquipments;
+
     private JPanel pnlLocation;
-    private JPanel pnlMobs;
+    private JButton btnLocation;
+
     private JPanel pnlGameLog;
-    private JButton btnMisc;
-    private JButton btnHead;
-    private JButton btnMainWeapon;
-    private JButton btnBody;
     private JTextArea txtGameLog;
+
+    private JPanel pnlMobs;
+    private final ArrayList<JButton> btnMobs = new ArrayList<>();
+    private final ArrayList<JLabel> lblMobs = new ArrayList<>();
+    private JPanel pnlLoots;
+
+    private JPanel pnlGame;
+    private JPanel pnlInventory;
     private JButton btnInv1;
     private JButton btnInv2;
     private JButton btnInv3;
     private JButton btnInv4;
-    private JPanel pnlInventory;
     private JPanel pnlHpBar;
-    private JLabel lblHpValue;
-    private JLabel lblHpIcon;
-    private JButton btnLocation;
-    private JButton btnMob1;
-    private JButton btnMob2;
-    private JButton btnMob3;
-    private JPanel pnlGame;
-    private JLabel lblMob2Hp;
-    private JLabel lblMob1Hp;
-    private JLabel lblMob3Hp;
-    private JPanel pnlLoots;
+    private JLabel lblHp;
     private JLabel lblDef;
     private JLabel lblAtk;
     private JLabel lblSans;
+    private JPanel pnlEquipments;
+    private JButton btnHead;
+    private JButton btnBody;
+    private JButton btnMainWeapon;
+    private JButton btnMisc;
+
     private MainMenu parent;
+    private Player player;
     private Room[] map;
     private int currLoc = 1;
     private Room room;
-    private Player player;
 
-    public GameWindow(String title, MainMenu parent, Room[] map, Player player) {
+
+    public GameWindow(String title, MainMenu parent, Player player) {
         super(title);
         this.setParent(parent);
         $$$setupUI$$$();
@@ -70,28 +74,28 @@ public class GameWindow extends JFrame {
         this.pack();
 
         setPlayer(player);
-        setMap(map);
-        setRoom(map[0]);
+        setMap();
+        setRoom(getMap()[0]);
 
-        txtGameLog.setEditable(false);
-        txtGameLog.setText("You woke up in the forest...");
-        txtGameLog.setSize(100, 400);
-        txtGameLog.setLineWrap(true);
+        txtGameLog.setText("You woke up in the forest...\n");
 
         btnLocation.addActionListener(e -> nextLocation(currLoc));
         btnInv1.addActionListener(this::equipOrConsume);
         btnInv2.addActionListener(this::equipOrConsume);
         btnInv3.addActionListener(this::equipOrConsume);
         btnInv4.addActionListener(this::equipOrConsume);
+
+        this.setVisible(true);
     }
 
+
     private void nextLocation(int nextLoc) {
-        if (nextLoc == map.length) {
+        if (nextLoc == getMap().length) {
             JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
             super.dispose();
             parent.setVisible(true);
         } else {
-            setRoom(map[nextLoc]);
+            setRoom(getMap()[nextLoc]);
             this.currLoc++;
         }
     }
@@ -106,10 +110,9 @@ public class GameWindow extends JFrame {
             setEquipments();
         } else if (btnInv.getName().equalsIgnoreCase("consumable")) {
             room.newTurn(player, "consume", btnInv.getText());
-            lblHpValue.setText(String.format("HP: (%.0f/100)", player.getHp()));
-            lblSans.setText(String.format("SANITY: (%.0f/100)", player.getSanity()));
+            lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
+            lblSans.setText(String.format("SANITY: (%.2f/100.00)", player.getSanity()));
         }
-        System.out.println(player);
         btnInv.setText("(empty)");
         txtGameLog.setText(room.getGameLog());
     }
@@ -134,6 +137,75 @@ public class GameWindow extends JFrame {
             lblDef.setText("DEF: " + player.getDef());
             btnMisc.setText(player.getMisc().getName());
         }
+    }
+
+    private void playerAttack(JButton btn, JLabel lbl) {
+        int idx = Integer.parseInt(btn.getName());
+        Entity mob;
+        if (idx > room.getMobs().size()) {
+            mob = room.getMobs().get(0);
+        }
+        mob = room.getMobs().get(Integer.parseInt(btn.getName()));
+        room.newTurn(player, "attack", mob.getName());
+        txtGameLog.setText(room.getGameLog());
+//        lblMobs.get(Integer.parseInt(btn.getName())).setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
+        lbl.setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
+        lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
+        lblSans.setText(String.format("SANITY: (%.2f/100.00)", player.getSanity()));
+        if (player.getHp() <= 0 || player.getSanity() <= 0) {
+            JOptionPane.showMessageDialog(null, "All is lost...", "GAME OVER", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+            this.parent.setVisible(true);
+        }
+    }
+
+
+    private void setMobs() {
+        ArrayList<Entity> mobs = room.getMobs();
+        pnlMobs.removeAll();
+        int i = 0;
+        for (Entity mob : mobs) {
+            JPanel pnlMob = new JPanel();
+            GridBagConstraints gbc;
+            pnlMob.setLayout(new GridBagLayout());
+            pnlMob.setOpaque(false);
+
+
+            //mob status label
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            gbc.fill = GridBagConstraints.BOTH;
+            JLabel lblMob = new JLabel(String.format("%s - HP: %.2f", mob.getName(), +room.getMobs().get(i).getHp()));
+            lblMobs.add(lblMob);
+            lblMob.setFont(customFont);
+            lblMob.setForeground(Color.white);
+            lblMob.setBackground(new Color(82, 79, 78));
+            lblMob.setVisible(true);
+            lblMobs.add(lblMob);
+
+            //set image, addEventListener etc.
+            gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.fill = GridBagConstraints.BOTH;
+            JButton btnMob = new JButton();
+            btnMob.setName(String.valueOf(i));
+            btnMob.setIcon(new ImageIcon(mob.getSrc()));
+            btnMob.setSize(120, 120);
+            btnMob.setOpaque(false);
+            btnMob.setContentAreaFilled(false);
+            btnMob.setBorderPainted(false);
+            btnMob.addActionListener(e -> playerAttack(btnMob, lblMob));
+            btnMob.setVisible(true);
+            btnMobs.add(btnMob);
+
+            pnlMob.add(lblMob, gbc);
+            pnlMob.add(btnMob, gbc);
+            pnlMobs.add(pnlMob);
+            i++;
+        }
+
     }
 
     private void setLoots() {
@@ -162,7 +234,7 @@ public class GameWindow extends JFrame {
             try {
                 setPnlInventory();
             } catch (Exception ex) {
-                System.out.println("???");
+                System.out.println("");
             }
         } else {
             JOptionPane.showMessageDialog(null, "There's no more space in your inventory!", "Inventory is Full", JOptionPane.WARNING_MESSAGE);
@@ -182,41 +254,31 @@ public class GameWindow extends JFrame {
     private void setRoom(Room room) {
         this.room = room;
         room.addPlayer(player);
-        JButton[] btnMobs = {btnMob1, btnMob2, btnMob3};
-        JLabel[] lblMobsHp = {lblMob1Hp, lblMob2Hp, lblMob3Hp};
-        for (int i = 0; i < btnMobs.length; i++) {
-            try {
-                if (room.getMobs().get(i).getSrc() != null) {
-                    btnMobs[i].setIcon(new ImageIcon(room.getMobs().get(i).getSrc()));
-                    btnMobs[i].setSize(120, 120);
-                    btnMobs[i].setOpaque(false);
-                    btnMobs[i].setContentAreaFilled(false);
-                    btnMobs[i].setBorderPainted(false);
-                    lblMobsHp[i].setText(room.getMobs().get(i).getName() + " - HP: " + room.getMobs().get(i).getHp());
-                    btnMobs[i].setText("");
-                    btnMobs[i].setVisible(true);
-                    lblMobsHp[i].setVisible(true);
-                }
-            } catch (Exception e) {
-                btnMobs[i].setVisible(false);
-                lblMobsHp[i].setVisible(false);
-            }
-        }
-
-        setLoots();
         btnLocation.setText(room.getName());
         lblAtk.setText("ATK: " + player.getAtk());
         lblDef.setText("DEF: " + player.getDef());
-        lblHpValue.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
+        lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
         lblSans.setText(String.format("SANITY: (%.2f/100.00)", +player.getSanity()));
+        setMobs();
+        setLoots();
+        txtGameLog.setText(room.getGameLog());
     }
 
-    public void setMap(Room[] map) {
-        this.map = map;
+
+    public void setMap() {
+        Room tutorial = allRooms.tutRoom();
+        Room forest1 = allRooms.newForest1();
+        Room forest2 = allRooms.newForest2();
+        Room cabin = allRooms.newCabin();
+        Room cave = allRooms.newCave();
+        Room forest3 = allRooms.newForest3();
+
+        final Room[] map = {tutorial, forest1, forest2, cabin, cave, forest3};
+        this.map = Arrays.copyOf(map, map.length);
     }
 
     public Room[] getMap() {
-        return map;
+        return Arrays.copyOf(map, map.length);
     }
 
     WindowListener exitListener = new WindowAdapter() {
@@ -233,10 +295,6 @@ public class GameWindow extends JFrame {
         }
     };
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -250,124 +308,8 @@ public class GameWindow extends JFrame {
         this.parent = parent;
     }
 
-    public JButton getBtnMisc() {
-        return btnMisc;
-    }
-
-    public void setBtnMisc(JButton btnMisc) {
-        this.btnMisc = btnMisc;
-    }
-
-    public JButton getBtnHead() {
-        return btnHead;
-    }
-
-    public void setBtnHead(JButton btnHead) {
-        this.btnHead = btnHead;
-    }
-
-    public JButton getBtnMainWeapon() {
-        return btnMainWeapon;
-    }
-
-    public void setBtnMainWeapon(JButton btnMainWeapon) {
-        this.btnMainWeapon = btnMainWeapon;
-    }
-
-    public JButton getBtnBody() {
-        return btnBody;
-    }
-
-    public void setBtnBody(JButton btnBody) {
-        this.btnBody = btnBody;
-    }
-
     public JTextArea getTxtGameLog() {
         return txtGameLog;
-    }
-
-    public void setTxtGameLog(JTextArea txtGameLog) {
-        this.txtGameLog = txtGameLog;
-    }
-
-    public JButton getBtnConsum1() {
-        return btnInv1;
-    }
-
-    public void setBtnConsum1(JButton btnConsum1) {
-        this.btnInv1 = btnConsum1;
-    }
-
-    public JButton getBtnConsum2() {
-        return btnInv2;
-    }
-
-    public void setBtnConsum2(JButton btnConsum2) {
-        this.btnInv2 = btnConsum2;
-    }
-
-    public JButton getBtnConsum3() {
-        return btnInv3;
-    }
-
-    public void setBtnConsum3(JButton btnConsum3) {
-        this.btnInv3 = btnConsum3;
-    }
-
-    public JButton getBtnConsum4() {
-        return btnInv4;
-    }
-
-    public void setBtnConsum4(JButton btnConsum4) {
-        this.btnInv4 = btnConsum4;
-    }
-
-    public JLabel getLblHpValue() {
-        return lblHpValue;
-    }
-
-    public void setLblHpValue(JLabel lblHpValue) {
-        this.lblHpValue = lblHpValue;
-    }
-
-    public JLabel getLblHpIcon() {
-        return lblHpIcon;
-    }
-
-    public void setLblHpIcon(JLabel lblHpIcon) {
-        this.lblHpIcon = lblHpIcon;
-    }
-
-    public JButton getBtnLocation() {
-        return btnLocation;
-    }
-
-    public void setBtnLocation(JButton btnLocation) {
-        this.btnLocation = btnLocation;
-    }
-
-    public JButton getBtnMob1() {
-        return btnMob1;
-    }
-
-    public void setBtnMob1(JButton btnMob1) {
-        this.btnMob1 = btnMob1;
-    }
-
-    public JButton getBtnMob2() {
-        return btnMob2;
-    }
-
-    public void setBtnMob2(JButton btnMob2) {
-        this.btnMob2 = btnMob2;
-    }
-
-    public JButton getBtnMob3() {
-        return btnMob3;
-    }
-
-    public void setBtnMob3(JButton btnMob3) {
-        this.btnMob3 = btnMob3;
     }
 
     // https://coderanch.com/wiki/660351/Background-Image-JPanel
@@ -398,7 +340,7 @@ public class GameWindow extends JFrame {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 2, new Insets(4, 4, 4, 4), 4, 4));
+        mainPanel.setLayout(new GridBagLayout());
         mainPanel.setBackground(new Color(-11382962));
         mainPanel.setDoubleBuffered(false);
         Font mainPanelFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, mainPanel.getFont());
@@ -410,14 +352,20 @@ public class GameWindow extends JFrame {
         mainPanel.setPreferredSize(new Dimension(1080, 720));
         mainPanel.setRequestFocusEnabled(false);
         pnlLocation = new JPanel();
-        pnlLocation.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
+        pnlLocation.setLayout(new GridBagLayout());
         pnlLocation.setBackground(new Color(-11382962));
         pnlLocation.setDoubleBuffered(false);
         Font pnlLocationFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlLocation.getFont());
         if (pnlLocationFont != null) pnlLocation.setFont(pnlLocationFont);
         pnlLocation.setForeground(new Color(-1));
         pnlLocation.setOpaque(false);
-        mainPanel.add(pnlLocation, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, true));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainPanel.add(pnlLocation, gbc);
         btnLocation = new JButton();
         btnLocation.setBackground(new Color(-11382962));
         btnLocation.setBorderPainted(false);
@@ -427,9 +375,16 @@ public class GameWindow extends JFrame {
         if (btnLocationFont != null) btnLocation.setFont(btnLocationFont);
         btnLocation.setForeground(new Color(-1));
         btnLocation.setHorizontalAlignment(4);
+        btnLocation.setHorizontalTextPosition(0);
         btnLocation.setOpaque(false);
         btnLocation.setText("(location)");
-        pnlLocation.add(btnLocation, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        pnlLocation.add(btnLocation, gbc);
         pnlGameLog = new JPanel();
         pnlGameLog.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         pnlGameLog.setBackground(new Color(-11382962));
@@ -437,9 +392,17 @@ public class GameWindow extends JFrame {
         Font pnlGameLogFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlGameLog.getFont());
         if (pnlGameLogFont != null) pnlGameLog.setFont(pnlGameLogFont);
         pnlGameLog.setForeground(new Color(-1));
+        pnlGameLog.setMaximumSize(new Dimension(364, 804));
+        pnlGameLog.setMinimumSize(new Dimension(364, 804));
         pnlGameLog.setOpaque(false);
-        mainPanel.add(pnlGameLog, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 3, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_NORTH, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(400, 804), new Dimension(400, 804), 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridheight = 3;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainPanel.add(pnlGameLog, gbc);
         txtGameLog = new JTextArea();
+        txtGameLog.setAutoscrolls(true);
         txtGameLog.setBackground(new Color(-11382962));
         txtGameLog.setDoubleBuffered(false);
         txtGameLog.setEditable(false);
@@ -451,76 +414,7 @@ public class GameWindow extends JFrame {
         txtGameLog.setOpaque(true);
         txtGameLog.setText("");
         txtGameLog.setWrapStyleWord(true);
-        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(400, 800), new Dimension(400, 800), 0, false));
-        pnlMobs = new JPanel();
-        pnlMobs.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
-        pnlMobs.setBackground(new Color(-11382962));
-        pnlMobs.setDoubleBuffered(false);
-        pnlMobs.setEnabled(false);
-        pnlMobs.setFocusable(false);
-        Font pnlMobsFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlMobs.getFont());
-        if (pnlMobsFont != null) pnlMobs.setFont(pnlMobsFont);
-        pnlMobs.setForeground(new Color(-1));
-        pnlMobs.setOpaque(false);
-        mainPanel.add(pnlMobs, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 200), new Dimension(-1, 200), 0, true));
-        pnlMobs.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        btnMob1 = new JButton();
-        btnMob1.setBackground(new Color(-11382962));
-        btnMob1.setBorderPainted(false);
-        btnMob1.setDoubleBuffered(false);
-        Font btnMob1Font = this.$$$getFont$$$("Courier New", Font.BOLD, 14, btnMob1.getFont());
-        if (btnMob1Font != null) btnMob1.setFont(btnMob1Font);
-        btnMob1.setForeground(new Color(-1));
-        btnMob1.setOpaque(false);
-        btnMob1.setText("(empty)");
-        pnlMobs.add(btnMob1, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        btnMob2 = new JButton();
-        btnMob2.setBackground(new Color(-11382962));
-        btnMob2.setBorderPainted(false);
-        btnMob2.setDoubleBuffered(false);
-        Font btnMob2Font = this.$$$getFont$$$("Courier New", Font.BOLD, 14, btnMob2.getFont());
-        if (btnMob2Font != null) btnMob2.setFont(btnMob2Font);
-        btnMob2.setForeground(new Color(-1));
-        btnMob2.setOpaque(false);
-        btnMob2.setText("(empty)");
-        pnlMobs.add(btnMob2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        btnMob3 = new JButton();
-        btnMob3.setBackground(new Color(-11382962));
-        btnMob3.setBorderPainted(false);
-        btnMob3.setDoubleBuffered(false);
-        Font btnMob3Font = this.$$$getFont$$$("Courier New", Font.BOLD, 14, btnMob3.getFont());
-        if (btnMob3Font != null) btnMob3.setFont(btnMob3Font);
-        btnMob3.setForeground(new Color(-1));
-        btnMob3.setOpaque(false);
-        btnMob3.setText("(empty)");
-        pnlMobs.add(btnMob3, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblMob2Hp = new JLabel();
-        lblMob2Hp.setBackground(new Color(-11382962));
-        lblMob2Hp.setDoubleBuffered(false);
-        Font lblMob2HpFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, lblMob2Hp.getFont());
-        if (lblMob2HpFont != null) lblMob2Hp.setFont(lblMob2HpFont);
-        lblMob2Hp.setForeground(new Color(-1));
-        lblMob2Hp.setOpaque(false);
-        lblMob2Hp.setText("(0/0)");
-        pnlMobs.add(lblMob2Hp, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblMob1Hp = new JLabel();
-        lblMob1Hp.setBackground(new Color(-11382962));
-        lblMob1Hp.setDoubleBuffered(false);
-        Font lblMob1HpFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, lblMob1Hp.getFont());
-        if (lblMob1HpFont != null) lblMob1Hp.setFont(lblMob1HpFont);
-        lblMob1Hp.setForeground(new Color(-1));
-        lblMob1Hp.setOpaque(false);
-        lblMob1Hp.setText("(0/0)");
-        pnlMobs.add(lblMob1Hp, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblMob3Hp = new JLabel();
-        lblMob3Hp.setBackground(new Color(-11382962));
-        lblMob3Hp.setDoubleBuffered(false);
-        Font lblMob3HpFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, lblMob3Hp.getFont());
-        if (lblMob3HpFont != null) lblMob3Hp.setFont(lblMob3HpFont);
-        lblMob3Hp.setForeground(new Color(-1));
-        lblMob3Hp.setOpaque(false);
-        lblMob3Hp.setText("(0/0)");
-        pnlMobs.add(lblMob3Hp, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTH, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        pnlGameLog.add(txtGameLog, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(360, 800), new Dimension(360, 800), new Dimension(360, 800), 0, false));
         pnlGame = new JPanel();
         pnlGame.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
         pnlGame.setBackground(new Color(-11382962));
@@ -529,69 +423,16 @@ public class GameWindow extends JFrame {
         Font pnlGameFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlGame.getFont());
         if (pnlGameFont != null) pnlGame.setFont(pnlGameFont);
         pnlGame.setForeground(new Color(-1));
+        pnlGame.setMaximumSize(new Dimension(680, 600));
+        pnlGame.setMinimumSize(new Dimension(680, 600));
         pnlGame.setOpaque(false);
-        mainPanel.add(pnlGame, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        pnlHpBar = new JPanel();
-        pnlHpBar.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
-        pnlHpBar.setBackground(new Color(-11382962));
-        pnlHpBar.setDoubleBuffered(false);
-        Font pnlHpBarFont = this.$$$getFont$$$("Courier New", Font.BOLD, 12, pnlHpBar.getFont());
-        if (pnlHpBarFont != null) pnlHpBar.setFont(pnlHpBarFont);
-        pnlHpBar.setForeground(new Color(-1));
-        pnlHpBar.setOpaque(false);
-        pnlGame.add(pnlHpBar, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 26), new Dimension(-1, 26), new Dimension(-1, 26), 0, false));
-        lblHpValue = new JLabel();
-        lblHpValue.setBackground(new Color(-11382962));
-        lblHpValue.setDoubleBuffered(false);
-        lblHpValue.setEnabled(true);
-        lblHpValue.setFocusable(false);
-        Font lblHpValueFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblHpValue.getFont());
-        if (lblHpValueFont != null) lblHpValue.setFont(lblHpValueFont);
-        lblHpValue.setForeground(new Color(-1));
-        lblHpValue.setHorizontalAlignment(0);
-        lblHpValue.setHorizontalTextPosition(0);
-        lblHpValue.setOpaque(false);
-        lblHpValue.setText("HP: (100/100)");
-        pnlHpBar.add(lblHpValue, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblDef = new JLabel();
-        lblDef.setBackground(new Color(-11382962));
-        lblDef.setDoubleBuffered(false);
-        lblDef.setEnabled(true);
-        lblDef.setFocusable(false);
-        Font lblDefFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblDef.getFont());
-        if (lblDefFont != null) lblDef.setFont(lblDefFont);
-        lblDef.setForeground(new Color(-1));
-        lblDef.setHorizontalAlignment(0);
-        lblDef.setHorizontalTextPosition(0);
-        lblDef.setOpaque(false);
-        lblDef.setText("DEF: 5");
-        pnlHpBar.add(lblDef, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblAtk = new JLabel();
-        lblAtk.setBackground(new Color(-11382962));
-        lblAtk.setDoubleBuffered(false);
-        lblAtk.setEnabled(true);
-        lblAtk.setFocusable(false);
-        Font lblAtkFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblAtk.getFont());
-        if (lblAtkFont != null) lblAtk.setFont(lblAtkFont);
-        lblAtk.setForeground(new Color(-1));
-        lblAtk.setHorizontalAlignment(0);
-        lblAtk.setHorizontalTextPosition(0);
-        lblAtk.setOpaque(false);
-        lblAtk.setText("ATK: 5");
-        pnlHpBar.add(lblAtk, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblSans = new JLabel();
-        lblSans.setBackground(new Color(-11382962));
-        lblSans.setDoubleBuffered(false);
-        lblSans.setEnabled(true);
-        lblSans.setFocusable(false);
-        Font lblSansFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblSans.getFont());
-        if (lblSansFont != null) lblSans.setFont(lblSansFont);
-        lblSans.setForeground(new Color(-1));
-        lblSans.setHorizontalAlignment(0);
-        lblSans.setHorizontalTextPosition(0);
-        lblSans.setOpaque(false);
-        lblSans.setText("SANITY: (100/100)");
-        pnlHpBar.add(lblSans, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainPanel.add(pnlGame, gbc);
         pnlInventory = new JPanel();
         pnlInventory.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
         pnlInventory.setBackground(new Color(-11382962));
@@ -602,8 +443,8 @@ public class GameWindow extends JFrame {
         if (pnlInventoryFont != null) pnlInventory.setFont(pnlInventoryFont);
         pnlInventory.setForeground(new Color(-1));
         pnlInventory.setOpaque(false);
-        pnlGame.add(pnlInventory, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(420, 200), new Dimension(420, 200), null, 0, false));
-        pnlInventory.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        pnlGame.add(pnlInventory, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(420, 100), new Dimension(420, 100), new Dimension(420, 100), 0, false));
+        pnlInventory.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         btnInv1 = new JButton();
         btnInv1.setBackground(new Color(-11382962));
         btnInv1.setDoubleBuffered(false);
@@ -644,16 +485,81 @@ public class GameWindow extends JFrame {
         btnInv4.setText("(empty)");
         btnInv4.setToolTipText("Inventory slot 4");
         pnlInventory.add(btnInv4, new com.intellij.uiDesigner.core.GridConstraints(0, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(96, 96), new Dimension(96, 96), new Dimension(96, 96), 0, false));
+        pnlHpBar = new JPanel();
+        pnlHpBar.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 4, 0, 4), 1, 1));
+        pnlHpBar.setBackground(new Color(-11382962));
+        pnlHpBar.setDoubleBuffered(false);
+        pnlHpBar.setEnabled(true);
+        Font pnlHpBarFont = this.$$$getFont$$$("Courier New", Font.BOLD, 12, pnlHpBar.getFont());
+        if (pnlHpBarFont != null) pnlHpBar.setFont(pnlHpBarFont);
+        pnlHpBar.setForeground(new Color(-1));
+        pnlHpBar.setOpaque(false);
+        pnlHpBar.setVisible(true);
+        pnlGame.add(pnlHpBar, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, new Dimension(-1, 50), new Dimension(-1, 50), new Dimension(-1, 50), 0, false));
+        lblAtk = new JLabel();
+        lblAtk.setBackground(new Color(-11382962));
+        lblAtk.setDoubleBuffered(false);
+        lblAtk.setEnabled(true);
+        lblAtk.setFocusable(false);
+        Font lblAtkFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblAtk.getFont());
+        if (lblAtkFont != null) lblAtk.setFont(lblAtkFont);
+        lblAtk.setForeground(new Color(-1));
+        lblAtk.setHorizontalAlignment(0);
+        lblAtk.setHorizontalTextPosition(0);
+        lblAtk.setOpaque(false);
+        lblAtk.setText("ATK: 5");
+        pnlHpBar.add(lblAtk, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblDef = new JLabel();
+        lblDef.setBackground(new Color(-11382962));
+        lblDef.setDoubleBuffered(false);
+        lblDef.setEnabled(true);
+        lblDef.setFocusable(false);
+        Font lblDefFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblDef.getFont());
+        if (lblDefFont != null) lblDef.setFont(lblDefFont);
+        lblDef.setForeground(new Color(-1));
+        lblDef.setHorizontalAlignment(0);
+        lblDef.setHorizontalTextPosition(0);
+        lblDef.setOpaque(false);
+        lblDef.setText("DEF: 5");
+        pnlHpBar.add(lblDef, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblSans = new JLabel();
+        lblSans.setBackground(new Color(-11382962));
+        lblSans.setDoubleBuffered(false);
+        lblSans.setEnabled(true);
+        lblSans.setFocusable(false);
+        Font lblSansFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblSans.getFont());
+        if (lblSansFont != null) lblSans.setFont(lblSansFont);
+        lblSans.setForeground(new Color(-1));
+        lblSans.setHorizontalAlignment(0);
+        lblSans.setHorizontalTextPosition(0);
+        lblSans.setOpaque(false);
+        lblSans.setText("SANITY: (100/100)");
+        pnlHpBar.add(lblSans, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        lblHp = new JLabel();
+        lblHp.setBackground(new Color(-11382962));
+        lblHp.setDoubleBuffered(false);
+        lblHp.setEnabled(true);
+        lblHp.setFocusable(false);
+        Font lblHpFont = this.$$$getFont$$$("Courier New", Font.BOLD, 18, lblHp.getFont());
+        if (lblHpFont != null) lblHp.setFont(lblHpFont);
+        lblHp.setForeground(new Color(-1));
+        lblHp.setHorizontalAlignment(0);
+        lblHp.setHorizontalTextPosition(0);
+        lblHp.setOpaque(false);
+        lblHp.setText("HP: (100/100)");
+        pnlHpBar.add(lblHp, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         pnlEquipments = new JPanel();
-        pnlEquipments.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
+        pnlEquipments.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1, true, true));
         pnlEquipments.setBackground(new Color(-11382962));
         pnlEquipments.setDoubleBuffered(false);
         Font pnlEquipmentsFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlEquipments.getFont());
         if (pnlEquipmentsFont != null) pnlEquipments.setFont(pnlEquipmentsFont);
         pnlEquipments.setForeground(new Color(-1));
+        pnlEquipments.setMaximumSize(new Dimension(250, 250));
+        pnlEquipments.setMinimumSize(new Dimension(250, 250));
         pnlEquipments.setOpaque(false);
         pnlEquipments.setPreferredSize(new Dimension(320, 320));
-        pnlGame.add(pnlEquipments, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(124, 124), null, 0, false));
+        pnlGame.add(pnlEquipments, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(260, 260), new Dimension(260, 260), 0, false));
         btnMainWeapon = new JButton();
         btnMainWeapon.setBackground(new Color(-11382962));
         btnMainWeapon.setDoubleBuffered(false);
@@ -703,7 +609,28 @@ public class GameWindow extends JFrame {
         if (pnlLootsFont != null) pnlLoots.setFont(pnlLootsFont);
         pnlLoots.setForeground(new Color(-1));
         pnlLoots.setOpaque(false);
-        mainPanel.add(pnlLoots, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 40), new Dimension(-1, 40), 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        mainPanel.add(pnlLoots, gbc);
+        pnlMobs = new JPanel();
+        pnlMobs.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        pnlMobs.setBackground(new Color(-11382962));
+        pnlMobs.setDoubleBuffered(false);
+        pnlMobs.setEnabled(false);
+        pnlMobs.setFocusable(false);
+        Font pnlMobsFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlMobs.getFont());
+        if (pnlMobsFont != null) pnlMobs.setFont(pnlMobsFont);
+        pnlMobs.setForeground(new Color(-1));
+        pnlMobs.setOpaque(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        mainPanel.add(pnlMobs, gbc);
+        pnlMobs.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
     }
 
     /**

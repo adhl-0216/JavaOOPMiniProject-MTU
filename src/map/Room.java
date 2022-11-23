@@ -36,7 +36,6 @@ public class Room {
     }
 
     public String newTurn(Player player, String event, String target){
-        gameLog += "Turn " + turnCount + "\n";
         if (event.equalsIgnoreCase("pickUp")){
             String pickUp = player.pickUp(target, this);
             if (!Objects.equals(pickUp, "Inventory is full!")) {
@@ -59,8 +58,6 @@ public class Room {
                 Entity mob = mobs.get(i);
                 if (mob.getHp() == 0) {
                     gameLogBuilder.append(mob.getName()).append(" is dead.").append("\n");
-                    removeMob(mob.getName());
-                    i++;
                 }
                 else {
                     if (mob.getClass().toString().equalsIgnoreCase("class GameObjects.Mobs.Tier1")) {
