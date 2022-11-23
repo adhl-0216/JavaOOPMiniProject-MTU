@@ -29,7 +29,6 @@ public class OptionsMenu extends JFrame {
         JPanel bg = new MainMenu.imgPanel();
         this.setContentPane(bg);
         this.add(mainPanel);
-        this.setVisible(true);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(exitListener);
 
@@ -59,14 +58,11 @@ public class OptionsMenu extends JFrame {
     WindowListener exitListener = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
-            int confirm = JOptionPane.showOptionDialog(
-                    null, "Return To Main Menu?",
-                    "Quit Options", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, null, null, null);
-            if (confirm == 0) {
-                getParent().setVisible(true);
-                OptionsMenu.super.dispose();
-            }
+        int confirm = JOptionPane.showConfirmDialog(null, "Return To Main Menu?", "Quit Options", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirm == 0) {
+            getParent().setVisible(true);
+            OptionsMenu.super.dispose();
+        }
         }
     };
 

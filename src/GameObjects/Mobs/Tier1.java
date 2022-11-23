@@ -7,6 +7,8 @@ import map.Room;
 import javax.swing.*;
 
 public class Tier1 extends Entity {
+    private static int count = 0;
+    private  String id;
     public Tier1(String name, double hp, double baseAtk, double maxAtk) {
         super(name, hp, 0, 10);
         double atk = (int) Math.floor((Math.random() * (maxAtk - baseAtk))) + baseAtk;

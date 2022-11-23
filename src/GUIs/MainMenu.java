@@ -149,11 +149,19 @@ public class MainMenu extends JFrame{
 
 
     private void btnStartClicked(ActionEvent e) {
-//        JButton btn = (JButton)e.getSource();
         int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "START GAME", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(newGame == 0) {
             try {
-                setGameWindow(new GameWindow(this.getTitle(), this, new Player(100, 10, 10,3)));
+                Player player = new Player(100, 15, 15,3);
+                String difficulty = optionsMenu.getDifficulty();
+                if (difficulty != null) {
+                    switch (difficulty) {
+                        case "Easy" -> player = new Player(200, 20, 20,3);
+                        case "Normal" -> player = new Player(100, 15, 15,3);
+                        case "Hard" -> player = new Player(100, 5, 5,3);
+                    }
+                }
+                setGameWindow(new GameWindow(this.getTitle(), this, player));
                 this.setVisible(false);
                 btnLoad.setEnabled(true);
             } catch (Exception ex) {

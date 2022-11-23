@@ -5,6 +5,7 @@ import GameObjects.Item;
 import GameObjects.Loots.Equipment;
 import GameObjects.Loots.Weapon;
 import GameObjects.Player;
+import com.sun.source.doctree.EntityTree;
 import map.Room;
 import map.allRooms;
 
@@ -90,13 +91,28 @@ public class GameWindow extends JFrame {
 
 
     private void nextLocation(int nextLoc) {
-        if (nextLoc == getMap().length) {
-            JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
-            super.dispose();
-            parent.setVisible(true);
+        boolean allCleared = true;
+        ArrayList<Entity> mobs = room.getMobs();
+        if (mobs != null) {
+            allCleared = false;
+            for (Entity mob : mobs) {
+                if (mob.getHp() != 0) break;
+                allCleared = true;
+            }
+        }
+
+        if (allCleared || room.getName().equalsIgnoreCase("cabin")) {
+            btnLocation.setText("Proceed to the next location>>");
+            if (nextLoc == getMap().length) {
+                JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
+                super.dispose();
+                parent.setVisible(true);
+            } else {
+                setRoom(getMap()[nextLoc]);
+                this.currLoc++;
+            }
         } else {
-            setRoom(getMap()[nextLoc]);
-            this.currLoc++;
+            JOptionPane.showMessageDialog(null, "Something is blocking your way...", "Can't Proceed", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -140,15 +156,15 @@ public class GameWindow extends JFrame {
     }
 
     private void playerAttack(JButton btn, JLabel lbl) {
-        int idx = Integer.parseInt(btn.getName());
-        Entity mob;
-        if (idx > room.getMobs().size()) {
-            mob = room.getMobs().get(0);
+        Entity mob = null;
+        for (Entity i : room.getMobs()) {
+            if (i.getId() == Integer.parseInt(btn.getName())) {
+                mob = i;
+            }
         }
-        mob = room.getMobs().get(Integer.parseInt(btn.getName()));
+        assert mob != null;
         room.newTurn(player, "attack", mob.getName());
         txtGameLog.setText(room.getGameLog());
-//        lblMobs.get(Integer.parseInt(btn.getName())).setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
         lbl.setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
         lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
         lblSans.setText(String.format("SANITY: (%.2f/100.00)", player.getSanity()));
@@ -163,13 +179,11 @@ public class GameWindow extends JFrame {
     private void setMobs() {
         ArrayList<Entity> mobs = room.getMobs();
         pnlMobs.removeAll();
-        int i = 0;
         for (Entity mob : mobs) {
             JPanel pnlMob = new JPanel();
             GridBagConstraints gbc;
             pnlMob.setLayout(new GridBagLayout());
             pnlMob.setOpaque(false);
-
 
             //mob status label
             gbc = new GridBagConstraints();
@@ -190,7 +204,7 @@ public class GameWindow extends JFrame {
             gbc.gridy = 0;
             gbc.fill = GridBagConstraints.BOTH;
             JButton btnMob = new JButton();
-            btnMob.setName(String.valueOf(i));
+            btnMob.setName(String.valueOf(mob.getId()));
             btnMob.setIcon(new ImageIcon(mob.getSrc()));
             btnMob.setSize(120, 120);
             btnMob.setOpaque(false);
@@ -198,12 +212,12 @@ public class GameWindow extends JFrame {
             btnMob.setBorderPainted(false);
             btnMob.addActionListener(e -> playerAttack(btnMob, lblMob));
             btnMob.setVisible(true);
+            btnMob.setToolTipText("Click to attack " + mob.getName());
             btnMobs.add(btnMob);
 
             pnlMob.add(lblMob, gbc);
             pnlMob.add(btnMob, gbc);
             pnlMobs.add(pnlMob);
-            i++;
         }
 
     }
@@ -272,8 +286,10 @@ public class GameWindow extends JFrame {
         Room cabin = allRooms.newCabin();
         Room cave = allRooms.newCave();
         Room forest3 = allRooms.newForest3();
+        Room tutorial2 = allRooms.tutRoom();
 
-        final Room[] map = {tutorial, forest1, forest2, cabin, cave, forest3};
+
+        final Room[] map = {tutorial, forest1, forest2, cabin, cave, forest3, tutorial2};
         this.map = Arrays.copyOf(map, map.length);
     }
 
@@ -284,10 +300,8 @@ public class GameWindow extends JFrame {
     WindowListener exitListener = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
-            int confirm = JOptionPane.showOptionDialog(
-                    null, "Return To Main Menu?",
-                    "Quit Game", JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE, null, null, null);
+            int confirm = JOptionPane.showConfirmDialog(null, "Return To Main Menu?", "Quit Game", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
             if (confirm == 0) {
                 getParent().setVisible(true);
                 GameWindow.super.dispose();

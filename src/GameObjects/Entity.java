@@ -8,17 +8,20 @@ public abstract class Entity {
     private double atk;
     private double def;
     private String src;
+    private static int count;
+    private int id;
 
     public Entity(String name, double hp, double atk, double def) {
         setName(name);
         setHp(hp);
         setAtk(atk);
         setDef(def);
+        setId(++count);
     }
 
     @Override
     public String toString() {
-        return String.format("name='%s', hp=%.2f, atk=%.2f, def=%.2f", getName(), getHp(), getAtk(), getDef());
+        return String.format("id=%d, name='%s', hp=%.2f, atk=%.2f, def=%.2f", getId(), getName(), getHp(), getAtk(), getDef());
     }
 
     public String getSrc() {
@@ -59,5 +62,13 @@ public abstract class Entity {
 
     public void setDef(double def) {
         this.def = def;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
