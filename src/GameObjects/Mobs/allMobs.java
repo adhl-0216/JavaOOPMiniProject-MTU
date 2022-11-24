@@ -5,7 +5,9 @@ import javax.swing.*;
 public class allMobs {
     //tier 1
     public static Tier1 newWolf() {
+        String[] var = {"Grey Wolf", "White Wolf", "Brown Wolf"};
         Tier1 wolf = new Tier1("Wolf", 100, 5,10);
+        wolf.setName(var[(int) Math.floor(Math.random() * var.length)]);
         wolf.setSrc("assets/wolf.png");
         return wolf;
     }
@@ -17,7 +19,9 @@ public class allMobs {
     }
 
     public static Tier1 newFox() {
+        String[] var = {"Red Fox", "White Fox", "Brown Fox"};
         Tier1 fox = new Tier1("Fox", 80, 8, 12);
+        fox.setName(var[(int) Math.floor(Math.random() * var.length)]);
         fox.setSrc("assets/fox.png");
         return fox;
     }
@@ -25,7 +29,7 @@ public class allMobs {
     //tier 2
     public static Tier2 newBoar(){
         Tier2 boar = new Tier2("Wild Boar", 150, 10,20);
-        boar.addSpecialAtk("Battle Cry",10,"SANITY");
+        boar.addSpecialAtk("Battle Cry",15,"SANITY");
         boar.addSpecialAtk("Charge",20,"HP");
         boar.setSrc("assets/boar.png");
         return boar;
@@ -36,10 +40,11 @@ public class allMobs {
     public static Tier3 newBear(){
         Tier3 bear;
         String[] var = {"Black Bear", "Brown Bear"};
-        bear = new Tier3("bear", 200, 20, 30);
+        bear = new Tier3("Bear", 200, 20, 30);
         bear.setName(var[(int) Math.floor(Math.random() * var.length)]);
-        bear.addSpecialAtk("Battle Cry",10,"SANITY");
+        bear.addSpecialAtk("Furious Roar",20,"SANITY");
         bear.addSpecialAtk("Claw Attack",25,"HP");
+        bear.addSpecialAtk("Ravenous Tackle",25,"HP & SANITY");
         bear.addSSA("Bear Hug",35,"HP");
         bear.setSrc("assets/bear.png");
         return bear;

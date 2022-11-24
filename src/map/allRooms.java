@@ -3,25 +3,21 @@ package map;
 import GameObjects.Entity;
 import GameObjects.Item;
 import GameObjects.Loots.allLoots;
-import GameObjects.Mobs.Tier1;
 import GameObjects.Mobs.allMobs;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class allRooms {
     public static Room tutRoom() {
-        final Item[] loots = {allLoots.newAxe(), allLoots.newApple(), allLoots.newWater(), allLoots.newCap()};
+        final Item[] loots = {allLoots.newAxe(), allLoots.newChoc(), allLoots.newWater(), allLoots.newCap()};
         final Entity[] mobs = {allMobs.newAlphaWolf()};
-        return new Room("Tutorial", loots, mobs);
+        return new Room("tutorial", loots, mobs);
     }
     public static Room newForest1() {
-        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newBerries(), allLoots.newBerries()};
+        final Item[] loots = {allLoots.newApple(), allLoots.newBerries(), allLoots.newApple(), allLoots.newBerries()};
         final Entity[] mobs = {allMobs.newFox(), allMobs.newFox()};
         return new Room("forest", loots, mobs);
     }
     public static Room newForest2() {
-        final Item[] loots = {allLoots.newBar(), allLoots.newBar()};
+        final Item[] loots = {allLoots.newChoc(), allLoots.newChoc()};
         final Entity[] mobs = {allMobs.newBoar()};
         return new Room("forest", loots, mobs);
     }
@@ -44,8 +40,15 @@ public class allRooms {
         return new Room("cave", loots, mobs);
     }
     public static Room newForest3() {
-        final Item[] loots = {allLoots.newApple(), allLoots.newWater()};
+        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newApple(), allLoots.newApple()};
         final Entity[] mobs = {allMobs.newAlphaWolf(), allMobs.newWolf(), allMobs.newWolf()};
         return new Room("forest", loots, mobs);
     }
+
+    public static Room newForest4() {
+        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newApple(), allLoots.newApple()};
+        final Entity[] mobs = {allMobs.newFox(), allMobs.newBoar()};
+        return new Room("forest", loots, mobs);
+    }
+
 }

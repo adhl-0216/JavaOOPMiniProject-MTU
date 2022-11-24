@@ -18,8 +18,9 @@ public class Tier3 extends Entity {
     public String basicAtk(Player player) {
         double dmg = this.getAtk() * (100 / (100 + player.getDef()));
         player.setHp(player.getHp() - dmg);
-        player.setSanity(player.getSanity() - (dmg*.05));
-        return this.getName() + " attacked " + player.getName() + ".";
+        double sansDmg = this.getAtk()*((Math.random()*0.90-0.50)+0.50);
+        player.setSanity(player.getSanity() - sansDmg);
+        return this.getName() + " attacked " + player.getName() + "." + String.format("(-%.2fHP, -%.2fSANITY)",dmg, sansDmg);
     }
 
     public void addSpecialAtk(String name, double val, String type){
@@ -37,17 +38,28 @@ public class Tier3 extends Entity {
 
     public String specialAtk(Player player, int sid){
         specialAtk sAtk = specialAtks.get(sid);
-        if (sAtk.getType().equals("HP")){
-            player.setHp(player.getHp()-sAtk.getVal());
-        } else if (sAtk.getType().equals("SANITY")) {
-            player.setSanity(player.getSanity()-sAtk.getVal());
+        String output = this.getName()  + " used " + sAtk.getName() + " against " + player.getName() + "! ";
+        switch (sAtk.getType()) {
+            case "HP" -> {
+                player.setHp(player.getHp() - sAtk.getVal());
+                output += String.format("(-%.2fHP)", sAtk.getVal());
+            }
+            case "SANITY" -> {
+                player.setSanity(player.getSanity() - sAtk.getVal());
+                output += String.format("(-%.2fSANITY)", sAtk.getVal());
+            }
+            case "HP & SANITY" -> {
+                player.setSanity(player.getSanity() - (sAtk.getVal() / 2));
+                player.setHp(player.getHp() - (sAtk.getVal() / 2));
+                output += String.format("(-%.2fHP, -%.2fSANITY)", (sAtk.getVal() / 2), (sAtk.getVal() / 2));
+            }
         }
-        return this.getName()  + " used " + sAtk.getName() + " against " + player.getName() + "!";
+        return output;
     }
 
     public String SSA(Player player){
         player.setHp(player.getHp()-this.SSA.getVal());
-        return this.getName()  + " used " + this.SSA.getName() + " against " + player.getName() + "!";
+        return this.getName()  + " used " + this.SSA.getName() + " against " + player.getName() + "! " + String.format("(-%.2fHP)", this.SSA.getVal());
     }
 
     public ArrayList<specialAtk> getSpecialAtks() {
@@ -64,10 +76,10 @@ public class Tier3 extends Entity {
 
     private static class specialAtk implements Serializable {
         private String name;
-        private double val;
-        private String type;
+        private final double val;
+        private final String type;
         private static int count = 0;
-        private int sId;
+        private final int sId;
 
         public specialAtk(String name, double val, String type) {
             this.name = name;
@@ -97,24 +109,8 @@ public class Tier3 extends Entity {
             return val;
         }
 
-        public void setVal(double val) {
-            this.val = val;
-        }
-
         public String getType() {
             return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public int getsId() {
-            return sId;
-        }
-
-        public void setsId(int sId) {
-            this.sId = sId;
         }
 
     }

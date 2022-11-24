@@ -19,8 +19,8 @@ public class Room implements Serializable {
     private String gameLog = "";
     public Room(String name) {
         setName(name);
-        this.loots = new ArrayList<Item>();
-        this.mobs = new ArrayList<Entity>();
+        this.loots = new ArrayList<>();
+        this.mobs = new ArrayList<>();
         setTurnCount(1);
     }
     public Room(String name, Item[] loots, Entity[] mobs) {
@@ -39,13 +39,10 @@ public class Room implements Serializable {
     public String newTurn(Player player, String event, String target){
         if (event.equalsIgnoreCase("pickUp")){
             String pickUp = player.pickUp(target, this);
-            if (!Objects.equals(pickUp, "Inventory is full!")) {
+            if (pickUp!= null) {
                 gameLog += pickUp + "\n";
                 setTurnCount(++turnCount);
-            } else {
-                gameLog += "Inventory is full!\n";
-                return "full";
-            }
+            }else return "full";
         }
         else if (event.equalsIgnoreCase("equip")) {
             gameLog += player.equip(target) + "\n";
@@ -81,7 +78,6 @@ public class Room implements Serializable {
                 }
             }
             gameLog += gameLogBuilder + "\n";
-//            gameLog += this.getMobs().toString() + "\n" + this.getPlayer() + "\n";
             setTurnCount(++turnCount);
         }
         return null;
@@ -118,29 +114,13 @@ public class Room implements Serializable {
         gameLog += "You entered the " + this.name + ".\n";
     }
 
-    public void removePlayer(Player player) {
+    public void removePlayer() {
         this.player = null;
         gameLog += "You left the " + this.name + ".\n";
     }
 
     public String getGameLog() {
         return gameLog;
-    }
-
-    public void addLoot(Item loot) {
-        loots.add(loot);
-    }
-
-    public void addMob(Entity mob) {
-        mobs.add(mob);
-    }
-
-    public void removeLoot(String target) {
-        loots.removeIf(loot -> loot.getName().equalsIgnoreCase(target));
-    }
-
-    public void removeMob(String target) {
-        mobs.removeIf(mob -> mob.getName().equalsIgnoreCase(target));
     }
 
     public ArrayList<Item> getLoots() {

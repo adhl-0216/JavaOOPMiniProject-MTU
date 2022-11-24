@@ -1,6 +1,5 @@
 package GameObjects;
 
-import javax.swing.*;
 import java.io.Serializable;
 
 public abstract class Entity implements Serializable {

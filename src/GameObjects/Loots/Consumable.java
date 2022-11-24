@@ -1,7 +1,6 @@
 package GameObjects.Loots;
 
 import GameObjects.Item;
-import GameObjects.Player;
 
 public class Consumable extends Item {
     private String type; //"hp" || "sans" || "hybrid"

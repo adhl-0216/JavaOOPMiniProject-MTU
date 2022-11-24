@@ -1,22 +1,14 @@
 package GUIs;
 
-import GameObjects.Inventory;
 import GameObjects.Player;
 import map.Map;
 import map.Room;
-import map.allRooms;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainMenu extends JFrame{
 
@@ -33,6 +25,8 @@ public class MainMenu extends JFrame{
         JPanel bg = new imgPanel();
         this.setContentPane(bg);
         this.setResizable(false);
+
+        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
 
         JPanel panelMain = new JPanel();
         panelMain.setLayout(new GridBagLayout());
@@ -98,7 +92,6 @@ public class MainMenu extends JFrame{
         btnLoad.setForeground(new Color(255, 255, 255));
         btnLoad.setBackground(new Color(82, 79, 78));
         btnLoad.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
-//        btnLoad.setEnabled(false);
         panelBtn.add(btnLoad, gbc);
 
         JButton btnOptions = new JButton("OPTIONS");
@@ -123,7 +116,7 @@ public class MainMenu extends JFrame{
         btnExit.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
         panelBtn.add(btnExit, gbc);
 
-        btnStart.addActionListener(this :: btnStartClicked);
+        btnStart.addActionListener(e -> btnStartClicked());
         btnLoad.addActionListener(e -> btnLoadClicked());
         btnOptions.addActionListener(e -> btnOptionsClicked());
         btnExit.addActionListener(e -> btnExitClicked());
@@ -138,20 +131,11 @@ public class MainMenu extends JFrame{
         this.setVisible(true);
     }
 
-    Timer t = new Timer();
-    class hideShowFrame extends TimerTask{
-        @Override
-        public void run() {
-            MainMenu.this.setVisible(true);
-        }
-    }
-
     public void setGameWindow(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
     }
 
-
-    private void btnStartClicked(ActionEvent e) {
+    private void btnStartClicked() {
         int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "Start Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(newGame == 0) {
             try {
@@ -164,7 +148,7 @@ public class MainMenu extends JFrame{
                         case "Hard" -> player = new Player(100, 5, 5,3);
                     }
                 }
-                setGameWindow(new GameWindow(this.getTitle(), this, player, Map.map,0));
+                setGameWindow(new GameWindow(this.getTitle(), this, player, Map.getMap(),0));
                 this.setVisible(false);
                 btnLoad.setEnabled(true);
             } catch (Exception ex) {
@@ -207,8 +191,6 @@ public class MainMenu extends JFrame{
                     objectOutStream.writeObject(gameWindow.getMap());
                     objectOutStream.writeObject(gameWindow.getCurrLoc());
                     JOptionPane.showMessageDialog(null, "There is no escape...", "Game Saved", JOptionPane.INFORMATION_MESSAGE);
-                    System.out.println(Arrays.toString(gameWindow.getMap()));
-                    System.out.println(gameWindow.getCurrLoc());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

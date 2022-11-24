@@ -20,11 +20,6 @@ public abstract class Item implements Serializable {
         setWeight(weight);
     }
 
-    public String viewItem() {
-        if (durability == 0) return null;
-        return name + String.format(" (%d/%d)",durability,maxDurability) + "," + desc;
-    }
-
 
     public String durabilityLost(int dmg) {
         String output;
@@ -97,7 +92,4 @@ public abstract class Item implements Serializable {
         return maxDurability;
     }
 
-    public void setMaxDurability(int maxDurability) {
-        this.maxDurability = maxDurability;
-    }
 }

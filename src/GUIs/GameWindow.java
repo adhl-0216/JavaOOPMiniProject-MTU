@@ -25,7 +25,6 @@ import java.util.Objects;
 public class GameWindow extends JFrame implements Serializable {
     private static final Font customFont = new Font(Font.MONOSPACED, Font.BOLD, 14);
     private JPanel mainPanel;
-
     private JPanel pnlLocation;
     private JButton btnLocation;
 
@@ -51,6 +50,7 @@ public class GameWindow extends JFrame implements Serializable {
     private JButton btnBody;
     private JButton btnMainWeapon;
     private JButton btnMisc;
+    private JLabel lblTurn;
 
     private MainMenu parent;
     private Player player;
@@ -70,7 +70,7 @@ public class GameWindow extends JFrame implements Serializable {
         this.setLocationRelativeTo(null);
         JPanel bg = new MainMenu.imgPanel();
         this.setContentPane(bg);
-        mainPanel.setSize(1080, 960);
+        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
         this.add(mainPanel);
         this.pack();
 
@@ -90,6 +90,23 @@ public class GameWindow extends JFrame implements Serializable {
         this.setVisible(true);
     }
 
+    private void setRoom(Room room) {
+        this.room = room;
+        room.addPlayer(player);
+        btnLocation.setText(room.getName().toUpperCase());
+        btnLocation.setToolTipText("Current location: " + room.getName().toUpperCase());
+        if (!room.getName().equalsIgnoreCase("cabin")) {
+            btnLocation.setEnabled(false);
+        }
+        lblTurn.setText("Turn " + room.getTurnCount());
+        lblAtk.setText("ATK: " + player.getAtk());
+        lblDef.setText("DEF: " + player.getDef());
+        lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
+        lblSans.setText(String.format("SANITY: (%.2f/100.00)", +player.getSanity()));
+        setMobs();
+        setLoots();
+        txtGameLog.setText(room.getGameLog());
+    }
 
     private void nextLocation(int currLoc) {
         boolean allCleared = true;
@@ -109,6 +126,8 @@ public class GameWindow extends JFrame implements Serializable {
                 super.dispose();
                 parent.setVisible(true);
             } else {
+                room.removePlayer();
+                txtGameLog.setText(room.getGameLog());
                 setRoom(getMap()[++this.currLoc]);
             }
         } else {
@@ -137,21 +156,30 @@ public class GameWindow extends JFrame implements Serializable {
         if (player.getMainWeapon() != null) {
             lblAtk.setText("ATK: " + player.getAtk());
             btnMainWeapon.setText(player.getMainWeapon().getName());
+            btnMainWeapon.setToolTipText(String.format("[ATK: %d, DUR: (%.0f/%d)]    %s", player.getMainWeapon().getAtk(), player.getMainWeapon().getDurability(), player.getMainWeapon().getMaxDurability(), player.getMainWeapon().getDesc()));
+        } else {
+            lblAtk.setText("ATK: " + player.getAtk());
+            btnMainWeapon.setText("(empty)");
+            btnMainWeapon.setToolTipText("Main Weapon slot");
         }
 
         if (player.getHead() != null) {
             lblDef.setText("DEF: " + player.getDef());
             btnHead.setText(player.getHead().getName());
+            btnHead.setToolTipText(String.format("[DEF: %d, DUR: (%.0f/%d)]    %s", player.getHead().getDef(), player.getHead().getDurability(), player.getHead().getMaxDurability(), player.getHead().getDesc()));
+
         }
 
         if (player.getBody() != null) {
             lblDef.setText("DEF: " + player.getDef());
             btnBody.setText(player.getBody().getName());
+            btnBody.setToolTipText(String.format("[DEF: %d, DUR: (%.0f/%d)]    %s", player.getBody().getDef(), player.getBody().getDurability(), player.getBody().getMaxDurability(), player.getBody().getDesc()));
         }
 
         if (player.getMisc() != null) {
             lblDef.setText("DEF: " + player.getDef());
             btnMisc.setText(player.getMisc().getName());
+            btnMisc.setToolTipText(String.format("[DEF: %d, DUR: (%.0f/%d)]    %s", player.getMisc().getDef(), player.getMisc().getDurability(), player.getMisc().getMaxDurability(), player.getMisc().getDesc()));
         }
     }
 
@@ -159,11 +187,18 @@ public class GameWindow extends JFrame implements Serializable {
         for (Entity mob : room.getMobs()) {
             if (mob.getId() == Integer.parseInt(btn.getName())) {
                 room.newTurn(player, "attack", String.valueOf(mob.getId()));
-                System.out.println(mob);
                 txtGameLog.setText(room.getGameLog());
+                lblTurn.setText("Turn " + room.getTurnCount());
                 lbl.setText(String.format("%s - HP: %.2f", mob.getName(), mob.getHp()));
                 lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
                 lblSans.setText(String.format("SANITY: (%.2f/100.00)", player.getSanity()));
+                if (mob.getHp() == 0) {
+                    btn.setEnabled(false);
+                    txtGameLog.append("Nothing is blocking your way now...");
+                    btnLocation.setText("Proceed>>");
+                    btnLocation.setToolTipText("Click to proceed to the next location.");
+                    btnLocation.setEnabled(true);
+                }
                 break;
             }
         }
@@ -173,8 +208,8 @@ public class GameWindow extends JFrame implements Serializable {
             this.dispose();
             this.parent.setVisible(true);
         }
+        if (player.getMainWeapon() == null) setEquipments();
     }
-
 
     private void setMobs() {
         ArrayList<Entity> mobs = room.getMobs();
@@ -209,8 +244,8 @@ public class GameWindow extends JFrame implements Serializable {
             btnMob.setContentAreaFilled(false);
             btnMob.setBorderPainted(false);
             btnMob.addActionListener(e -> playerAttack(btnMob, lblMob));
+            btnMob.setToolTipText(String.format("%s (ATK: %.2f, DEF: %.2f)    [Click To Attack]", mob.getName(), mob.getAtk(), mob.getDef()));
             btnMob.setVisible(true);
-            btnMob.setToolTipText("Click to attack " + mob.getName() + " id=" + mob.getId());
 
             pnlMob.add(lblMob, gbc);
             pnlMob.add(btnMob, gbc);
@@ -228,6 +263,7 @@ public class GameWindow extends JFrame implements Serializable {
             btnLoot.setFont(customFont);
             btnLoot.setForeground(Color.white);
             btnLoot.setBackground(new Color(82, 79, 78));
+            btnLoot.setToolTipText("Click to pick up loot");
             btnLoot.addActionListener(this::btnLootClicked);
             pnlLoots.add(btnLoot);
         }
@@ -271,20 +307,6 @@ public class GameWindow extends JFrame implements Serializable {
             btnInvs[i].setName(type);
         }
     }
-
-    private void setRoom(Room room) {
-        this.room = room;
-        room.addPlayer(player);
-        btnLocation.setText(room.getName());
-        lblAtk.setText("ATK: " + player.getAtk());
-        lblDef.setText("DEF: " + player.getDef());
-        lblHp.setText(String.format("HP: (%.2f/100.00)", player.getHp()));
-        lblSans.setText(String.format("SANITY: (%.2f/100.00)", +player.getSanity()));
-        setMobs();
-        setLoots();
-        txtGameLog.setText(room.getGameLog());
-    }
-
 
     public void setMap(Room[] map) {
         this.map = Arrays.copyOf(map, map.length);
@@ -331,10 +353,6 @@ public class GameWindow extends JFrame implements Serializable {
         this.currLoc = currLoc;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
     /**
      * Method generated by IntelliJ IDEA GUI Designer
      * >>> IMPORTANT!! <<<
@@ -359,6 +377,7 @@ public class GameWindow extends JFrame implements Serializable {
         pnlLocation.setLayout(new GridBagLayout());
         pnlLocation.setBackground(new Color(-11382962));
         pnlLocation.setDoubleBuffered(false);
+        pnlLocation.setEnabled(true);
         Font pnlLocationFont = this.$$$getFont$$$("Courier New", Font.BOLD, 14, pnlLocation.getFont());
         if (pnlLocationFont != null) pnlLocation.setFont(pnlLocationFont);
         pnlLocation.setForeground(new Color(-1));
@@ -383,12 +402,24 @@ public class GameWindow extends JFrame implements Serializable {
         btnLocation.setOpaque(false);
         btnLocation.setText("(location)");
         gbc = new GridBagConstraints();
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.fill = GridBagConstraints.VERTICAL;
         pnlLocation.add(btnLocation, gbc);
+        lblTurn = new JLabel();
+        lblTurn.setEnabled(true);
+        Font lblTurnFont = this.$$$getFont$$$("DialogInput", Font.BOLD, 20, lblTurn.getFont());
+        if (lblTurnFont != null) lblTurn.setFont(lblTurnFont);
+        lblTurn.setForeground(new Color(-1));
+        lblTurn.setText("Turn 1");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 690, 0, 0);
+        pnlLocation.add(lblTurn, gbc);
         pnlGameLog = new JPanel();
         pnlGameLog.setLayout(new GridBagLayout());
         pnlGameLog.setBackground(new Color(-11382962));

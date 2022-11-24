@@ -4,10 +4,7 @@ import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.util.Locale;
 
 public class OptionsMenu extends JFrame {
@@ -17,20 +14,25 @@ public class OptionsMenu extends JFrame {
     private JRadioButton radHard;
     private JLabel lblDifficulty;
     private JPanel pnlDiff;
+    private JButton btnReturn;
     private MainMenu parent;
-    private String difficulty;
+    private String difficulty = "Normal";
 
     public OptionsMenu(MainMenu parent) {
         super("Options");
         setParent(parent);
-        this.setSize(240, 180);
+        this.setSize(240, 240);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
+
         JPanel bg = new MainMenu.imgPanel();
         this.setContentPane(bg);
         this.add(mainPanel);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         this.addWindowListener(exitListener);
+
+        radNormal.setSelected(true);
 
         radEasy.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
         radEasy.setForeground(new Color(255, 255, 255));
@@ -46,6 +48,15 @@ public class OptionsMenu extends JFrame {
 
         lblDifficulty.setFont(new Font(Font.MONOSPACED, Font.BOLD, 24));
         lblDifficulty.setForeground(new Color(255, 255, 255));
+
+        btnReturn.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+        btnReturn.setForeground(new Color(255, 255, 255));
+        btnReturn.setBackground(new Color(82, 79, 78));
+        btnReturn.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 55)));
+        btnReturn.addActionListener(e -> {
+            this.dispose();
+            parent.setVisible(true);
+        });
     }
 
     private void selectDifficulty(ActionEvent e) {
@@ -132,6 +143,13 @@ public class OptionsMenu extends JFrame {
         radHard.setOpaque(false);
         radHard.setText("Hard");
         pnlDiff.add(radHard, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        btnReturn = new JButton();
+        btnReturn.setText("RETURN");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        mainPanel.add(btnReturn, gbc);
         ButtonGroup buttonGroup;
         buttonGroup = new ButtonGroup();
         buttonGroup.add(radHard);
