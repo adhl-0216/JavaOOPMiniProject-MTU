@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: A_Second_Chance
+Class-Path: out/production/JavaOOP Mini Project - MTU/A_Second_Chance.cl
+ ass
+

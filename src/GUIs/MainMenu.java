@@ -19,14 +19,14 @@ public class MainMenu extends JFrame{
     public MainMenu(String title) {
         this.setTitle(title);
         this.setSize(360, 360);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         JPanel bg = new imgPanel();
         this.setContentPane(bg);
         this.setResizable(false);
 
-        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
+        this.setIconImage(new ImageIcon("resources/icon.png").getImage());
 
         JPanel panelMain = new JPanel();
         panelMain.setLayout(new GridBagLayout());
@@ -130,11 +130,9 @@ public class MainMenu extends JFrame{
         this.add(panelMain);
         this.setVisible(true);
     }
-
     public void setGameWindow(GameWindow gameWindow) {
         this.gameWindow = gameWindow;
     }
-
     private void btnStartClicked() {
         int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "Start Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(newGame == 0) {
@@ -159,7 +157,7 @@ public class MainMenu extends JFrame{
     private void btnLoadClicked() {
         if (gameWindow == null) {
             try {
-                File inFile = new File("saved_games.data");
+                File inFile = new File("src/SavedGame/saved_game.data");
                 FileInputStream inStream = new FileInputStream(inFile);
                 ObjectInputStream objectInputStream = new ObjectInputStream(inStream);
                 Room[] loadedMap = (Room[]) objectInputStream.readObject();
@@ -185,7 +183,7 @@ public class MainMenu extends JFrame{
         if (exit == 0) {
             if (this.gameWindow != null) {
                 try {
-                    File outFile = new File("saved_games.data");
+                    File outFile = new File("src/SavedGame/saved_game.data");
                     FileOutputStream outStream = new FileOutputStream(outFile);
                     ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
                     objectOutStream.writeObject(gameWindow.getMap());
@@ -196,6 +194,7 @@ public class MainMenu extends JFrame{
                 }
             }
             JOptionPane.showMessageDialog(null, "COWARD","COWARD",JOptionPane.WARNING_MESSAGE);
+            MainMenu.this.dispose();
             System.exit(0);
         }
     }
@@ -206,7 +205,7 @@ public class MainMenu extends JFrame{
 
         public imgPanel() {
             try {
-                image = Toolkit.getDefaultToolkit().createImage("assets/mainMenuBG.jpg");
+                image = Toolkit.getDefaultToolkit().createImage("resources/mainMenuBG.jpg");
             } catch (Exception e) { /*handled in paintComponent()*/ }
         }
 

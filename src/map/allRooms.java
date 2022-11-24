@@ -40,13 +40,13 @@ public class allRooms {
         return new Room("cave", loots, mobs);
     }
     public static Room newForest3() {
-        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newApple(), allLoots.newApple()};
+        final Item[] loots = {allLoots.newChoc(), allLoots.newChoc(), allLoots.newChoc()};
         final Entity[] mobs = {allMobs.newAlphaWolf(), allMobs.newWolf(), allMobs.newWolf()};
         return new Room("forest", loots, mobs);
     }
 
     public static Room newForest4() {
-        final Item[] loots = {allLoots.newApple(), allLoots.newApple(), allLoots.newApple(), allLoots.newApple()};
+        final Item[] loots = {allLoots.newApple(), allLoots.newWater(), allLoots.newArmor(), allLoots.newMachete()};
         final Entity[] mobs = {allMobs.newFox(), allMobs.newBoar()};
         return new Room("forest", loots, mobs);
     }

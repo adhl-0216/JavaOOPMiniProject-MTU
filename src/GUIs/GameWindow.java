@@ -7,7 +7,6 @@ import GameObjects.Loots.Equipment;
 import GameObjects.Loots.Weapon;
 import GameObjects.Player;
 import map.Room;
-import map.allRooms;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,7 +14,6 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +56,6 @@ public class GameWindow extends JFrame implements Serializable {
     private int currLoc = 0;
     private Room room;
 
-
     public GameWindow(String title, MainMenu parent, Player player, Room[] map, int loadedLoc) {
         super(title);
         this.setParent(parent);
@@ -70,7 +67,7 @@ public class GameWindow extends JFrame implements Serializable {
         this.setLocationRelativeTo(null);
         JPanel bg = new MainMenu.imgPanel();
         this.setContentPane(bg);
-        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
+        this.setIconImage(new ImageIcon("resources/icon.png").getImage());
         this.add(mainPanel);
         this.pack();
 
@@ -89,7 +86,6 @@ public class GameWindow extends JFrame implements Serializable {
 
         this.setVisible(true);
     }
-
     private void setRoom(Room room) {
         this.room = room;
         room.addPlayer(player);
@@ -105,9 +101,14 @@ public class GameWindow extends JFrame implements Serializable {
         lblSans.setText(String.format("SANITY: (%.2f/100.00)", +player.getSanity()));
         setMobs();
         setLoots();
+        try {
+            setPnlInventory();
+        } catch (Exception e) {
+            System.out.print("");
+        }
+        setEquipments();
         txtGameLog.setText(room.getGameLog());
     }
-
     private void nextLocation(int currLoc) {
         boolean allCleared = true;
         ArrayList<Entity> mobs = room.getMobs();
@@ -134,7 +135,6 @@ public class GameWindow extends JFrame implements Serializable {
             JOptionPane.showMessageDialog(null, "Something is blocking your way...", "Can't Proceed", JOptionPane.WARNING_MESSAGE);
         }
     }
-
     private void equipOrConsume(ActionEvent e) {
         JButton btnInv = (JButton) e.getSource();
         if (btnInv.getName().equalsIgnoreCase("weapon")) {
@@ -151,7 +151,6 @@ public class GameWindow extends JFrame implements Serializable {
         btnInv.setText("(empty)");
         txtGameLog.setText(room.getGameLog());
     }
-
     private void setEquipments() {
         if (player.getMainWeapon() != null) {
             lblAtk.setText("ATK: " + player.getAtk());
@@ -182,7 +181,6 @@ public class GameWindow extends JFrame implements Serializable {
             btnMisc.setToolTipText(String.format("[DEF: %d, DUR: (%.0f/%d)]    %s", player.getMisc().getDef(), player.getMisc().getDurability(), player.getMisc().getMaxDurability(), player.getMisc().getDesc()));
         }
     }
-
     private void playerAttack(JButton btn, JLabel lbl) {
         for (Entity mob : room.getMobs()) {
             if (mob.getId() == Integer.parseInt(btn.getName())) {
@@ -210,7 +208,6 @@ public class GameWindow extends JFrame implements Serializable {
         }
         if (player.getMainWeapon() == null) setEquipments();
     }
-
     private void setMobs() {
         ArrayList<Entity> mobs = room.getMobs();
         pnlMobs.removeAll();
@@ -253,7 +250,6 @@ public class GameWindow extends JFrame implements Serializable {
         }
 
     }
-
     private void setLoots() {
         ArrayList<Item> loots = room.getLoots();
         pnlLoots.removeAll();
@@ -268,7 +264,6 @@ public class GameWindow extends JFrame implements Serializable {
             pnlLoots.add(btnLoot);
         }
     }
-
     private void btnLootClicked(ActionEvent e) {
         String gameLog;
         JButton btnLoot = (JButton) e.getSource();
@@ -281,13 +276,13 @@ public class GameWindow extends JFrame implements Serializable {
             try {
                 setPnlInventory();
             } catch (Exception ex) {
-                System.out.println();
+                System.out.print("");
             }
+            lblTurn.setText("Turn " + room.getTurnCount());
         } else {
             JOptionPane.showMessageDialog(null, "There's no more space in your inventory!", "Inventory is Full", JOptionPane.WARNING_MESSAGE);
         }
     }
-
     private void setPnlInventory() {
         Item[] inv = player.getInventory().getItems();
         JButton[] btnInvs = {btnInv1, btnInv2, btnInv3, btnInv4};
@@ -307,11 +302,9 @@ public class GameWindow extends JFrame implements Serializable {
             btnInvs[i].setName(type);
         }
     }
-
     public void setMap(Room[] map) {
         this.map = Arrays.copyOf(map, map.length);
     }
-
     public Room[] getMap() {
         return Arrays.copyOf(map, map.length);
     }
@@ -327,28 +320,22 @@ public class GameWindow extends JFrame implements Serializable {
             }
         }
     };
-
     public void setPlayer(Player player) {
         this.player = player;
     }
-
     @Override
     public MainMenu getParent() {
         return parent;
     }
-
     public void setParent(MainMenu parent) {
         this.parent = parent;
     }
-
     public JTextArea getTxtGameLog() {
         return txtGameLog;
     }
-
     public int getCurrLoc() {
         return currLoc;
     }
-
     public void setCurrLoc(int currLoc) {
         this.currLoc = currLoc;
     }
@@ -723,10 +710,5 @@ public class GameWindow extends JFrame implements Serializable {
      */
     public JComponent $$$getRootComponent$$$() {
         return mainPanel;
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-
     }
 }

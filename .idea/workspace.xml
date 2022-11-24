@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="A Second Chance:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="99%!">
-      <change afterPath="$PROJECT_DIR$/assets/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/JavaOOP Mini Project - MTU/A_Second_Chance.class" afterDir="false" />
+    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="99.9%!">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/A_Second_Chance_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saved_games.data" beforeDir="false" afterPath="$PROJECT_DIR$/saved_games.data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/GameWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaOOP Mini Project - MTU.iml" beforeDir="false" afterPath="$PROJECT_DIR$/A Second Chance.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/alphaWolf.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/alphaWolf.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/bear.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/bear.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/boar.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/boar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fox.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fox.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/mainMenuBG.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/mainMenuBG.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/wolf.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/wolf.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JavaOOP Mini Project - MTU/A_Second_Chance.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/saved_games.data" beforeDir="false" afterPath="$PROJECT_DIR$/src/SavedGame/saved_game.data" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/GameWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUIs/OptionsMenu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/OptionsMenu.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUIs/OptionsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUIs/OptionsMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/Consumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/Consumable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Loots/allLoots.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Loots/allLoots.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/Tier3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Mobs/allMobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameObjects/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameObjects/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/allRooms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/allRooms.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,8 +63,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -67,73 +79,55 @@
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\GUIs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src" />
+      <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU" />
+      <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\SavedGame" />
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\assets" />
       <recent name="C:\Users\ADHL\IdeaProjects\JavaOOPMiniProject-MTU\assets" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="GameObjects" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="GameObjects.Mobs" />
     </key>
   </component>
   <component name="RunManager" selected="Application.A_Second_Chance">
-    <configuration name="A_Second_Chance (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="A_Second_Chance" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="A_Second_Chance" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="A_Second_Chance" />
-      <module name="JavaOOP Mini Project - MTU" />
+      <module name="A Second Chance" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OptionsMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUIs.OptionsMenu" />
-      <module name="JavaOOP Mini Project - MTU" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GUIs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration name="A Second Chance" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/A_Second_Chance_jar/JavaOOP Mini Project - MTU.jar" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="BuildArtifacts" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="A Second Chance" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="allMobs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GameObjects.Mobs.allMobs" />
-      <module name="JavaOOP Mini Project - MTU" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="GameObjects.Mobs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="A Second Chance" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="testRooms" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="map.testRooms" />
-      <module name="JavaOOP Mini Project - MTU" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="map.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Application.A_Second_Chance" />
+      <item itemvalue="JAR Application.A Second Chance" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.A_Second_Chance" />
-        <item itemvalue="Application.A_Second_Chance (1)" />
-        <item itemvalue="Application.OptionsMenu" />
-        <item itemvalue="Application.allMobs" />
-        <item itemvalue="Application.testRooms" />
       </list>
     </recent_temporary>
   </component>
@@ -162,7 +156,7 @@
       <workItem from="1669127112492" duration="5469000" />
       <workItem from="1669201018325" duration="1074000" />
       <workItem from="1669209510966" duration="17075000" />
-      <workItem from="1669296748518" duration="11842000" />
+      <workItem from="1669296748518" duration="17469000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1665499373478</created>
@@ -241,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669235096524</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="99.9%!">
+      <created>1669309085484</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669309085484</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,7 +271,8 @@
     <MESSAGE value="working on gameplay Inventory" />
     <MESSAGE value="90%!" />
     <MESSAGE value="99%!" />
-    <option name="LAST_COMMIT_MESSAGE" value="99%!" />
+    <MESSAGE value="99.9%!" />
+    <option name="LAST_COMMIT_MESSAGE" value="99.9%!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

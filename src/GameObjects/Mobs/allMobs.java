@@ -8,13 +8,13 @@ public class allMobs {
         String[] var = {"Grey Wolf", "White Wolf", "Brown Wolf"};
         Tier1 wolf = new Tier1("Wolf", 100, 5,10);
         wolf.setName(var[(int) Math.floor(Math.random() * var.length)]);
-        wolf.setSrc("assets/wolf.png");
+        wolf.setSrc("resources/wolf.png");
         return wolf;
     }
     public static Tier1 newAlphaWolf() {
         Tier1 alphaWolf;
         alphaWolf = new Tier1("Alpha Wolf", 120, 6,12);
-        alphaWolf.setSrc("assets/alphaWolf.png");
+        alphaWolf.setSrc("resources/alphaWolf.png");
         return alphaWolf;
     }
 
@@ -22,7 +22,7 @@ public class allMobs {
         String[] var = {"Red Fox", "White Fox", "Brown Fox"};
         Tier1 fox = new Tier1("Fox", 80, 8, 12);
         fox.setName(var[(int) Math.floor(Math.random() * var.length)]);
-        fox.setSrc("assets/fox.png");
+        fox.setSrc("resources/fox.png");
         return fox;
     }
 
@@ -31,7 +31,7 @@ public class allMobs {
         Tier2 boar = new Tier2("Wild Boar", 150, 10,20);
         boar.addSpecialAtk("Battle Cry",15,"SANITY");
         boar.addSpecialAtk("Charge",20,"HP");
-        boar.setSrc("assets/boar.png");
+        boar.setSrc("resources/boar.png");
         return boar;
     }
 
@@ -46,12 +46,8 @@ public class allMobs {
         bear.addSpecialAtk("Claw Attack",25,"HP");
         bear.addSpecialAtk("Ravenous Tackle",25,"HP & SANITY");
         bear.addSSA("Bear Hug",35,"HP");
-        bear.setSrc("assets/bear.png");
+        bear.setSrc("resources/bear.png");
         return bear;
     }
 
-    public static void main(String[] args) {
-        JOptionPane.showMessageDialog( null, new ImageIcon(newBear().getSrc()));
-        System.exit(0);
-    }
 }

@@ -24,7 +24,7 @@ public class OptionsMenu extends JFrame {
         this.setSize(240, 240);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setIconImage(new ImageIcon("assets/icon.png").getImage());
+        this.setIconImage(new ImageIcon("resources/icon.png").getImage());
 
         JPanel bg = new MainMenu.imgPanel();
         this.setContentPane(bg);
