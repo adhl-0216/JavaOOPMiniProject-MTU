@@ -41,7 +41,7 @@ public class Inventory implements Serializable {
         return count;
     }
 
-    public String addItem(Item target){
+    public void addItem(Item target){
         if (vacantSpace() > 0) {
             for (int i = 0; i < size; i++) {
                 if (items[i] == null) {
@@ -49,8 +49,7 @@ public class Inventory implements Serializable {
                     break;
                 }
             }
-        }else return "Inventory is full!";
-        return target.getName() + " added";
+        }
     }
     public void dropItem(Item target){
         Item[] temp = new Item[size];
@@ -62,16 +61,8 @@ public class Inventory implements Serializable {
         setItems(temp);
     }
 
-    public int getGrade() {
-        return grade;
-    }
-
     public void setGrade(int grade) {
         this.grade = grade;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public void setSize(int size) {

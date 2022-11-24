@@ -267,8 +267,8 @@ public class GameWindow extends JFrame implements Serializable {
     private void btnLootClicked(ActionEvent e) {
         String gameLog;
         JButton btnLoot = (JButton) e.getSource();
-        gameLog = room.newTurn(room.getPlayer(), "pickup", btnLoot.getText());
-        if (!Objects.equals(gameLog, "full")) {
+        gameLog = room.newTurn(room.getPlayer(), "pickUp", btnLoot.getText());
+        if (gameLog.equalsIgnoreCase("Success")) {
             btnLoot.setVisible(false);
             pnlLoots.remove(btnLoot);
             gameLog = room.getGameLog();

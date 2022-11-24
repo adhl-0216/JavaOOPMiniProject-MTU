@@ -38,11 +38,12 @@ public class Room implements Serializable {
 
     public String newTurn(Player player, String event, String target){
         if (event.equalsIgnoreCase("pickUp")){
-            String pickUp = player.pickUp(target, this);
-            if (pickUp!= null) {
-                gameLog += pickUp + "\n";
+            String playerOutput = player.pickUp(target, this);
+            if (!playerOutput.equalsIgnoreCase("Inventory is full!")) {
+                gameLog += playerOutput + "\n";
                 setTurnCount(++turnCount);
-            }else return "full";
+                return "Success";
+            }else return "Inventory is full!";
         }
         else if (event.equalsIgnoreCase("equip")) {
             gameLog += player.equip(target) + "\n";

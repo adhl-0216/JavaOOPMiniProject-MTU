@@ -16,6 +16,9 @@ public class Player extends Entity {
     private Equipment misc;
     private final double baseATK;
     private final double baseDEF;
+    /**
+    *Constructor for Player class.
+    * */
     public Player(double HP, double ATK, double DEF, int invGrade) {
         super("You", HP, ATK, DEF);
         this.baseATK = ATK;
@@ -23,21 +26,34 @@ public class Player extends Entity {
         setInventory(new Inventory(invGrade));
         setSanity(100);
     }
+    /**
+    * Adds Item to Player's Inventory.
+    * */
     public String pickUp(String itemName, Room room){
 
         for (Item target : room.getLoots()) {
             if (target.getName().equalsIgnoreCase(itemName)) {
-                if (!Objects.equals(inventory.addItem(target), "Inventory is full!")) {
+                /**
+                 * Check if Inventory is full.
+                 * */
+                if (inventory.vacantSpace() > 0) {
+                    inventory.addItem(target);
                     room.getLoots().remove(target);
                     return "Picked up " + target.getName() +".";
-                }else return "";
+                }else return "Inventory is full!";
             }
         }
         return "No such thing exists.";
     }
+    /**
+    * Consumes Item in Inventory, updating Player's statistics.
+    * */
     public String consume(String consumable) {
         for (Item item: inventory.getItems()) {
             if (item != null) {
+                /**
+                 * Check if Item in Inventory is of Consumable class.
+                 * */
                 if (item.getName().equalsIgnoreCase(consumable)) {
                     if (item.getClass() == Consumable.class) {
                         Consumable c = (Consumable)item;
@@ -68,6 +84,9 @@ public class Player extends Entity {
         }
         return "Item is not in inventory.";
     }
+    /**
+    * Equips an Equipment or Weapon from the Inventory to corresponding slots.
+    * */
     public String equip(String equipment) {
         for (Item item: inventory.getItems()) {
             if (item != null) {
@@ -115,6 +134,9 @@ public class Player extends Entity {
             }
         return "Item is not in inventory.";
     }
+    /**
+    * Player attacks a target Entity with a Room. Chance to deal a Strong hit or Critical hit depending on the current Sanity value of the Player.
+    **/
     public String basicAtk(String id, Room room) {
         for (Entity target : room.getMobs()) {
             if (target.getId() == Integer.parseInt(id)){
@@ -181,6 +203,9 @@ public class Player extends Entity {
     public Weapon getMainWeapon() {
         return mainWeapon;
     }
+    /**
+    * Sets mainWeapon of the Player, and updates Player's ATK stat.
+    * */
     public void setMainWeapon(Weapon mainWeapon) {
         if (mainWeapon != null) {
             double wpAtk = mainWeapon.getAtk();
