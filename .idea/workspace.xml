@@ -10,7 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="Documentation">
-      <change afterPath="$PROJECT_DIR$/src/Documentation/HanLim.Oah - Requirements Document .docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Documentation/HanLim.Oah - DeclarationOfOriginalityForm.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Documentation/HanLim.Oah - Requirements Document .pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Documentation/~$nLim.Oah - Requirements Document .docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +136,7 @@
       <workItem from="1669296748518" duration="18825000" />
       <workItem from="1669317573515" duration="164000" />
       <workItem from="1669318149555" duration="1864000" />
-      <workItem from="1669375837606" duration="2855000" />
+      <workItem from="1669375837606" duration="4046000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1665499373478</created>
@@ -275,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669378522562</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Documentation">
+      <created>1669378737491</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1669378737491</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
