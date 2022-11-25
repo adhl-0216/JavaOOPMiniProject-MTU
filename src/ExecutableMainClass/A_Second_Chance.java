@@ -1,3 +1,5 @@
+package ExecutableMainClass;
+
 import GUIs.MainMenu;
 
 public class A_Second_Chance {
