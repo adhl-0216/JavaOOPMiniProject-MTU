@@ -9,99 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="code cleanup">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/A_Second_Chance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExecutableMainClass/A_Second_Chance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/A_Second_Chance.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GUIs/GameWindow.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GUIs/MainMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GUIs/OptionsMenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GUIs/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GUIs/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Entity.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Inventory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Item.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Loots/Consumable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Loots/Equipment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Loots/Weapon.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Loots/allLoots.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Loots/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Loots/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Mobs/Tier1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Mobs/Tier2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Mobs/Tier3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Mobs/allMobs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Mobs/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Mobs/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/Player.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/GameObjects/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/copy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-13.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-14.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-15.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-16.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-17.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/jquery-ui.overrides.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/legal/COPYRIGHT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/legal/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/legal/jquery.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/legal/jqueryUI.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/map/Room.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/map/allRooms.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/map/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/map/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/overview-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-bg_glass_65_dadada_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-bg_glass_75_dadada_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-icons_222222_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-icons_2e83ff_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-icons_454545_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-icons_888888_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/images/ui-icons_cd0a0a_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/jquery-3.5.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script-dir/jquery-ui.structure.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/serialized-form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JavaDoc/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SavedGame/saved_game.data" beforeDir="false" afterPath="$PROJECT_DIR$/src/SavedGame/saved_game.data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="a1cd650a-2c5c-4a04-8330-49d15cd10cd2" name="Changes" comment="Documentation">
+      <change afterPath="$PROJECT_DIR$/src/Documentation/HanLim.Oah - Requirements Document .docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +48,7 @@
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
     "WebServerToolWindowFactoryState": "false",
     "deletionFromPopupRequiresConfirmation": "false",
-    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/Documentation/JavaDoc",
+    "last_opened_file_path": "C:/Users/T00229173/IdeaProjects/JavaOOPMiniProject-MTU/src/Documentation",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -151,6 +60,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\Documentation" />
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\assets" />
       <recent name="C:\Users\T00229173\IdeaProjects\JavaOOPMiniProject-MTU\src\GUIs" />
     </key>
@@ -223,7 +133,7 @@
       <workItem from="1669296748518" duration="18825000" />
       <workItem from="1669317573515" duration="164000" />
       <workItem from="1669318149555" duration="1864000" />
-      <workItem from="1669375837606" duration="2468000" />
+      <workItem from="1669375837606" duration="2855000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1665499373478</created>
@@ -351,7 +261,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669377849036</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Documentation">
+      <created>1669378487225</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1669378487225</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Documentation">
+      <created>1669378522562</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1669378522562</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,7 +306,8 @@
     <MESSAGE value="99%!" />
     <MESSAGE value="99.9%!" />
     <MESSAGE value="code cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="code cleanup" />
+    <MESSAGE value="Documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
