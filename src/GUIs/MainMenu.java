@@ -1,8 +1,8 @@
 package GUIs;
 
 import GameObjects.Player;
-import map.Map;
 import map.Room;
+import map.allRooms;
 
 import javax.swing.*;
 import java.awt.*;
@@ -136,22 +136,28 @@ public class MainMenu extends JFrame{
     private void btnStartClicked() {
         int newGame = JOptionPane.showConfirmDialog(null, "Start new game?", "Start Game", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(newGame == 0) {
-            try {
-                Player player = new Player(100, 15, 15,3);
-                String difficulty = optionsMenu.getDifficulty();
-                if (difficulty != null) {
-                    switch (difficulty) {
-                        case "Easy" -> player = new Player(200, 20, 20,3);
-                        case "Normal" -> player = new Player(100, 15, 15,3);
-                        case "Hard" -> player = new Player(100, 5, 5,3);
-                    }
+            Player player = new Player(100, 15, 15,3);
+            String difficulty = optionsMenu.getDifficulty();
+            if (difficulty != null) {
+                switch (difficulty) {
+                    case "Easy" -> player = new Player(100, 20, 20,3);
+                    case "Normal" -> player = new Player(100, 15, 15,3);
+                    case "Hard" -> player = new Player(100, 5, 5,3);
                 }
-                setGameWindow(new GameWindow(this.getTitle(), this, player, Map.getMap(),0));
-                this.setVisible(false);
-                btnLoad.setEnabled(true);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
             }
+            final Room tutorial = allRooms.tutRoom();
+            final Room forest1 = allRooms.newForest1();
+            final Room forest5 = allRooms.newForest1();
+            final Room forest2 = allRooms.newForest2();
+            final Room cabin = allRooms.newCabin();
+            final Room cave = allRooms.newCave();
+            final Room forest3 = allRooms.newForest3();
+            final Room forest4 = allRooms.newForest4();
+
+            final Room[] map = {tutorial, forest1, forest2, cabin, cave, forest5, forest4, forest3};
+            setGameWindow(new GameWindow(this.getTitle(), this, player, map,0));
+            this.setVisible(false);
+            btnLoad.setEnabled(true);
         }
     }
     private void btnLoadClicked() {
@@ -205,7 +211,7 @@ public class MainMenu extends JFrame{
 
         public imgPanel() {
             try {
-                image = Toolkit.getDefaultToolkit().createImage("resources/mainMenuBG.jpg");
+                image = Toolkit.getDefaultToolkit().createImage("src/resources/mainMenuBG.jpg");
             } catch (Exception e) { /*handled in paintComponent()*/ }
         }
 

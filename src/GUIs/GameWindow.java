@@ -72,9 +72,9 @@ public class GameWindow extends JFrame implements Serializable {
         this.pack();
 
         setPlayer(player);
-        setMap(map);
         setCurrLoc(loadedLoc);
-        setRoom(this.map[currLoc]);
+        setMap(map);
+        setRoom(map[currLoc]);
 
         txtGameLog.setText("You woke up in the forest...\n");
 
@@ -121,15 +121,16 @@ public class GameWindow extends JFrame implements Serializable {
         }
 
         if (allCleared || room.getName().equalsIgnoreCase("cabin")) {
-            btnLocation.setText("Proceed to the next location>>");
-            if (currLoc == getMap().length) {
+            this.currLoc++;
+            if (this.currLoc == getMap().length) {
+                btnLocation.setText("THE END");
                 JOptionPane.showMessageDialog(null, "You have been grated a second chance in life.", "The End", JOptionPane.INFORMATION_MESSAGE);
                 super.dispose();
                 parent.setVisible(true);
             } else {
                 room.removePlayer();
                 txtGameLog.setText(room.getGameLog());
-                setRoom(getMap()[++this.currLoc]);
+                setRoom(getMap()[this.currLoc]);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Something is blocking your way...", "Can't Proceed", JOptionPane.WARNING_MESSAGE);
